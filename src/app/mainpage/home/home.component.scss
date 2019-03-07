@@ -1,0 +1,88 @@
+
+.mySlides {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+angular-image-slider{
+    width: 900px;
+    margin-top: 10%;
+}
+.footer {
+    font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: #1d1d1d;
+    color: white;
+    text-align: center;
+ }
+.rightText[_ngcontent-c10]{
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 15px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: center;
+    color: snow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* min-width: 500px; */
+    height: 100px;
+}
+.docs-footer-copyright[_ngcontent-c10] {
+    display: flex;
+    /* flex: 1; */
+    /* flex-grow: 1; */
+    /* flex-shrink: 1; */
+    /* flex-basis: 0%; */
+    justify-content: flex-end;
+    flex-direction: column;
+    min-width: 225px;
+    text-align: center;
+}
+.midText{
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 11px;
+    line-height: 15px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: center;
+    color: snow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.leftText{
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: left;
+    color: snow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-left: 5%; */
+}
+b{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+}
