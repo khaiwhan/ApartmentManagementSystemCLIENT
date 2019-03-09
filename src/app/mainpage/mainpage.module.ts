@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material';
 import { SliderModule } from 'angular-image-slider';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ServerService } from '../@service/server.service';
 
 @NgModule({
   declarations: [MainpageComponent, HomeComponent, DialogOverviewExampleDialog, RegisterDialog],
@@ -25,6 +26,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     SliderModule,
     AngularFontAwesomeModule
   ],
+  providers:[ServerService]
 
 })
 export class MainpageModule { }

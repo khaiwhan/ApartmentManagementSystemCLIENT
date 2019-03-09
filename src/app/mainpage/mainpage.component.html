@@ -1,40 +1,58 @@
 <!-- Menubar -->
 <mat-toolbar>
-  <mat-toolbar-row class="shadow" style="background: #1d1d1d">
-    <mat-icon class="example-icon">location_city</mat-icon>
+  <mat-toolbar-row class="shadow" style="background: #63320e">
+    <mat-icon class="example-icon" style="margin-top: 0px;font-size:30px;padding-bottom: 35px;">home</mat-icon>
     <a mat-button routerLink="/mainpage/mainpage/home">Apartment</a>
     <a mat-button [matMenuTriggerFor]="animals" active="true">Type Room</a>
-    <a mat-button >Contact</a>
-    <!-- <a mat-button [matMenuTriggerFor]="animals" active="true">Animal index</a> -->
-
+    <a mat-button>Contact</a>
     <mat-menu #animals="matMenu" style="background: black">
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 16px;">Fan Room</a>
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 16px;">Air Room</a>
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 16px;">Suite Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/home">Fan Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;">Air-Conditioned Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;">Suite Room</a>
     </mat-menu>
     <span></span>
     <span class="example-spacer"></span>
     <a mat-raised-button style="color: black;background: rgb(245, 245, 245);
                                                 border-bottom: gray 2px solid;
-                                                border-right: gray 2px solid"
-                                                (click)="openDialog()">Sign-in</a>
+                                                border-right: gray 2px solid" (click)="openDialog()">Sign-in</a>
     <a mat-button (click)="openDialogRegister()">Registor</a>
     <!-- <mat-icon class="example-icon">face</mat-icon>
     <mat-icon class="example-icon">delete</mat-icon> -->
   </mat-toolbar-row>
 </mat-toolbar>
 
-<!-- <ol>
-  <li>
-    <mat-form-field>
-      <input matInput [(ngModel)]="name" placeholder="What's your name?">
-    </mat-form-field>
-  </li>
-  <li>
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
-  </li>
-  <li *ngIf="animal">
-    You chose: <i>{{animal}}</i>
-  </li>
-</ol> -->
+
 <router-outlet></router-outlet>
+<br>
+<mat-toolbar>
+  <mat-toolbar-row style="background: #63320e;height: 100px;">
+    <footer class="footer">
+      <div class="row">
+        <div class="col-md-1">
+            <mat-icon class="example-icon" style="font-size: 60px;margin-top: 20px;">location_city</mat-icon>
+        </div>
+        <div class="col-md-2 leftText">
+          Contact
+          <span _ngcontent-c10>
+            <i class="fa fa-phone" aria-hidden="true"><b> : 0862826721</b></i>
+          </span>
+          <span _ngcontent-c10>
+            <i class="fa fa-envelope" aria-hidden="true"><b> : Natinun.t@gmail.com</b></i>
+          </span>
+        </div>
+        <div class="col-md-6 midText">Apartment Management System Version 1.0</div>
+        <div _ngcontent-c10 class="col-md-3 rightText">
+          <span _ngcontent-c10>
+            Powered by Natinun Thunlapan @2017-2018.
+          </span>
+          <span _ngcontent-c10>
+            Copyright © 2007 - 2018 Computer Engineering.
+          </span>
+          <span _ngcontent-c10>
+            Rajamangala University of Technology Thanyaburi.
+          </span>
+        </div>
+      </div>
+    </footer>
+  </mat-toolbar-row>
+</mat-toolbar>

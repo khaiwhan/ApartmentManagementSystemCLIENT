@@ -8,8 +8,10 @@ import { MaterialModule } from './material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material';
-import { SliderModule } from 'angular-image-slider'
+import { SliderModule } from 'angular-image-slider';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { ServerService } from './@service/server.service';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     MatNativeDateModule,
     ReactiveFormsModule,
     SliderModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgxWebstorageModule.forRoot(),
   ],
-  providers: [],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

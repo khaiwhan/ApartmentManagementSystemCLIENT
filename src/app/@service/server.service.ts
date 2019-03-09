@@ -11,4 +11,7 @@ export class ServerService {
   onLogin(data){
     return this.http.post(urlServer.ipServer + 'loginadmin',data)
   }
+  onRegister(data){
+    return this.http.post(urlServer.ipServer + 'register',data)
+  }
 }
