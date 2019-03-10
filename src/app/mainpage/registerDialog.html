@@ -9,7 +9,7 @@
 
   <mat-form-field style="width: 100%" >
     <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" >
+    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" [formControl]="ConfirmPassword">
     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
 

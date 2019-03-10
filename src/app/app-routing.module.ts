@@ -7,6 +7,14 @@ const routes: Routes = [
     loadChildren:'./mainpage/mainpage.module#MainpageModule'
   },
   {
+    path:'admin',
+    loadChildren:'./admin/admin.module#AdminModule'
+  },
+  {
+    path:'staff',
+    loadChildren:'./staff/staff.module#StaffModule'
+  },
+  {
     path:'',
     redirectTo:'mainpage',
     pathMatch:'full'

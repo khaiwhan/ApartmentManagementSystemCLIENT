@@ -14,12 +14,22 @@
     <span class="example-spacer"></span>
     <a mat-raised-button style="color: black;background: rgb(245, 245, 245);
                                                 border-bottom: gray 2px solid;
-                                                border-right: gray 2px solid" (click)="openDialog()">Sign-in</a>
-    <a mat-button (click)="openDialogRegister()">Registor</a>
+                                                border-right: gray 2px solid" (click)="openDialog()"
+                                                *ngIf="user == null"
+                                                [(ngModel)] ="user">Sign-in</a>
+    <!-- <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" *ngIf="user != null" [(ngModel)] ="user">{{user}}</a> -->
+    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)] ="user" active="true" *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
+    <mat-menu #profile="matMenu" style="background: black">
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;">Profile</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" (click)="onLogout()">Logout</a>
+    </mat-menu>
+    <a mat-button (click)="openDialogRegister()" *ngIf="user == null">Registor</a>
+    <!-- <a mat-button (click)="openDialogRegister()" *ngIf="user != null">Logout</a> -->
     <!-- <mat-icon class="example-icon">face</mat-icon>
     <mat-icon class="example-icon">delete</mat-icon> -->
   </mat-toolbar-row>
 </mat-toolbar>
+
 
 
 <router-outlet></router-outlet>
