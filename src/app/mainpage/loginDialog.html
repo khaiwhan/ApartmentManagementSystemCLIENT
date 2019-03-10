@@ -1,15 +1,15 @@
 <h1 mat-dialog-title>Login</h1>
 <div mat-dialog-content>
-  <p>Please insert username and password</p>
+  <p  style="color: gray">Please insert username and password</p>
   <mat-form-field style="width: 100%" appearance="outline">
     <mat-label>Username</mat-label>
-    <input matInput [(ngModel)]="data.username" [formControl]="Username">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <input matInput  [(ngModel)]="data.username" [formControl]="Username"  style="color: #63320e">
+    <mat-icon matSuffix style="color: #63320e">sentiment_very_satisfied</mat-icon>
   </mat-form-field>
-  <mat-form-field style="width: 100%" appearance="outline">
+  <mat-form-field style="width: 100%;" appearance="outline">
     <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" [formControl]="Password">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" [formControl]="Password" style="color: #63320e">
+    <mat-icon matSuffix (click)="hide = !hide" style="color: #63320e">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
   <!-- cdkFocusInitial ใส่อันนี้ไว้ใน tag button จะทำให้ปุ่มเกิดการ active-->
 </div>

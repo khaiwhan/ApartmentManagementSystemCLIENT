@@ -37,22 +37,23 @@ export class MainpageComponent implements OnInit {
     private session: SessionService,
     private route: Router
   ) {
-    this.route.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    }
-
-    this.route.events.subscribe((evt) => {
-      if (evt instanceof NavigationEnd) {
-        // trick the Router into believing it's last link wasn't previously loaded
-        this.route.navigated = false;
-        // if you need to scroll back to top, here is the right place
-        window.scrollTo(0, 0);
-      }
-    });
+    
   }
 
   ngOnInit() {
     this.user = this.session.getActiveUser();
+    // this.route.routeReuseStrategy.shouldReuseRoute = function () {
+    //   return false;
+    // }
+
+    // this.route.events.subscribe((evt) => {
+    //   if (evt instanceof NavigationEnd) {
+    //     // trick the Router into believing it's last link wasn't previously loaded
+    //     this.route.navigated = false;
+    //     // if you need to scroll back to top, here is the right place
+    //     window.scrollTo(0, 0);
+    //   }
+    // });
 
   }
 
@@ -106,32 +107,35 @@ export class DialogOverviewExampleDialog {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private service: ServerService,
     private session: SessionService,
-    private route: Router) { }
+    private route: Router,
+    private dialog:MatDialog
+    ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
   onLogin() {
-    console.log(this.Username.value, this.Password.value)
+    
     const data = {
       username: this.Username.value,
       password: this.Password.value
     }
-    this.service.onLogin(data).subscribe(
-      (res) => {
-        alert("Success");
-        this.session.setActiveUser(res);
-        if (res[0].cus_role === "viewer") {
-          this.route.navigate(['/mainpage/mainpage/home'])
+    if (this.Username.value != null && this.Password.value != null) {
+      this.service.onLogin(data).subscribe(
+        (res) => {
+          this.session.setActiveUser(res);
+          if (res[0].cus_role === "viewer") {
+            window.history.go(0);
+          }
+          if (res[0].cus_role === "admin") {
+            this.route.navigate(['/admin/admin'])
+          }
+          if (res[0].cus_role === "staff") {
+            this.route.navigate(['/staff/staff/'])
+          }
         }
-        if (res[0].cus_role === "admin") {
-          this.route.navigate(['/admin/admin'])
-        }
-        if(res[0].cus_role === "staff"){
-          this.route.navigate(['/staff/staff/'])
-        }
-      }
-    )
+      )
+    }
   }
 }
 
@@ -150,7 +154,8 @@ export class RegisterDialog {
   constructor(
     public dialogRef: MatDialogRef<RegisterDialog>,
     @Inject(MAT_DIALOG_DATA) public data: RegisterDialog,
-    private service: ServerService
+    private service: ServerService,
+    private dialog: MatDialog
   ) { }
 
   onNoClick(): void {
@@ -158,6 +163,7 @@ export class RegisterDialog {
   }
 
   onRegister() {
+    this.dialog.open(AlertRegisterError)
     const data = {
       username: this.Username.value,
       password: this.Password.value,
@@ -165,18 +171,52 @@ export class RegisterDialog {
       cus_lname: this.Lastname.value,
       email: this.Email.value
     }
-    if(this.ConfirmPassword.value === this.Password.value){
+    if (this.ConfirmPassword.value === this.Password.value) {
       this.service.onRegister(data).subscribe(
         (res) => {
-          alert("Register Complete")
+          this.dialog.open(AlertRegisterSuccess)
         },
         (err) => {
-          alert("Something Incorrect")
+          this.dialog.open(AlertRegisterError)
         }
       )
     }
-    else{
-      alert("Password and ConfirmPassword is different")
+    else {
+      this.dialog.open(AlertRegisterError)
     }
   }
+}
+
+
+@Component({
+  selector: 'alertRegisterSuccess',
+  templateUrl: 'alertRegisterSuccess.html',
+  styles: [`button{background:#63320e;color:snow;}`]
+})
+export class AlertRegisterSuccess {
+
+  constructor(private dialog: MatDialog) { }
+  onNoClick(): void {
+    this.dialog.closeAll();
+  }
+}
+
+@Component({
+  selector: 'alertRegisterError',
+  templateUrl: 'alertRegisterError.html',
+  styles: [`button{background:#63320e;color:snow}`]
+})
+export class AlertRegisterError {
+  constructor(private dialog: MatDialog) { }
+  onNoClick() { this.dialog.closeAll(); }
+}
+
+@Component({
+  selector: 'alertLoginError',
+  templateUrl: 'alertLoginError.html',
+  styles: [`button{background:#63320e;color:snow}`]
+})
+export class AlertLoginError {
+  constructor(private dialog: MatDialog) { }
+  onNoClick() { this.dialog.closeAll(); }
 }

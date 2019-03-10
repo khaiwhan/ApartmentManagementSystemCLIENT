@@ -4,34 +4,34 @@
 
   <mat-form-field style="width: 100%">
     <mat-label>Username</mat-label>
-    <input matInput  [formControl]="Username">
+    <input matInput  [formControl]="Username"  style="color: #63320e">
   </mat-form-field>
 
   <mat-form-field style="width: 100%" >
     <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" [formControl]="ConfirmPassword">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" [formControl]="ConfirmPassword"  style="color: #63320e">
+    <mat-icon matSuffix (click)="hide = !hide"  style="color: #63320e">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
 
   <mat-form-field style="width: 100%" >
     <mat-label>Confirm-Password</mat-label>
-    <input matInput [(ngModel)]="hide1" [type]="hide1 ? 'password' : 'text'" [formControl]="Password">
-    <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput [(ngModel)]="hide1" [type]="hide1 ? 'password' : 'text'" [formControl]="Password"  style="color: #63320e">
+    <mat-icon matSuffix (click)="hide1 = !hide1"  style="color: #63320e">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
 
   <mat-form-field style="width: 100%" >
     <mat-label>Firstname</mat-label>
-    <input matInput [formControl]="Firstname">
+    <input matInput [formControl]="Firstname"  style="color: #63320e">
   </mat-form-field>
 
   <mat-form-field style="width: 100%" >
     <mat-label>Lastname</mat-label>
-    <input matInput [formControl]="Lastname">
+    <input matInput [formControl]="Lastname"  style="color: #63320e">
   </mat-form-field>
 
   <mat-form-field style="width: 100%">
     <mat-label>Email</mat-label>
-    <input matInput [formControl]="Email">
+    <input matInput [formControl]="Email"  style="color: #63320e">
   </mat-form-field>
   <!-- cdkFocusInitial ใส่อันนี้ไว้ใน tag button จะทำให้ปุ่มเกิดการ active-->
 </div>
