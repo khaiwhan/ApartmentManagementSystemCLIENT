@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.user = this.session.getActiveUser();
     console.log(this.user[0].cus_role);
     

@@ -34,3 +34,17 @@ table {
   ::placeholder{
     color: #63320e;
   }
+  mat-icon,a{
+    color: snow;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  select {
+    border:  1px solid #834b23;
+    transition: 0.5s;
+    outline: none;
+}
+
+select:focus {
+    border:  #63320e;
+}

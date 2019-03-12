@@ -8,15 +8,15 @@ import { urlServer } from '../@URL/URL';
 export class ServerService {
 
   constructor(private http:HttpClient) { }
+  // login
   onLogin(data){
     return this.http.post(urlServer.ipServer + 'loginadmin',data)
   }
   onRegister(data){
     return this.http.post(urlServer.ipServer + 'register',data)
-  }
-  getDataOverview(){
-    return this.http.get(urlServer.ipServer + 'selectuseroom')
-  }
+  }// register
+
+  // manageUser
   getDataUser(){
     return this.http.get(urlServer.ipServer + 'selectmember')
   }
@@ -29,4 +29,20 @@ export class ServerService {
   deleteUser(data){
     return this.http.delete(urlServer.ipServer + 'deletemember/' + data)
   }
+  // end manageUser
+  // ManageRoom Resident
+  getDataRoomResident(){
+    return this.http.get(urlServer.ipServer + 'selectuseroom')
+  }
+  addRoomResident(data)
+  {
+    return this.http.post(urlServer.ipServer + 'addroom',data)
+  }
+  updateRoomResident(data){
+    return this.http.put(urlServer.ipServer + 'updateroom',data)
+  }
+  deleteRoom(data){
+    return this.http.delete(urlServer.ipServer + 'deleteroom/' + data)
+  }
+  // end ManageRoom Resident
 }

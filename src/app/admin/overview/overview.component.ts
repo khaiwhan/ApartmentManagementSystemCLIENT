@@ -17,7 +17,7 @@ export class OverviewComponent implements OnInit {
 
   constructor(private service:ServerService,private dialog:MatDialog) {}
     ngOnInit() {
-      this.service.getDataOverview().subscribe(
+      this.service.getDataUser().subscribe(
         (res) => {
           this.dataSource = new MatTableDataSource(res as any[]);
           this.dataSource.sort = this.sort;
