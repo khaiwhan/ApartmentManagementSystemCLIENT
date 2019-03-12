@@ -42,19 +42,17 @@ export class MainpageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.session.getActiveUser();
-    // this.route.routeReuseStrategy.shouldReuseRoute = function () {
-    //   return false;
-    // }
-
-    // this.route.events.subscribe((evt) => {
-    //   if (evt instanceof NavigationEnd) {
-    //     // trick the Router into believing it's last link wasn't previously loaded
-    //     this.route.navigated = false;
-    //     // if you need to scroll back to top, here is the right place
-    //     window.scrollTo(0, 0);
-    //   }
-    // });
-
+    console.log(this.user)
+    
+    if(this.user == null || this.user === ""){
+      this.route.navigate(['/mainpage/magepage/home'])
+    }
+    if(this.user !== null || this.user !== ""){
+      if(this.user[0].cus_role === "admin" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/admin/admin/overview'])
+      }
+    }
+    
   }
 
   openDialog(): void {
@@ -88,7 +86,7 @@ export class MainpageComponent implements OnInit {
   }
   onLogout() {
     this.session.clearActiveUser();
-    this.route.navigate(['/mainpage/mainpage/home'])
+    window.history.go(0);
   }
 }
 
@@ -128,11 +126,14 @@ export class DialogOverviewExampleDialog {
             window.history.go(0);
           }
           if (res[0].cus_role === "admin") {
-            this.route.navigate(['/admin/admin'])
+            this.route.navigate(['/admin/admin/overview'])
           }
           if (res[0].cus_role === "staff") {
             this.route.navigate(['/staff/staff/'])
           }
+        },
+        (err) => {
+          this.dialog.open(AlertLoginError);
         }
       )
     }
@@ -181,9 +182,7 @@ export class RegisterDialog {
         }
       )
     }
-    else {
-      this.dialog.open(AlertRegisterError)
-    }
+  
   }
 }
 

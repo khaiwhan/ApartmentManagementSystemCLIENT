@@ -1,3 +1,29 @@
-<p>
-  admin works!
-</p>
+<!-- Menubar -->
+<mat-toolbar>
+  <mat-toolbar-row class="shadow" style="background: #63320e">
+    <mat-icon class="example-icon" style="margin-top: 0px;font-size:30px;padding-bottom: 35px;">dvr</mat-icon>
+    <a mat-button routerLink="/admin/admin/overview">Overview</a>
+    <a mat-button routerLink="/admin/admin/manageroom">ManageResident</a>
+    <a mat-button routerLink="/admin/admin/manageuser">ManageUser</a>
+    <!-- <mat-menu #animals="matMenu" style="background: black">
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/managefanroom">Fan Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/manageairroom">Air-Conditioned Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/managesuiteroom">Suite Room</a>
+    </mat-menu>
+    <mat-menu #users="matMenu" style="background: black">
+        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/managstaff">Staff</a>
+        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/managemember">Member</a>
+        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/manageviewver">Viewver</a>
+    </mat-menu> -->
+    <span></span>
+    <span class="example-spacer"></span>
+    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)] ="user" active="true" *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
+    <mat-menu #profile="matMenu" style="background: black">
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;">Profile</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" (click)="onLogout()">Logout</a>
+    </mat-menu>
+    <a mat-button (click)="openDialogRegister()" *ngIf="user == null">Registor</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

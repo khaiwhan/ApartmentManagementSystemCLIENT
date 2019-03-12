@@ -1,0 +1,213 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">ManageUser</h1>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md">
+      <mat-form-field style="width: 90%">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
+      </mat-form-field>
+      <span> &nbsp;<a mat-button style="background-color: #63320e"
+          (click)="openModalAddUser(AddUser)">AddUser</a></span>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="Username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Password">
+            <th mat-header-cell *matHeaderCellDef> Password </th>
+            <td mat-cell *matCellDef="let row"> {{row.password}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Firstname">
+            <th mat-header-cell *matHeaderCellDef> Firstname </th>
+            <td mat-cell *matCellDef="let row"> {{row.cus_fname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Lastname">
+            <th mat-header-cell *matHeaderCellDef> Lastname </th>
+            <td mat-cell *matCellDef="let row"> {{row.cus_lname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Gender">
+            <th mat-header-cell *matHeaderCellDef> Gender </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_sex}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Tel">
+            <th mat-header-cell *matHeaderCellDef> Tel </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_phone}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Address">
+            <th mat-header-cell *matHeaderCellDef> Address </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_addr}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_role}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Edit">
+            <th mat-header-cell *matHeaderCellDef> EditUser </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-icon (click)="openModalEditUser(row,EditUser)"
+                style="font-size: 30px;cursor: pointer;color: #63320e">
+                create</mat-icon>&nbsp;
+              <mat-icon (click)="openModalDeleteUser(row.username,deleteUser)"
+                style="font-size: 30px;cursor: pointer;color: red">delete</mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5,10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+
+<ng-template #AddUser let-modal>
+  <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;">
+    <h1 mat-dialog-title>Add User Form</h1>
+    <mat-form-field style="width: 100%">
+      <mat-label>Username</mat-label>
+      <input matInput [formControl]="Username" style="color: #63320e">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Password</mat-label>
+      <input matInput [formControl]="Password" style="color: #63320e">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Firstname</mat-label>
+      <input matInput [formControl]="Firstname" style="color: #63320e">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Lastname</mat-label>
+      <input matInput [formControl]="Lastname" style="color: #63320e">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Email</mat-label>
+      <input matInput [formControl]="Email" style="color: #63320e">
+    </mat-form-field>
+
+    <mat-radio-group [formControl]="Gender" style="color: #63320e">
+      <mat-radio-button value="female" style="color: #63320e">Female</mat-radio-button>&nbsp;
+      <mat-radio-button value="male" style="color: #63320e">Male</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Tel</mat-label>
+      <input matInput [formControl]="Tel" style="color: #63320e">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Address</mat-label>
+      <textarea matInput [formControl]="Address" style="color: #63320e"></textarea>
+    </mat-form-field>
+
+    <mat-radio-group [formControl]="Status" style="color: #63320e">
+      <mat-radio-button value="member" style="color: #63320e">Member</mat-radio-button>&nbsp;
+      <mat-radio-button value="viewer" style="color: #63320e">Viewer</mat-radio-button>&nbsp;
+      <mat-radio-button value="staff" style="color: #63320e">Staff</mat-radio-button>
+    </mat-radio-group><br><br>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow"
+        (click)="onAddUser()">AddMember</button>
+    </div>
+  </form>
+
+</ng-template>
+
+<ng-template #EditUser let-modal>
+  <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updateUser">
+    <h1 mat-dialog-title>Edit User Form</h1>
+
+    <input formControlName="username" style="color: #63320e" type="hidden" [(ngModel)]="username">
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" style="color: #63320e" [(ngModel)]="password">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Firstname</mat-label>
+      <input matInput formControlName="cus_fname" style="color: #63320e" [(ngModel)]="cus_fname">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Lastname</mat-label>
+      <input matInput formControlName="cus_lname" style="color: #63320e" [(ngModel)]="cus_lname">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" style="color: #63320e" [(ngModel)]="email">
+    </mat-form-field>
+
+    <mat-radio-group formControlName="cus_sex" style="color: #63320e" [(ngModel)]="cus_sex">
+      <mat-radio-button value="female" style="color: #63320e">Female</mat-radio-button>&nbsp;
+      <mat-radio-button value="male" style="color: #63320e">Male</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Tel</mat-label>
+      <input matInput formControlName="cus_phone" style="color: #63320e" [(ngModel)]="cus_phone">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="cus_addr" style="color: #63320e" [(ngModel)]="cus_addr"></textarea>
+    </mat-form-field>
+
+    <mat-radio-group formControlName="cus_role" style="color: #63320e" [(ngModel)]="cus_role">
+      <mat-radio-button value="member" style="color: #63320e">Member</mat-radio-button>&nbsp;
+      <mat-radio-button value="viewer" style="color: #63320e">Viewer</mat-radio-button>&nbsp;
+      <mat-radio-button value="staff" style="color: #63320e">Staff</mat-radio-button>
+    </mat-radio-group><br><br>
+
+
+    <div mat-dialog-actions>
+      <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow"
+        (click)="onUpdateUser()">EditMember</button>
+    </div>
+  </form>
+
+</ng-template>
+
+<ng-template #deleteUser let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Are You Sure?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Want to Remove This User!!</p>
+  </div>
+  <div class="modal-footer">
+    <button mat-raised-button (click)="modal.close('Close click')" >No Thanks</button>
+    <button mat-raised-button (click)="onDeleteUser()" style="background-color: #63320e;color: snow">OK</button>
+  </div>
+</ng-template>

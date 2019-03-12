@@ -14,4 +14,19 @@ export class ServerService {
   onRegister(data){
     return this.http.post(urlServer.ipServer + 'register',data)
   }
+  getDataOverview(){
+    return this.http.get(urlServer.ipServer + 'selectuseroom')
+  }
+  getDataUser(){
+    return this.http.get(urlServer.ipServer + 'selectmember')
+  }
+  addUser(data){
+    return this.http.post(urlServer.ipServer + 'addmember',data)
+  }
+  editUser(data){
+    return this.http.put(urlServer.ipServer + 'updatemember',data)
+  }
+  deleteUser(data){
+    return this.http.delete(urlServer.ipServer + 'deletemember/' + data)
+  }
 }
