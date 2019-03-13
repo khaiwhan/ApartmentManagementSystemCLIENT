@@ -12,6 +12,8 @@ import { MaterialModule } from '../material';
 import { OverviewComponent } from './overview/overview.component';
 import { ManageroomComponent } from './manageroom/manageroom.component';
 import { ManageuserComponent } from './manageuser/manageuser.component';
+import { AddroomresidentComponent } from './manageroom/addroomresident/addroomresident.component';
+import { EditroomresidentComponent } from './manageroom/editroomresident/editroomresident.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ManageuserComponent } from './manageuser/manageuser.component';
     OverviewComponent,
     ManageroomComponent,
     ManageuserComponent,
+    AddroomresidentComponent,
+    EditroomresidentComponent,
   ],
   entryComponents:[
     AdminComponent,

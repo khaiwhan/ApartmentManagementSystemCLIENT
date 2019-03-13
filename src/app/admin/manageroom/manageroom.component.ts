@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { ServerService } from 'src/app/@service/server.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manageroom',
@@ -11,7 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class ManageroomComponent implements OnInit {
 
-  displayedColumns: string[] = ['Room', 'Residents', 'TypeRoom', 'StatusUser', 'StatusRoom','Edit'];
+  displayedColumns: string[] = ['Room', 'Residents', 'TypeRoom', 'StatusUser', 'CheckIN','CheckOut','StatusRoom','Edit'];
   dataSource: MatTableDataSource<[any]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,7 +39,7 @@ export class ManageroomComponent implements OnInit {
   delete_room_id;
 
   listUsername;
-  constructor(private service: ServerService, private dialog: MatDialog,private modal:NgbModal) { }
+  constructor(private service: ServerService, private dialog: MatDialog,private modal:NgbModal,private route:Router) { }
   ngOnInit() {
     this.getTable();
     this.service.getDataUser().subscribe(
@@ -49,7 +50,7 @@ export class ManageroomComponent implements OnInit {
   }
   getTable(){
     this.service.getDataRoomResident().subscribe(
-      (res) => {
+      (res) => {        
         this.dataSource = new MatTableDataSource(res as any[]);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -67,12 +68,13 @@ export class ManageroomComponent implements OnInit {
     this.modal.open(modal,{centered:true});
   }
   onAddRoom(){
-    this.service.addRoomResident(this.AddRoomForm.value).subscribe(
-      (res) => {
-        this.getTable();
-        this.modal.dismissAll();
-      }
-    )
+    // this.service.addRoomResident(this.AddRoomForm.value).subscribe(
+    //   (res) => {
+    //     this.getTable();
+    //     this.modal.dismissAll();
+    //   }
+    // )
+    this.route.navigate[('admin/admin/manageroom/addroomresident')]
   }
   openModalEditUser(data,modal){
     this.update_room_id = data.room_id;
@@ -100,5 +102,8 @@ export class ManageroomComponent implements OnInit {
         this.modal.dismissAll();
       }
     )
+  }
+  gotoEditpage(){
+    this.route.navigate(['../editroomresident',this.AddRoomForm.value.room_id])
   }
 }

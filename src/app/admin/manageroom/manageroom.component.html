@@ -1,16 +1,16 @@
 <div class="container-fluid">
   <div class="row" style="height: 100px;background-color: #63320e">
-    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">ManageResident</h1>
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">AddRoomResident</h1>
   </div>
   <br><br>
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md">
-      <mat-form-field style="width: 90%">
+      <mat-form-field style="width: 80%">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
       </mat-form-field>
       <span> &nbsp;<a mat-button style="background-color: #63320e"
-          (click)="openModalAddRoom(AddRoom)">AddRoom</a></span>
+          routerLink="../addroomresident">AddRoomOrResident</a></span>
 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -30,6 +30,16 @@
             <td mat-cell *matCellDef="let row"> {{row.type_room}} </td>
           </ng-container>
 
+          <ng-container matColumnDef="CheckIN">
+            <th mat-header-cell *matHeaderCellDef> CheckIN </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.check_in}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="CheckOut">
+            <th mat-header-cell *matHeaderCellDef> CheckOut </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.check_out}} </td>
+          </ng-container>
+
           <ng-container matColumnDef="StatusUser">
             <th mat-header-cell *matHeaderCellDef> StatusUser </th>
             <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_role}} </td>
@@ -43,8 +53,8 @@
           <ng-container matColumnDef="Edit">
             <th mat-header-cell *matHeaderCellDef> EditRoom </th>
             <td mat-cell *matCellDef="let row">
-              <mat-icon (click)="openModalEditUser(row,EditData)"
-                style="font-size: 30px;cursor: pointer;color: #63320e">
+              <mat-icon style="font-size: 30px;cursor: pointer;color: #63320e"
+                [routerLink]="['../editroomresident',row.room_id,row.username,row.type_id,row.room_status,row.check_in,row.check_out]">
                 settings</mat-icon>&nbsp;
               <mat-icon (click)="openModalDeleteUser(row.room_id,deleteRoom)"
                 style="font-size: 30px;cursor: pointer;color: rgb(177, 25, 25)">remove_circle</mat-icon>
@@ -76,13 +86,14 @@
       <mat-label>Residents</mat-label>
       <input matInput formControlName="username" style="color: #63320e">
     </mat-form-field> -->
-    
+
     <!-- <mat-form-field style="width: 100%;color: #63320e;font-size: 14px;"> -->
-      <select class="custom-select mb-3" formControlName="username" placeholder="ChooseUser" style="width: 100%;color: #63320e;font-size: 14px;">
-        <option *ngFor="let list of listUsername" [value]="list.username">
-          {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
-        </option>
-      </select>
+    <select class="custom-select mb-3" formControlName="username" placeholder="ChooseUser"
+      style="width: 100%;color: #63320e;font-size: 14px;">
+      <option *ngFor="let list of listUsername" [value]="list.username">
+        {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
+      </option>
+    </select>
     <!-- </mat-form-field> -->
 
     <mat-label>TypeRoom</mat-label><br><br>
@@ -115,7 +126,8 @@
     <input formControlName="update_room_id" style="color: #63320e" type="hidden" [(ngModel)]="update_room_id">
 
 
-    <select class="custom-select mb-3" formControlName="update_username" [(ngModel)]="update_username" placeholder="ChooseUser" style="width: 100%;color: #63320e;font-size: 14px;">
+    <select class="custom-select mb-3" formControlName="update_username" [(ngModel)]="update_username"
+      placeholder="ChooseUser" style="width: 100%;color: #63320e;font-size: 14px;">
       <option *ngFor="let list of listUsername" [value]="list.username">
         {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
       </option>
