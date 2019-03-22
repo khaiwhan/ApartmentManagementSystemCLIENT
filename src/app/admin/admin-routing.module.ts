@@ -72,7 +72,7 @@ const routes: Routes = [
         component: PrintComponent,
         children: [
           {
-            path: 'printout',
+            path: 'printout/:roomm/:month/:year',
             component: PrintoutComponent
           }
 

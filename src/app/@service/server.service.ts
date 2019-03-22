@@ -50,6 +50,15 @@ export class ServerService {
   getRent(){
     return this.http.get(urlServer.ipServer + 'selectdabit')
   }
-
   //ENDRent
+
+  //getRoom
+  getRoom(){
+    return this.http.get(urlServer.ipServer + 'selectroom')
+  }
+  //endroom
+  //getBill
+  getDebit(a,b,c){
+    return this.http.get(urlServer.ipServer + 'selectdabit/' + a + '/' + b + '/' + c)
+  }
 }
