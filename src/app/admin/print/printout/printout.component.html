@@ -1,5 +1,3 @@
-
-
 <div class="container" id="contentToConvert" style="margin-top: 20px;">
 
   <div class="row">
@@ -51,7 +49,8 @@
         <td scope="row">
           <div class="row">
             <div class="col-md-6">ค่าไฟฟ้า</div>
-            <div class="col-md-2">{{data[0].elect_start}}&nbsp;หน่วย</div>  <!--เริ่ม-->
+            <div class="col-md-2">{{data[0].elect_start}}&nbsp;หน่วย</div>
+            <!--เริ่ม-->
             <div class="col-md-1">ถึง</div>
             <div class="col-md">{{data[0].elect_end}}&nbsp;หน่วย</div>
           </div>
@@ -64,7 +63,8 @@
         <td scope="row">
           <div class="row">
             <div class="col-md-6">ค่าประปา</div>
-            <div class="col-md-2">{{data[0].water_start}}&nbsp;หน่วย</div> <!--เริ่ม-->
+            <div class="col-md-2">{{data[0].water_start}}&nbsp;หน่วย</div>
+            <!--เริ่ม-->
             <div class="col-md-1">ถึง</div>
             <div class="col-md">{{data[0].water_end}}&nbsp;หน่วย</div>
           </div>
@@ -80,25 +80,34 @@
         <td class="right">-</td>
       </tr>
       <tr>
-          <td colspan="3"><b>รวมเป็นเงินทั้งสิ้น</b></td>
-          <td  class="right">{{data[0].total_rent}} -</td>
-        </tr>
+        <td colspan="3"><b>รวมเป็นเงินทั้งสิ้น</b></td>
+        <td class="right">{{data[0].total_rent}} -</td>
+      </tr>
     </tbody>
   </table>
   <div class="row" style="margin-top: 150px;">
     <div class="col-md-6"></div>
-    <div class="col-md">ลายมื่อชื่อ........................................................................ผู้รับเงิน/ผู้ให้เช่า</div>
+    <div class="col-md">
+      ลายมื่อชื่อ........................................................................ผู้รับเงิน/ผู้ให้เช่า</div>
   </div>
   <div class="row" style="margin-top: 150px">
     <div class="col-md"><b>กรุณาชำระเงินในวันที่ 7 ของเดือนถัดไป</b></div>
   </div>
   <div class="row">
-    <div class="col-md">**กรณีชำระหลังวันที่ 7 จะมีค่าปรับวันละ 50 บาท การจ่ายค่าปรับจะต้องจ่ายผ่านธนาคารกรุงไทยในบัญชี 0987654321 ต้องจ่ายค่าห้องรวมกับค่าปรับตามจำนวนวัน พร้อมทั้งถ่ายสลิปแล้วส่งมาทาง LINE @ApartmentOffice หากภายในวันที่ 16 ขอเดือนยังไม่มีการชำระค่าห้อง ทาง Apartment จะทำการตัดไฟห้อง</div>
+    <div class="col-md">**กรณีชำระหลังวันที่ 7 จะมีค่าปรับวันละ 50 บาท การจ่ายค่าปรับจะต้องจ่ายผ่านธนาคารกรุงไทยในบัญชี
+      0987654321 ต้องจ่ายค่าห้องรวมกับค่าปรับตามจำนวนวัน
+      </div>
   </div>
-  
+  <div class="row">
+    <div class="col-md">
+      พร้อมทั้งถ่ายสลิปแล้วส่งมาทาง LINE @ApartmentOffice หากภายในวันที่ 16 ขอเดือนยังไม่มีการชำระค่าห้อง ทาง Apartment
+      จะทำการตัดไฟห้อง</div>
+  </div>
+
 </div>
 
 
 <!-- ปุ่ม print-->
-<button class="fa fa-print" aria-hidden="true" mat-raised-button style="background:#63320e;color:snow;margin-left: 50%; margin-top: 90px;margin-block-end: 100px "
+<button class="fa fa-print" aria-hidden="true" mat-raised-button
+  style="background:#63320e;color:snow;margin-left: 50%; margin-top: 90px;margin-block-end: 100px "
   (click)="captureScreen()"> Print</button>

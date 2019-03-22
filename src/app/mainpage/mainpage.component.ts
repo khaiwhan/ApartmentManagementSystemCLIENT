@@ -54,6 +54,9 @@ export class MainpageComponent implements OnInit {
       if(this.user[0].cus_role === "member" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
         this.route.navigate(['/member/member/home'])
       }
+      if(this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/staff/staff'])
+      }
     }
     
     
@@ -133,7 +136,7 @@ export class DialogOverviewExampleDialog {
             this.route.navigate(['/admin/admin/overview'])
           }
           if (res[0].cus_role === "staff") {
-            this.route.navigate(['/staff/staff/'])
+            window.history.go(0);
           }
           if (res[0].cus_role === "member") {
             window.history.go(0);

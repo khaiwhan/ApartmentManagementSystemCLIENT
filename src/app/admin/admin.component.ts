@@ -26,6 +26,9 @@ export class AdminComponent implements OnInit {
     if(this.user && this.user[0].cus_role !== "admin"){
       this.route.navigate(['/mainpage/mainpage/home'])
     }
+    if(this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+      this.route.navigate(['/staff/staff/home'])
+    }
   }
   onLogout() {
     this.session.clearActiveUser();
