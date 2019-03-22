@@ -6,38 +6,84 @@ import { ManageroomComponent } from './manageroom/manageroom.component';
 import { ManageuserComponent } from './manageuser/manageuser.component';
 import { AddroomresidentComponent } from './manageroom/addroomresident/addroomresident.component';
 import { EditroomresidentComponent } from './manageroom/editroomresident/editroomresident.component';
+import { NotiticationsComponent } from './notitications/notitications.component';
+import { ContactComponent } from './contact/contact.component';
+import { WaterComponent } from './water/water.component';
+import { PrintComponent } from './print/print.component';
+import { PrintoutComponent } from './print/printout/printout.component';
+import { ReplyComponent } from './reply/reply.component';
+import { InfomationComponent } from './infomation/infomation.component';
+import { FacilityComponent } from './facility/facility.component';
 
 const routes: Routes = [
   {
-    path:'admin',
-    component:AdminComponent,
-    children:[
+    path: 'admin',
+    component: AdminComponent,
+    children: [
       {
-        path:'overview',
-        component:OverviewComponent
+        path: 'facility',
+        component: FacilityComponent
       },
       {
-        path:'manageroom',
-        component:ManageroomComponent
+        path: 'info',
+        component: InfomationComponent
       },
       {
-        path:'addroomresident',
-        component:AddroomresidentComponent
+        path: 'reply',
+        component: ReplyComponent
       },
       {
-        path:'editroomresident/:room_id/:username/:type_id/:room_status/:check_in/:check_out',
-        component:EditroomresidentComponent
+        path: 'overview',
+        component: OverviewComponent
       },
       {
-        path:'manageuser',
-        component:ManageuserComponent
+        path: 'manageroom',
+        component: ManageroomComponent
+      },
+      {
+        path: 'addroomresident',
+        component: AddroomresidentComponent
+      },
+      {
+        path: 'editroomresident/:room_id/:username/:type_id/:room_status/:check_in/:check_out',
+        component: EditroomresidentComponent
+      },
+      {
+        path: 'manageuser',
+        component: ManageuserComponent
+      },
+      {
+        path: 'notitications',
+        component: NotiticationsComponent
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+
+      },
+
+      {
+        path: 'water',
+        component: WaterComponent,
+
+      },
+      {
+        path: 'print',
+        component: PrintComponent,
+        children: [
+          {
+            path: 'printout',
+            component: PrintoutComponent
+          }
+
+        ]
       }
     ]
   },
   {
-    path:'',
-    redirectTo:'admin/home',
-    pathMatch:'admin'
+    path: '',
+    redirectTo: 'admin/home',
+    pathMatch: 'admin'
   }
 ];
 

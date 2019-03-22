@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Rental</h1>
+  </div>
+
+  <div class="container" id="contentToConvert" style="margin-top: 20px;">
+
+    <div class="row">
+      <div class="col-md">Apartment</div>
+    </div>
+    <div class="row">
+      <div class="col-md">55 Rangsit-Pathum Rd., Khlong 6, Khlong Luang, Pathum Thani 12120</div>
+    </div>
+    <div class="row">
+      <div class="col-md">Tel.075372021</div>
+    </div>
+    <div class="row" style="margin-left: 45%; margin-top: 50px; font-size: 25px">
+      <div class="col-md"><b>ใบแจ้งหนี้ค่าเช่า</b></div>
+    </div>
+    <div class="row" style="margin-top: 50px;">
+      <div class="col-md-3">วันที่แจ้งค่าเช่า</div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">ชื่อผู้เช่า</div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">เลขที่ห้อง</div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <table class="table table-bordered" style="margin-top: 40px; ">
+      <thead>
+        <tr>
+          <th scope="col" width="45%">รายการ</th>
+          <th scope="col" width="25%">อัตราค่าบริการต่อหน่วย (บาท)</th>
+          <th scope="col" width="15%">จำนวนหน่วยที่ใช้</th>
+          <th scope="col" width="15%">รวมเงิน (บาท)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">ค่าเช่า</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4">ค่าสารณูปโภค</td>
+
+        </tr>
+        <tr>
+          <td scope="row">
+            <div class="row">
+              <div class="col-md-7">ค่าไฟฟ้า</div>
+              <div class="col-md-2"></div>
+              <!--เริ่ม-->
+              <div class="col-md-1">ถึง</div>
+              <div class="col-md-2"></div>
+            </div>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td scope="row">
+            <div class="row">
+              <div class="col-md-7">ค่าประปา</div>
+              <div class="col-md-2"></div>
+              <!--เริ่ม-->
+              <div class="col-md-1">ถึง</div>
+              <div class="col-md-2"></div>
+            </div>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td scope="row">ค่าใช้จ่ายอื่น ๆ</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="3"><b>รวมเป็นเงินทั้งสิ้น</b></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row" style="margin-top: 150px;">
+      <div class="col-md-6"></div>
+      <div class="col-md">
+        ลายมื่อชื่อ........................................................................ผู้รับเงิน/ผู้ให้เช่า</div>
+    </div>
+    <div class="row" style="margin-top: 150px">
+      <div class="col-md"><b>กรุณาชำระเงินในวันที่ 7 ของเดือนถัดไป</b></div>
+    </div>
+    <div class="row">
+      <div class="col-md">(กรณีชำระหลังวันที่ 7 จะมีค่าปรับวันละ 50 บาท
+        เรียกเก็บไปพร้อมกับใบแจ้งหนี้ค่าเช่าในรอบเดือนถัดไป)</div>
+    </div>
+  </div>
+
+
+  <!-- ปุ่ม print-->
+  <button class="fa fa-print" aria-hidden="true" mat-raised-button
+    style="background:#63320e;color:snow;margin-left: 50%; margin-top: 90px;margin-block-end: 100px "
+    (click)="captureScreen()"> Print</button>
+
+</div>

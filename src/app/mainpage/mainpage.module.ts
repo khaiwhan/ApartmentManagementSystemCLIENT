@@ -14,6 +14,10 @@ import { ServerService } from '../@service/server.service';
 import { AriRoomComponent } from './ari-room/ari-room.component';
 import { FanRoomComponent } from './fan-room/fan-room.component';
 import { SuiteRoomComponent } from './suite-room/suite-room.component';
+import { CarouselModule } from 'ngx-bootstrap';
+import { ContactComponent } from './contact/contact.component';
+
+import { AirBookComponent } from './ari-room/air-book/air-book.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import { SuiteRoomComponent } from './suite-room/suite-room.component';
     AlertLoginError,
     AriRoomComponent,
     FanRoomComponent,
-    SuiteRoomComponent
+    SuiteRoomComponent,
+    ContactComponent,
+    
+    AirBookComponent,
   ],
   entryComponents: [
     MainpageComponent,
@@ -45,7 +52,8 @@ import { SuiteRoomComponent } from './suite-room/suite-room.component';
     MatNativeDateModule,
     ReactiveFormsModule,
     SliderModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    CarouselModule.forRoot()
   ],
   providers:[ServerService]
 

@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Reply</h1>
+  </div>
+  <div class="row">
+    
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+         
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Room </th>
+            <td mat-cell *matCellDef="let row"> {{row.position}} </td>
+          </ng-container>
+
+      
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Head </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+          </ng-container>
+
+         
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Detail </th>
+            <td mat-cell *matCellDef="let row"> {{row.weight}} </td>
+          </ng-container>
+
+         
+          <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef  style="right: 2%;" > Reply</th>
+            <td mat-cell *matCellDef="let row">
+              <i class="material-icons" (click)="openModalReply(row,Reply)" style="cursor: pointer;">
+                reply
+              </i></td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    
+  </div>
+</div>
+
+<ng-template #Reply let-modal>
+  <div style="margin: 20px;">
+    <form>
+      <h6>Head :</h6>
+      {{head}} <br><br>
+      <h6>Detail :</h6>
+      {{detail}} <br><br>
+      <h6>Reply :</h6>
+      <textarea name="" id="" cols="30" rows="3" style="width: 100%"></textarea><br>
+      <button mat-raised-button style="background-color: #63320e;color:snow;margin-left: 40%">Reply</button>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #974f1c">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Reply <i class="material-icons">
+      email
+      </i></h1>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+
+      <ng-container matColumnDef="head">
+        <th mat-header-cell *matHeaderCellDef>Head contact</th>
+        <td mat-cell *matCellDef="let row"> {{row.head}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="detail">
+        <th mat-header-cell *matHeaderCellDef>Contact detail</th>
+        <td mat-cell *matCellDef="let row"> {{row.detail}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reply">
+        <th mat-header-cell *matHeaderCellDef>Reply</th>
+        <td mat-cell *matCellDef="let row"> {{row.reply}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef style="width: 180px"> Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="show">
+        <th mat-header-cell *matHeaderCellDef style="width: 100px"> show </th>
+        <td mat-cell *matCellDef="let row">
+          <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" (click)="openModalShow(row,Show)"
+            style="cursor: pointer; color: #63320e;"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>
+
+<ng-template #Show let-modal>
+  <div style="margin: 20px;">
+    <form>
+      <h6>Head :</h6>
+      {{head}} <br><br>
+      <h6>Detail :</h6>
+      {{detail}} <br><br>
+      <h6>Reply :</h6>
+      {{reply}}
+      <button mat-raised-button style="background-color: #63320e;color:snow;margin-left: 40%">close</button>
+    </form>
+  </div>
+</ng-template>

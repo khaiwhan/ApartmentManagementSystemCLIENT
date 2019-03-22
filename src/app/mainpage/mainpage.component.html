@@ -4,12 +4,13 @@
     <mat-icon class="example-icon" style="margin-top: 0px;font-size:30px;padding-bottom: 35px;">home</mat-icon>
     <a mat-button routerLink="/mainpage/mainpage/home">Apartment</a>
     <a mat-button [matMenuTriggerFor]="animals" active="true">Type Room</a>
-    <a mat-button>Contact</a>
+    <a mat-button routerLink="/mainpage/mainpage/contact">Contact</a>
     <mat-menu #animals="matMenu" style="background: black">
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/fanroom">Fan Room</a>
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/airroom">Air-Conditioned Room</a>
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/suiteroom">Suite Room</a>
     </mat-menu>
+    
     <span></span>
     <span class="example-spacer"></span>
     <a mat-raised-button style="color: black;background: rgb(245, 245, 245);

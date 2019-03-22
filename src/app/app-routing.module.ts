@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren:'./staff/staff.module#StaffModule'
   },
   {
+    path:'member',
+    loadChildren:'./member/member.module#MemberModule'
+  },
+  {
     path:'',
     redirectTo:'mainpage',
     pathMatch:'full'

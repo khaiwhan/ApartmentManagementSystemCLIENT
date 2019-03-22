@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Print &nbsp;<i class="fa fa-print fa-2x"
+        aria-hidden="true"></i></h1>
+  </div>
+
+  <div class="container">
+    <div class="row" style="margin-top: 50px;">
+      <div class="col-md-1"></div>
+      <div class="col-md">
+        <label>Room</label>
+      </div>
+      <div class="col-md"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md">
+        <div class="form-group">
+
+          <input type="text" class="form-control" placeholder="Room">
+        </div>
+      </div>
+      <div class="col-md">
+        <button mat-raised-button style="background:#63320e;color: snow; "
+          routerLink="/admin/admin/print/printout">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<router-outlet></router-outlet>

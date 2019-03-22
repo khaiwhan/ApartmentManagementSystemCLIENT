@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Meter water/electricity </h1>
+  </div>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Room name" value="">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="room">
+        <th mat-header-cell *matHeaderCellDef> Room </th>
+        <td mat-cell *matCellDef="let row"> {{row.room}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="waterstart">
+        <th mat-header-cell *matHeaderCellDef> water start </th>
+        <td mat-cell *matCellDef="let row"> {{row.waterstart}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="waterend">
+        <th mat-header-cell *matHeaderCellDef> water end </th>
+        <td mat-cell *matCellDef="let row"> {{row.waterend}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="electstart">
+        <th mat-header-cell *matHeaderCellDef> elect start </th>
+        <td mat-cell *matCellDef="let row"> {{row.electstart}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="electend">
+        <th mat-header-cell *matHeaderCellDef> elect end </th>
+        <td mat-cell *matCellDef="let row"> {{row.electend}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef> Update </th>
+        <td mat-cell *matCellDef="let row">
+          <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" (click)="openModalMeter(row,Meter)"
+            style="cursor: pointer; color: #63320e;"></i>
+
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </form>
+</div>
+
+
+
+<ng-template #Meter let-modal>
+  <div style="margin: 20px;">
+    <form>
+      <div class="row" style="font-size: 20px;">
+        <div class="col-md">Room : {{room}} </div>
+        <div class="col-md"></div> <!-- เลขห้อง -->
+      </div>
+      <br>
+      <div class="form-group">
+        <label>meter water</label>
+        <input type="number" class="form-control" placeholder="water">
+      </div>
+      <div class="form-group">
+        <label>meter electricity</label>
+        <input type="number" class="form-control" placeholder="electricity">
+      </div>
+      <button mat-raised-button style="background:#63320e;color: snow; margin-left: 35%;">Submit</button>
+    </form>
+  </div>
+</ng-template>

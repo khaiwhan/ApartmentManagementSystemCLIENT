@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+  }
+  .example-full-width {
+    width: 50%;
+  }
+
+
+form {
+  margin-top: 50px;
+
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #63320e !important;
+ }
+
+ 
+mat-icon,a{
+  color: snow;
+  font-size: 15px;
+  text-decoration: none;
+}

@@ -45,13 +45,17 @@ export class MainpageComponent implements OnInit {
     console.log(this.user)
     
     if(this.user == null || this.user === ""){
-      this.route.navigate(['/mainpage/magepage/home'])
+      this.route.navigate(['/mainpage/mainpage/home'])
     }
     if(this.user !== null || this.user !== ""){
       if(this.user[0].cus_role === "admin" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
         this.route.navigate(['/admin/admin/overview'])
       }
+      if(this.user[0].cus_role === "member" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/member/member/home'])
+      }
     }
+    
     
   }
 
@@ -130,6 +134,9 @@ export class DialogOverviewExampleDialog {
           }
           if (res[0].cus_role === "staff") {
             this.route.navigate(['/staff/staff/'])
+          }
+          if (res[0].cus_role === "member") {
+            window.history.go(0);
           }
         },
         (err) => {

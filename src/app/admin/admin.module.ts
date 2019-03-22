@@ -14,6 +14,14 @@ import { ManageroomComponent } from './manageroom/manageroom.component';
 import { ManageuserComponent } from './manageuser/manageuser.component';
 import { AddroomresidentComponent } from './manageroom/addroomresident/addroomresident.component';
 import { EditroomresidentComponent } from './manageroom/editroomresident/editroomresident.component';
+import { NotiticationsComponent } from './notitications/notitications.component';
+import { ContactComponent } from './contact/contact.component';
+import { WaterComponent } from './water/water.component';
+import { PrintComponent } from './print/print.component';
+import { PrintoutComponent } from './print/printout/printout.component';
+import { ReplyComponent } from './reply/reply.component';
+import { InfomationComponent } from './infomation/infomation.component';
+import { FacilityComponent } from './facility/facility.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +31,14 @@ import { EditroomresidentComponent } from './manageroom/editroomresident/editroo
     ManageuserComponent,
     AddroomresidentComponent,
     EditroomresidentComponent,
+    NotiticationsComponent,
+    ContactComponent,
+    WaterComponent,
+    PrintComponent,
+    PrintoutComponent,
+    ReplyComponent,
+    InfomationComponent,
+    FacilityComponent,
   ],
   entryComponents:[
     AdminComponent,

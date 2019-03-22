@@ -45,4 +45,11 @@ export class ServerService {
     return this.http.delete(urlServer.ipServer + 'deleteroom/' + data)
   }
   // end ManageRoom Resident
+
+  //Rent
+  getRent(){
+    return this.http.get(urlServer.ipServer + 'selectdabit')
+  }
+
+  //ENDRent
 }

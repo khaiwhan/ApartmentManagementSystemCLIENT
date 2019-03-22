@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { AriRoomComponent } from './ari-room/ari-room.component';
 import { FanRoomComponent } from './fan-room/fan-room.component';
 import { SuiteRoomComponent } from './suite-room/suite-room.component';
+import { ContactComponent } from './contact/contact.component';
+import { AirBookComponent } from './ari-room/air-book/air-book.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,7 @@ const routes: Routes = [
       },
       {
         path:'airroom',
-        component:AriRoomComponent
+        component:AriRoomComponent,
       },
       {
         path:'fanroom',
@@ -26,6 +28,14 @@ const routes: Routes = [
       {
         path:'suiteroom',
         component:SuiteRoomComponent
+      },
+      {
+        path:'contact',
+        component:ContactComponent
+      },
+      {
+        path:'airbookroom',
+        component:AirBookComponent
       }
     ]
   },

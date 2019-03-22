@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="row" style="height: 100px;background-color: #63320e">
+        <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Notifiy Book</h1>
+    </div>
+    <br><br>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
+            </mat-form-field>
+
+
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
+
+
+                    <ng-container matColumnDef="room">
+                        <th mat-header-cell *matHeaderCellDef>Room No.</th>
+                        <td mat-cell *matCellDef="let row"> {{row.room}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="checkin">
+                        <th mat-header-cell *matHeaderCellDef> Check-in </th>
+                        <td mat-cell *matCellDef="let row"> {{row.checkin}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="checkout">
+                        <th mat-header-cell *matHeaderCellDef> Check-out </th>
+                        <td mat-cell *matCellDef="let row"> {{row.checkout}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> Date Book </th>
+                        <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="icon">
+                        <th mat-header-cell *matHeaderCellDef> icon </th>
+                        <td mat-cell *matCellDef="let row">
+                            <i class="material-icons" style="cursor: pointer; color: #63320e;"
+                                (click)="openModalSearch(row,Search)">
+                                add_box
+                            </i>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #Search let-modal>
+    <div style="margin: 20px;">
+        <form>
+            <h6>Room : {{room}} </h6>
+             <br>
+            <h6>Name :</h6>
+            {{name}} <br><br>
+            <h6>E-mail :</h6>
+            {{email}} <br><br>
+            <h6>Check-in :</h6>
+            {{checkin}} <br><br>
+            <h6>Check-out :</h6>
+            {{checkout}} <br><br>
+            <h6>Date :</h6>
+            {{date}} <br><br>
+            
+                <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%;">Add</button>
+                <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%">Cancle</button>
+           
+        </form>
+    </div>
+</ng-template>

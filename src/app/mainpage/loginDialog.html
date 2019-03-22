@@ -8,7 +8,7 @@
   </mat-form-field>
   <mat-form-field style="width: 100%;" appearance="outline">
     <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="hide" [type]="hide ? 'password' : 'text'" [formControl]="Password" style="color: #63320e">
+    <input matInput  [type]="!hide ? 'password' : 'text'" [formControl]="Password" style="color: #63320e">
     <mat-icon matSuffix (click)="hide = !hide" style="color: #63320e">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
   <!-- cdkFocusInitial ใส่อันนี้ไว้ใน tag button จะทำให้ปุ่มเกิดการ active-->
