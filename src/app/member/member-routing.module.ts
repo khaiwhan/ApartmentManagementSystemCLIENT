@@ -13,6 +13,7 @@ import { AirBookComponent } from '../mainpage/ari-room/air-book/air-book.compone
 import { MemberairbookComponent } from './air-room/memberairbook/memberairbook.component';
 import { MemberfanbookComponent } from './fan-room/memberfanbook/memberfanbook.component';
 import { MembersuitebookComponent } from './suite-room/membersuitebook/membersuitebook.component';
+import { PrintComponent } from './print/print.component';
 
 const routes: Routes = [
   {
@@ -73,7 +74,10 @@ const routes: Routes = [
         path: 'reply',
         component: ReplyComponent
       },
-     
+      {
+        path:'print',
+        component:PrintComponent
+      }
     ]
   }
 ];

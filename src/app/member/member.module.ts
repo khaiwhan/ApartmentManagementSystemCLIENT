@@ -22,11 +22,26 @@ import { ReplyComponent } from './reply/reply.component';
 import { MemberairbookComponent } from './air-room/memberairbook/memberairbook.component';
 import { MemberfanbookComponent } from './fan-room/memberfanbook/memberfanbook.component';
 import { MembersuitebookComponent } from './suite-room/membersuitebook/membersuitebook.component';
+import { PrintComponent } from './print/print.component';
 
 
 
 @NgModule({
-  declarations: [MemberComponent, HomeComponent, AirRoomComponent, ContactComponent, FanRoomComponent, SuiteRoomComponent, InfoComponent, ProfileComponent, ReplyComponent, MemberairbookComponent, MemberfanbookComponent, MembersuitebookComponent, ],
+  declarations: [
+    MemberComponent,
+    HomeComponent,
+    AirRoomComponent,
+    ContactComponent,
+    FanRoomComponent,
+    SuiteRoomComponent,
+    InfoComponent,
+    ProfileComponent,
+    ReplyComponent,
+    MemberairbookComponent,
+    MemberfanbookComponent,
+    MembersuitebookComponent,
+    PrintComponent,
+   ],
   imports: [
     CommonModule,
     MemberRoutingModule,

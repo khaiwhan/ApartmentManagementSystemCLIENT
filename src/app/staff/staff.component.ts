@@ -18,6 +18,23 @@ export class StaffComponent implements OnInit {
     if(this.user == null || this.user === ""){
       this.route.navigate(['/mainpage/mainpage/home'])
     }
+    if(this.user !== null || this.user !== ""){
+      if(this.user[0].cus_role === "admin" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/admin/admin/overview'])
+      }
+      if(this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/staff/staff/home'])
+      }
+      if(this.user[0].cus_role === "member" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/member/member/home'])
+      }
+      if(this.user[0].cus_role === "viewer" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+        this.route.navigate(['/mainpage/mainpage/home'])
+      }
+    }
   }
-
+  onLogout() {
+    this.session.clearActiveUser();
+    window.history.go(0);
+  }
 }

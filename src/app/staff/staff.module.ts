@@ -11,9 +11,12 @@ import { MatNativeDateModule } from '@angular/material';
 import { SliderModule } from 'angular-image-slider';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CarouselModule } from 'ngx-bootstrap';
+import { PrintComponent } from './print/print.component';
+import { PrintoutComponent } from './print/printout/printout.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [StaffComponent, ProfileComponent],
+  declarations: [StaffComponent, ProfileComponent, PrintComponent, PrintoutComponent, HomeComponent],
   imports: [
     CommonModule,
     StaffRoutingModule,

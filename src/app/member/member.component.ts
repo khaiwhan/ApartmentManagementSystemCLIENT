@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { SessionService } from '../@service/session.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
@@ -18,10 +19,11 @@ export class MemberComponent implements OnInit {
   hide = true;
   hide1 = true;
   user;
+  
   constructor(
     public dialog: MatDialog,
     private session: SessionService,
-    private route: Router
+    private route: Router,
   ) { }
 
   ngOnInit() {

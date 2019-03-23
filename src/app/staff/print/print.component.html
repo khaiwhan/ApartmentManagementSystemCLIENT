@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Print &nbsp;<i class="fa fa-print fa-2x"
+        aria-hidden="true"></i></h1>
+  </div><br>
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md shadow"
+      style="border-radius: 20px;padding-bottom: 20px;border-top-width: 20px;padding-top: 20px;padding-left: 20px;padding-right: 20px;">
+      <mat-form-field>
+        <mat-label>SELECT ROOM</mat-label>
+        <mat-select [formControl]="roomm">
+          <mat-option *ngFor="let room of rooms" [value]="room.room_id">
+            {{room.room_id}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <a mat-raised-button style="background:#63320e;color: snow;"
+        [routerLink]="['../print/printout',roomm.value]">Search</a>
+    </div>
+    <div class="col-md"></div>
+  </div>
+</div>
+<hr>
+<router-outlet></router-outlet>

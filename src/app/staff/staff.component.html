@@ -1,5 +1,63 @@
-<p>
-  staff works!
-</p>
+<!-- Menubar -->
+<mat-toolbar>
+  <mat-toolbar-row class="shadow" style="background: #63320e">
+    <mat-icon class="example-icon" style="margin-top: 0px;font-size:30px;padding-bottom: 35px;">home</mat-icon>
+    <a mat-button routerLink="/staff/staff/home">Apartment</a>
+
+    <a mat-button routerLink="/staff/staff/print">Print <i class="fa fa-print" aria-hidden="true"></i></a>
+
+    <span></span>
+    <span class="example-spacer"></span>
+    <a mat-raised-button style="color: black;background: rgb(245, 245, 245);
+                                                    border-bottom: gray 2px solid;
+                                                    border-right: gray 2px solid" (click)="openDialog()"
+      *ngIf="user == null" [(ngModel)]="user">Sign-in</a>
+    <!-- <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" *ngIf="user != null" [(ngModel)] ="user">{{user}}</a> -->
+    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)]="user" active="true"
+      *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
+    <mat-menu #profile="matMenu" style="background: black">
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/member/member/profile">Profile</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" (click)="onLogout()">Logout</a>
+    </mat-menu>
+    <a mat-button (click)="openDialogRegister()" *ngIf="user == null">Registor</a>
+    <!-- <a mat-button (click)="openDialogRegister()" *ngIf="user != null">Logout</a> -->
+    <!-- <mat-icon class="example-icon">face</mat-icon>
+        <mat-icon class="example-icon">delete</mat-icon> -->
+  </mat-toolbar-row>
+</mat-toolbar>
 
 
+<router-outlet></router-outlet>
+<br>
+<mat-toolbar>
+  <mat-toolbar-row style="background: #63320e;height: 100px;">
+    <footer class="footer">
+      <div class="row">
+        <div class="col-md-1">
+          <mat-icon class="example-icon" style="font-size: 60px;margin-top: 20px;">location_city</mat-icon>
+        </div>
+        <div class="col-md-2 leftText">
+          Contact
+          <span _ngcontent-c10>
+            <i class="fa fa-phone" aria-hidden="true"><b> : 0862826721</b></i>
+          </span>
+          <span _ngcontent-c10>
+            <i class="fa fa-envelope" aria-hidden="true"><b> : Natinun.t@gmail.com</b></i>
+          </span>
+        </div>
+        <div class="col-md-6 midText">Apartment Management System Version 1.0</div>
+        <div _ngcontent-c10 class="col-md-3 rightText">
+          <span _ngcontent-c10>
+            Powered by Natinun Thunlapan @2017-2018.
+          </span>
+          <span _ngcontent-c10>
+            Copyright © 2007 - 2018 Computer Engineering.
+          </span>
+          <span _ngcontent-c10>
+            Rajamangala University of Technology Thanyaburi.
+          </span>
+        </div>
+      </div>
+    </footer>
+  </mat-toolbar-row>
+</mat-toolbar>
