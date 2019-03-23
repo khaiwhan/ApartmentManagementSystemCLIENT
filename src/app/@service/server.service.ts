@@ -61,4 +61,32 @@ export class ServerService {
   getDebit(a,b,c){
     return this.http.get(urlServer.ipServer + 'selectdabit/' + a + '/' + b + '/' + c)
   }
+  //getQuestion
+  getQuestion(){
+    return this.http.get(urlServer.ipServer + 'selectcontact')
+  }
+  //Awnser
+  Answer(data){
+    return this.http.put(urlServer.ipServer + 'updatecontact',data)
+  }
+  //countQuestion
+  countQuestion(){
+    return this.http.get(urlServer.ipServer + 'totalquestion')
+  }
+  //Ask
+  Ask(data){
+    return this.http.post(urlServer.ipServer + 'addcontact',data)
+  }
+  //selectRoomforMember
+  memberGetQuestion(data){
+    return this.http.get(urlServer.ipServer + 'selectquestionroom/' + data)
+  }
+  //deleteroomMember
+  memberDeleteQuestion(data){
+    return this.http.delete(urlServer.ipServer + 'deletequestionmember/' + data)
+  }
+  //countReplyMember
+  memberCountReply(data){
+    return this.http.get(urlServer.ipServer + 'selectreplymember/' + data)
+  }
 }

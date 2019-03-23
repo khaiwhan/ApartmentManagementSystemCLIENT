@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SessionService } from '../@service/session.service';
 import { Router } from '@angular/router';
+import { ServerService } from '../@service/server.service';
 
 
 @Component({
@@ -19,11 +20,12 @@ export class MemberComponent implements OnInit {
   hide = true;
   hide1 = true;
   user;
-  
+  total_reply;
   constructor(
     public dialog: MatDialog,
     private session: SessionService,
     private route: Router,
+    private service:ServerService
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,11 @@ export class MemberComponent implements OnInit {
         this.route.navigate(['/staff/staff/home'])
       }
     }
-    
+    this.service.memberCountReply(this.user[0].room_id).subscribe(
+      (res) => {
+        this.total_reply = res[0].total_reply
+      }
+    )
   }
   onLogout() {
     this.session.clearActiveUser();

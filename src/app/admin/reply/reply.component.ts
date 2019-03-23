@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServerService } from 'src/app/@service/server.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-reply',
@@ -8,59 +10,47 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['room', 'question', 'reply'];
+  dataSource : MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  head;
-  detail;
+  contact_id;
+  question;
+  public answer = new FormControl('')
   constructor(
-    private modalService:NgbModal
+    private modalService:NgbModal,
+    private service:ServerService
   ) { }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.service.getQuestion().subscribe(
+      (res) => {
+        console.log(res);
+        
+        this.dataSource = new MatTableDataSource(res as any[]);
+        this.dataSource.paginator = this.paginator;
+      }
+    )
   }
   openModalReply(data,modal) {
-    this.head = data.name;
-    this.detail = data.weight;
+    this.contact_id = data.contact_id;
+    this.question = data.question;
     this.modalService.open(modal, { centered: true })
   }
-
+  onReply(){
+    const data = [
+      {
+        contact_id:this.contact_id,
+        answer:this.answer.value
+      }
+    ]
+    console.log(data);
+    
+    this.service.Answer(data).subscribe(
+      (res) => {
+        this.modalService.dismissAll();
+        window.history.go(0);
+      }
+    )
+  }
 }
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
 
-
-  
-
-
- 
-}
-
-
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];

@@ -27,13 +27,14 @@
     <span></span>
     <span class="example-spacer"></span>
 
-
-    <a mat-button [matMenuTriggerFor]="contact"> Contact <mat-icon matBadge="2" matBadgeColor="warn"><i
+    <a mat-menu-item  routerLink="/admin/admin/reply">Reply <mat-icon matBadge="{{totalQuestion}}" matBadgeColor="warn"><i
+      class="fa fa-commenting" style="color: snow" aria-hidden="true"></i></mat-icon></a>
+    <!-- <a mat-button [matMenuTriggerFor]="contact"> Contact <mat-icon matBadge="2" matBadgeColor="warn"><i
           class="fa fa-commenting" aria-hidden="true"></i></mat-icon></a>
     <mat-menu #contact="matMenu" style="background: black">
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/contact">Contact</a>
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/reply">Reply</a>
-    </mat-menu>
+    </mat-menu> -->
     <a mat-button [matMenuTriggerFor]="profile" [(ngModel)]="user" active="true"
       *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
     <mat-menu #profile="matMenu" style="background: black">

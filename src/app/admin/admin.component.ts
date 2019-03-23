@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../@service/session.service';
 import { Router } from '@angular/router';
+import { ServerService } from '../@service/server.service';
 
 @Component({
   selector: 'app-admin',
@@ -10,9 +11,11 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
 
   user;
+  totalQuestion;
   constructor(
     private session:SessionService,
-    private route:Router
+    private route:Router,
+    private service:ServerService
   ) { }
 
   ngOnInit() {
@@ -29,6 +32,14 @@ export class AdminComponent implements OnInit {
     if(this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
       this.route.navigate(['/staff/staff/home'])
     }
+
+    this.service.countQuestion().subscribe(
+      (res) => {
+        this.totalQuestion = res[0].total_question;
+        console.log(this.totalQuestion);
+        
+      }
+    )
   }
   onLogout() {
     this.session.clearActiveUser();
