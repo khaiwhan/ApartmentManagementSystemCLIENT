@@ -11,10 +11,15 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./water.component.scss']
 })
 export class WaterComponent implements OnInit {
-  displayedColumns: string[] = ['room_id', 'water_start', 'water_end', 'elect_start', 'elect_end', 'update'];
+  displayedColumns: string[] = ['room_id', 'water_start', 'elect_start', 'update'];
   dataSource: MatTableDataSource<[any]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  public updatedebit = new FormGroup({
+    water_end: new FormControl(''),
+    elect_end: new FormControl(''),
+   
+  })
   room;
   sort;
   constructor(
@@ -22,12 +27,6 @@ export class WaterComponent implements OnInit {
     private service: ServerService,
 
   ) { }
-
-  public updatedebit = new FormGroup({
-    water_end: new FormControl(''),
-    elect_end: new FormControl(''),
-   
-  })
 
   ngOnInit() {
     this.getMeterTable();

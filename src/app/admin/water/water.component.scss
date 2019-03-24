@@ -1,15 +1,7 @@
 table {
-    width: 100%;
-  }
-  .example-full-width {
-    width: 50%;
-  }
-
-
-form {
-  margin-top: 50px;
-
+  width: 100%;
 }
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -19,7 +11,28 @@ form {
   color: #63320e !important;
  }
 
- 
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #63320e !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #63320e !important;;
+}
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #63320e!important;
+  // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #63320e!important;
+}
+::placeholder{
+  color: #63320e;
+}
 mat-icon,a{
   color: snow;
   font-size: 15px;
