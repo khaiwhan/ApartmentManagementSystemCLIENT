@@ -98,7 +98,20 @@ export class ServerService {
   }
 
   //getQuestionViewver
-  viewerAskAndAnswer(){
+  viewerAskAndAnswer() {
     return this.http.get(urlServer.ipServer + 'selectquestionviewer')
   }
+  //getFan N/A
+  getFanna() {
+    return this.http.get(urlServer.ipServer + 'selectfanna')
+  }
+  //getAir N/A
+  getAirna() {
+    return this.http.get(urlServer.ipServer + 'selectairna')
+  }
+  //getSuite N/A
+  getSuitena() {
+    return this.http.get(urlServer.ipServer + 'selectsuitena')
+  }
+
 }
