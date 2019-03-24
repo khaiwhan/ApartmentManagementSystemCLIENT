@@ -73,7 +73,7 @@
 
 <ng-template #Search let-modal>
     <div style="margin: 20px;">
-        <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="notifiybook">
+        <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updateRoomResident">
             <h1 mat-dialog-title>Notifiy book</h1>
             <mat-form-field style="width: 100%">
                 <mat-label>Room</mat-label>
@@ -106,8 +106,8 @@
                     [(ngModel)]="book_date">
             </mat-form-field>
 
-            <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%;">Add</button>
-            <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%">Cancle</button>
+            <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%;" (click)="onUpdatetoRoom()">Add</button>
+            <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%" (click)="closeModal()">Cancle</button>
 
         </form>
     </div>

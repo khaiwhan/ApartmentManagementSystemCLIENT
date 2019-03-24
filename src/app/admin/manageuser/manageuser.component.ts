@@ -120,12 +120,12 @@ export class ManageuserComponent implements OnInit {
     this.username = data.username;
     this.password = data.password;
     this.cus_fname = data.cus_fname;
-    this.cus_lname = data.cus_lname
+    this.cus_lname = data.cus_lname;
     this.email = data.email;
     this.cus_sex = data.cus_sex;
-    this.cus_phone = data.cus_phone
-    this.cus_addr = data.cus_addr
-    this.cus_role = data.cus_role
+    this.cus_phone = data.cus_phone;
+    this.cus_addr = data.cus_addr;
+    this.cus_role = data.cus_role;
     this.modalService.open(modal, { centered: true })
   }
   onUpdateUser() {

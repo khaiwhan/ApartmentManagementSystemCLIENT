@@ -45,38 +45,47 @@
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
 
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="position">
+
+                    <ng-container matColumnDef="room_id">
                         <th mat-header-cell *matHeaderCellDef> Room </th>
-                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                        <td mat-cell *matCellDef="let row"> {{row.room_id}} </td>
                     </ng-container>
 
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
+
+                    <ng-container matColumnDef="type_room">
                         <th mat-header-cell *matHeaderCellDef> Type room </th>
-                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        <td mat-cell *matCellDef="let row"> {{row.type_room}} </td>
                     </ng-container>
 
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="weight">
-                        <th mat-header-cell *matHeaderCellDef> icont </th>
-                        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    <ng-container matColumnDef="room_status">
+                        <th mat-header-cell *matHeaderCellDef> Room status </th>
+                        <td mat-cell *matCellDef="let row"> {{row.room_status}} </td>
                     </ng-container>
 
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="symbol">
-                        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                    <ng-container matColumnDef="book">
+                        <th mat-header-cell *matHeaderCellDef> Book room </th>
+                        <td mat-cell *matCellDef="let row">
+                            <i class="material-icons" style="cursor: pointer; color: #63320e;"
+                            (click)="openModalAirroom(row,Bookroom)">loyalty</i>
+                        </td>
                     </ng-container>
-
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-
                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             </div>
-
         </div>
     </div>
-
 </div>
+
+<ng-template #Bookroom let-modal>
+    <div style="margin: 20px;">
+        <form style="padding-top: 10px;padding-left: 15px;padding-right: 15px;">
+            <h1 mat-dialog-title style="margin-left: 30%; margin-bottom: 20px;">Book a room</h1>
+
+            <button mat-raised-button style="width: 20%; background-color: #63320e;color:snow; margin-left: 25%;">Book</button>
+            <button mat-raised-button style="width: 20%; background-color: #FF9900;color:snow; margin-left: 5%" (click)="closeModal()">Cancle</button>
+
+        </form>
+    </div>
+</ng-template>

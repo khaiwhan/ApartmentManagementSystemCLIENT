@@ -21,7 +21,7 @@ export class NotiticationsComponent implements OnInit {
   book_date;
   sort: any;
 
-  public notifiybook = new FormGroup({
+  public updateRoomResident = new FormGroup({
     room_id: new FormControl(''),
     username: new FormControl(''),
     email: new FormControl(''),
@@ -48,6 +48,9 @@ export class NotiticationsComponent implements OnInit {
     this.book_date = data.book_date;
     this.modalService.open(modal, { centered: true })
   }
+  closeModal() {
+    this.modalService.dismissAll();
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -63,6 +66,17 @@ export class NotiticationsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(res as any[]);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+      }
+    )
+  }
+
+  // update book to room
+  onUpdatetoRoom() {
+    console.log(this.updateRoomResident.value)
+    this.service.editUser(this.updateRoomResident.value).subscribe(
+      (res) => {
+        this.getBookTable();
+        this.closeModal();
       }
     )
   }
