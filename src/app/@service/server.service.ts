@@ -96,4 +96,9 @@ export class ServerService {
   getBook() {
     return this.http.get(urlServer.ipServer + 'selectbook')
   }
+
+  //getQuestionViewver
+  viewerAskAndAnswer(){
+    return this.http.get(urlServer.ipServer + 'selectquestionviewer')
+  }
 }
