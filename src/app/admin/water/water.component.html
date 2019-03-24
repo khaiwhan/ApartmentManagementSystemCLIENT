@@ -7,9 +7,10 @@
     <div class="col-md"></div>
     <div class="col-md-8 shadow">
       <br>
-      <mat-form-field class="example-full-width">
+      <mat-form-field style="width: 100%">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Room name" value="">
       </mat-form-field><br>
+
       <table mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="room_id">
@@ -22,15 +23,25 @@
           <td mat-cell *matCellDef="let row"> {{row.water_start}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="water_end">
+          <th mat-header-cell *matHeaderCellDef> UsingWater </th>
+          <td mat-cell *matCellDef="let row"> {{row.water_end}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="elect_start">
           <th mat-header-cell *matHeaderCellDef> ElectUnit </th>
           <td mat-cell *matCellDef="let row"> {{row.elect_start}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="elect_end">
+          <th mat-header-cell *matHeaderCellDef> ElectUsing </th>
+          <td mat-cell *matCellDef="let row"> {{row.elect_end}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="update">
           <th mat-header-cell *matHeaderCellDef> Update </th>
           <td mat-cell *matCellDef="let row">
-            <mat-icon (click)="openModalEditUser(row,Meter)" style="font-size: 30px;cursor: pointer;color: #63320e">
+            <mat-icon (click)="openModalMeter(row,Meter)" style="font-size: 30px;cursor: pointer;color: #63320e">
               create</mat-icon>
           </td>
         </ng-container>
@@ -43,27 +54,118 @@
       <mat-paginator [pageSizeOptions]="[5,10, 25, 100]"></mat-paginator>
     </div>
     <div class="col-md"></div>
-  </div>
+  </div><br>
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md shadow formUpload">
+      <form>
+        <div class="formContent">
+          <div class="form-group mb-3">
+            <div class="row">
+              <h4>DownloadFileTemplate</h4>
+              <h6 style="color: rgb(138, 138, 138)">**This file type is file Excel**</h6>
+              <h6 style="color: darkgray;font-size: 11px;">befor uploadfile all around please convert file xlsx to csv.
+              </h6>
+              <br><br>
+              <button mat-raised-button style="color: snow;background-color: #63320e;width: 100%"
+                (click)="onDownload()">Download</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-md shadow formUpload">
+      <form>
+        <div class="formContent">
+          <div class="form-group mb-3">
+            <div class="row">
+              <h4>UploadFile</h4><br>
 
+              <input #csvData type="file" accept=".csv" (change)="onCSV()" class="form-control-file mb-3">
+              <h6 style="color: darkgray;font-size: 13px;">Please use only csv file for upload.!!</h6>
+              <button mat-raised-button style="color: snow;background-color: #63320e;width: 100%"
+                (click)="onUpload()">Upload</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md"></div>
+    <div class="col-md-3 shadow formUpload">
+      <form>
+        <div class="formContent">
+          <div class="form-group mb-3">
+            <div class="row">
+              <h4>Generater Table</h4>
+              <h6 style="color: rgb(138, 138, 138)">**Function GenerateTable Monthly**</h6>
+              <h6 style="color: darkgray;font-size: 11px;">Using this function case this page is no has table.
+              </h6>
+              <br><br>
+              <button mat-raised-button style="color: snow;background-color: #63320e;width: 100%"
+                (click)="Generater()">GenerateTable</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md"></div>
+    <div class="col-md"></div>
+  </div>
+  <br>
 </div>
 
 
 
 <ng-template #Meter let-modal>
-  <div style="margin: 20px;">
-    <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updatedebit">
-      <h1 mat-dialog-title>Meter</h1>
-      <mat-form-field style="width: 100%">
-        <mat-label>water</mat-label>
-        <input type="number" matInput formControlName="water_end" style="color: #63320e" [(ngModel)]="water_end">
-      </mat-form-field>
+  <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updateMeterManual">
+    <h1 mat-dialog-title>Edit Meter Form</h1>
 
-      <mat-form-field style="width: 100%">
-        <mat-label>elect</mat-label>
-        <input type="number" matInput formControlName="elect_end" style="color: #63320e" [(ngModel)]="elect_end">
-      </mat-form-field>
+    <input formControlName="room_id" style="color: #63320e" type="hidden" [(ngModel)]="update_room_id">
 
-      <button mat-raised-button style="background:#63320e; color:  snow">Submit</button>
-    </form>
+    <mat-form-field style="width: 100%">
+      <mat-label>Water_Start</mat-label>
+      <input matInput formControlName="water_start" style="color: #63320e" [(ngModel)]="update_water_start">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Water_end</mat-label>
+      <input matInput formControlName="water_end" style="color: #63320e" [(ngModel)]="update_water_end">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Elect_start</mat-label>
+      <input matInput formControlName="elect_start" style="color: #63320e" [(ngModel)]="update_elect_start">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>Elect_end</mat-label>
+      <input matInput formControlName="elect_end" style="color: #63320e" [(ngModel)]="update_elect_end">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow"
+        (click)="onUpdateMeterManual()">EditMeter</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #success let-modal >
+  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+    <i class="material-icons" style="color: forestgreen">
+        offline_pin
+    </i> Successfully
   </div>
 </ng-template>
+
+<ng-template #error let-modal >
+    <div class="alert alert-danger" role="alert" style="margin-bottom: 0px;">
+      <i class="material-icons" style="color: forestgreen">
+        error
+      </i> Error
+    </div>
+  </ng-template>

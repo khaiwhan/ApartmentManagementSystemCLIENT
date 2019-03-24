@@ -36,8 +36,6 @@ export class AdminComponent implements OnInit {
     this.service.countQuestion().subscribe(
       (res) => {
         this.totalQuestion = res[0].total_question;
-        console.log(this.totalQuestion);
-        
       }
     )
   }

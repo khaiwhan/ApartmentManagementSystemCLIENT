@@ -15,6 +15,7 @@ import { ServerService } from './@service/server.service';
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { CarouselModule } from 'ngx-bootstrap';
+import { PapaParseModule } from 'ngx-papaparse';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { CarouselModule } from 'ngx-bootstrap';
     SliderModule,
     SlideshowModule,
     AngularFontAwesomeModule,
+    PapaParseModule,
     NgxWebstorageModule.forRoot(),
     CarouselModule.forRoot()
   ],

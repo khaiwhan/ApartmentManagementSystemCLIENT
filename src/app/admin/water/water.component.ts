@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServerService } from 'src/app/@service/server.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ExcelService } from 'src/app/@service/excel.service';
+import { Papa } from 'ngx-papaparse';
+import { delay } from 'q';
 
 
 @Component({
@@ -11,21 +14,40 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./water.component.scss']
 })
 export class WaterComponent implements OnInit {
-  displayedColumns: string[] = ['room_id', 'water_start', 'elect_start', 'update'];
+  displayedColumns: string[] = ['room_id', 'water_start', 'water_end', 'elect_start', 'elect_end', 'update'];
   dataSource: MatTableDataSource<[any]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('csvData') _file: ElementRef;
+  @ViewChild('success') success: ElementRef;
+  @ViewChild('error') error: ElementRef;
   public updatedebit = new FormGroup({
     water_end: new FormControl(''),
     elect_end: new FormControl(''),
-   
+
   })
-  room;
+  update_room_id;
+  update_water_start;
+  update_water_end;
+  update_elect_start;
+  update_elect_end;
+  public updateMeterManual = new FormGroup({
+    room_id: new FormControl(''),
+    water_start: new FormControl(''),
+    water_end: new FormControl(''),
+    elect_start: new FormControl(''),
+    elect_end: new FormControl('')
+  })
+  listDownload;
   sort;
+  date = new Date();
+  private data: any;
+  private fileData;
   constructor(
     private modalService: NgbModal,
     private service: ServerService,
-
+    private excel: ExcelService,
+    private papa: Papa
   ) { }
 
   ngOnInit() {
@@ -41,17 +63,95 @@ export class WaterComponent implements OnInit {
   }
 
   openModalMeter(data, modal) {
-    this.room = data.room;
+    this.update_room_id = data.room_id;
+    this.update_water_start = data.water_start;
+    this.update_water_end = data.water_end;
+    this.update_elect_start = data.elect_start;
+    this.update_elect_end = data.elect_end
     this.modalService.open(modal, { centered: true })
   }
 
+  onUpdateMeterManual() {
+    this.service.updateMeter(this.updateMeterManual.value).subscribe(
+      async (res) => {
+        this.modalService.open(this.success)
+        this.getMeterTable();
+        await delay(1000);
+        this.modalService.dismissAll()
+      },
+      async (err) => {
+        this.modalService.open(this.error)
+        this.getMeterTable();
+        await delay(1000);
+        this.modalService.dismissAll()
+      }
+    )
+  }
+
   getMeterTable() {
-    this.service.getMeter().subscribe(
+    this.service.getMeter((this.date.getMonth() + 1), (this.date.getFullYear() + 543)).subscribe(
       (res) => {
+        this.listDownload = res;
         this.dataSource = new MatTableDataSource(res as any[]);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       }
     )
+  }
+  onDownload() {
+    this.excel.exportAsExcelFile(this.listDownload, (this.date.getMonth() + 1) + "-" + (this.date.getFullYear() + 543))
+  }
+  onCSV() {
+    const files = this._file.nativeElement.files;
+    const blob: Blob = new Blob(files, { type: 'text/csv' });
+    this.data = blob;
+
+    const options = {
+      header: true,
+      complete: (results, file) => {
+        this.fileData = results;
+        console.log(this.fileData.data);
+      },
+    };
+    this.papa.parse(this.data, options);
+  }
+  onUpload() {
+    if (!this.fileData || this.fileData.data.length <= 0) {
+      alert('Please Choose File For Upload!!!')
+    }
+    else {
+      this.service.uploadfile(this.fileData.data).subscribe(
+        async (res) => {
+          this.modalService.open(this.success)
+          this.getMeterTable();
+          await delay(1000);
+          this.modalService.dismissAll()
+        },
+        async (err) => {
+          this.modalService.open(this.success)
+          this.getMeterTable();
+          await delay(1000);
+          this.modalService.dismissAll()
+        }
+      )
+    }
+  }
+  Generater() {
+    const data = [{
+      year: (this.date.getFullYear() + 543),
+      month: (this.date.getMonth())
+    }]
+    console.log(data)
+    this.service.GenerateTable(data).subscribe(
+      async (res) => {
+        this.modalService.open(this.success)
+        this.getMeterTable();
+        await delay(1000);
+        this.modalService.dismissAll()
+      }
+    )
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

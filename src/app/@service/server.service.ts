@@ -89,8 +89,8 @@ export class ServerService {
     return this.http.get(urlServer.ipServer + 'selectreplymember/' + data)
   }
   //getmeter 
-  getMeter() {
-    return this.http.get(urlServer.ipServer + 'selectshmeter')
+  getMeter(month,year) {
+    return this.http.get(urlServer.ipServer + 'selectshmeter/' + month + "/" + year)
   }
   //getBook
   getBook() {
@@ -113,5 +113,18 @@ export class ServerService {
   getSuitena() {
     return this.http.get(urlServer.ipServer + 'selectsuitena')
   }
-
+  //meter page
+  //uploadFile For Update Meter
+  uploadfile(data){
+    return this.http.put(urlServer.ipServer + 'uploadmeter', data)
+  }
+  //Generate Table 
+  GenerateTable(data){
+    return this.http.post(urlServer.ipServer + 'generatetable',data)
+  }
+  //edit meter
+  updateMeter(data){
+    return this.http.put(urlServer.ipServer + 'updatemeter',data)
+  }
+  //end meter page
 }
