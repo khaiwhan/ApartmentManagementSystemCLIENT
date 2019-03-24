@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-air-book',
-  templateUrl: './air-book.component.html',
-  styleUrls: ['./air-book.component.scss']
+  selector: 'app-fanbook',
+  templateUrl: './fanbook.component.html',
+  styleUrls: ['./fanbook.component.scss']
 })
-export class AirBookComponent implements OnInit {
+export class FanbookComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
   constructor() { }

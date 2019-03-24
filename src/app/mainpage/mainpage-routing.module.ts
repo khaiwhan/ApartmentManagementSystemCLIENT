@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainpageComponent } from './mainpage.component';
 import { HomeComponent } from './home/home.component';
@@ -7,6 +7,9 @@ import { FanRoomComponent } from './fan-room/fan-room.component';
 import { SuiteRoomComponent } from './suite-room/suite-room.component';
 import { ContactComponent } from './contact/contact.component';
 import { AirBookComponent } from './ari-room/air-book/air-book.component';
+import { compileComponent } from '@angular/core/src/render3/jit/directive';
+import { FanbookComponent } from './fan-room/fanbook/fanbook.component';
+import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
 
 const routes: Routes = [
   {
@@ -20,14 +23,32 @@ const routes: Routes = [
       {
         path:'airroom',
         component:AriRoomComponent,
+        children:[
+          {
+            path: 'viewair',
+            component: AirBookComponent,
+          }
+        ]
       },
       {
         path:'fanroom',
-        component:FanRoomComponent
+        component:FanRoomComponent,
+        children:[
+          {
+            path: 'viewfan',
+            component: FanbookComponent,
+          }
+        ]
       },
       {
         path:'suiteroom',
-        component:SuiteRoomComponent
+        component:SuiteRoomComponent,
+        children:[
+          {
+            path: 'viewsuite',
+            component: SuitebookComponent,
+          }
+        ]
       },
       {
         path:'contact',

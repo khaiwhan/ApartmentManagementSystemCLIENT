@@ -18,6 +18,8 @@ import { CarouselModule } from 'ngx-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 
 import { AirBookComponent } from './ari-room/air-book/air-book.component';
+import { FanbookComponent } from './fan-room/fanbook/fanbook.component';
+import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,10 @@ import { AirBookComponent } from './ari-room/air-book/air-book.component';
     ContactComponent,
     
     AirBookComponent,
+    
+    FanbookComponent,
+    
+    SuitebookComponent,
   ],
   entryComponents: [
     MainpageComponent,

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, TooltipPosition } from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServerService } from 'src/app/@service/server.service';
 
 @Component({
   selector: 'app-notitications',
@@ -9,45 +10,61 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./notitications.component.scss']
 })
 export class NotiticationsComponent implements OnInit {
-  displayedColumns: string[] = ['room', 'name', 'email', 'checkin', 'checkout', 'date', 'icon'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  room;
-  name;
-  email;
-  checkin;
-  checkout;
-  date;
+  displayedColumns: string[] = ['room_id', 'username', 'email', 'book_in', 'book_out', 'book_date', 'icon'];
+  dataSource: MatTableDataSource<[any]>;
 
+  room_id;
+  username;
+  email;
+  book_in;
+  book_out;
+  book_date;
+  sort: any;
+
+  public notifiybook = new FormGroup({
+    room_id: new FormControl(''),
+    username: new FormControl(''),
+    email: new FormControl(''),
+    book_in: new FormControl(''),
+    book_out: new FormControl(''),
+    book_date: new FormControl(''),
+   
+  })
 
   constructor(
-    private modalService: NgbModal
-
+    private modalService: NgbModal,
+    private service: ServerService,
   ) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.getBookTable()
   }
   openModalSearch(data, modal) {
-    this.room = data.room;
-    this.name = data.name;
+    this.room_id = data.room_id;
+    this.username = data.username;
     this.email = data.email;
-    this.checkin = data.checkin;
-    this.checkout = data.checkout;
-    this.date = data.date;
+    this.book_in = data.book_in;
+    this.book_out = data.book_out;
+    this.book_date = data.book_date;
     this.modalService.open(modal, { centered: true })
   }
 
-}
-export interface PeriodicElement {
-  room: string;
-  name: string;
-  email: string;
-  checkin: string;
-  checkout: string;
-  date: string;
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  getBookTable() {
+    this.service.getBook().subscribe(
+      (res) => {
+        this.dataSource = new MatTableDataSource(res as any[]);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    )
+  }
 }
-const ELEMENT_DATA: PeriodicElement[] = [
-  { room: 'T101', name: 'Natanon', email: 'natanon@getMaxListeners.com',checkin:'11-02-2222',checkout:'13-02-2222', date: '12-02-2560' },
-];
 

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServerService } from 'src/app/@service/server.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -9,18 +11,34 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./water.component.scss']
 })
 export class WaterComponent implements OnInit {
-  displayedColumns: string[] = ['room', 'waterstart', 'waterend', 'electstart', 'electend', 'update'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['room_id', 'water_start', 'water_end', 'elect_start', 'elect_end', 'update'];
+  dataSource: MatTableDataSource<[any]>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   room;
+  sort;
   constructor(
-    private modalService: NgbModal
-
+    private modalService: NgbModal,
+    private service: ServerService,
 
   ) { }
 
+  public updatedebit = new FormGroup({
+    water_end: new FormControl(''),
+    elect_end: new FormControl(''),
+   
+  })
+
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.getMeterTable();
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   openModalMeter(data, modal) {
@@ -28,17 +46,13 @@ export class WaterComponent implements OnInit {
     this.modalService.open(modal, { centered: true })
   }
 
-
+  getMeterTable() {
+    this.service.getMeter().subscribe(
+      (res) => {
+        this.dataSource = new MatTableDataSource(res as any[]);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    )
+  }
 }
-export interface PeriodicElement {
-  room: string;
-  waterstart: string;
-  waterend: string;
-  electstart: string;
-  electend: string;
-
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {room: 'a111',  waterstart: '4444', waterend:'' , electstart: '11111' , electend: '' },
-
-];
