@@ -127,4 +127,14 @@ export class ServerService {
     return this.http.put(urlServer.ipServer + 'updatemeter',data)
   }
   //end meter page
+  //notifiy page
+  updateBooktoRoom(data){
+    return this.http.put(urlServer.ipServer + 'updatebooktoroom',data)
+  }
+
+  //viewer room
+  //addbook
+  AddtableBook(data){
+    return this.http.post(urlServer.ipServer + 'addbook',data)
+  }
 }

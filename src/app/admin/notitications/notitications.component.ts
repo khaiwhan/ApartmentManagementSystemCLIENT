@@ -10,23 +10,25 @@ import { ServerService } from 'src/app/@service/server.service';
   styleUrls: ['./notitications.component.scss']
 })
 export class NotiticationsComponent implements OnInit {
-  displayedColumns: string[] = ['room_id', 'username', 'email', 'book_in', 'book_out', 'book_date', 'icon'];
+  displayedColumns: string[] = ['room_id','type_room', 'username', 'email', 'book_in', 'book_out', 'book_date', 'icon'];
   dataSource: MatTableDataSource<[any]>;
 
   room_id;
+  type_room;
   username;
   email;
   book_in;
   book_out;
   book_date;
   sort: any;
+  
 
-  public updateRoomResident = new FormGroup({
+  public updateBooktoRoom = new FormGroup({
     room_id: new FormControl(''),
     username: new FormControl(''),
     email: new FormControl(''),
-    book_in: new FormControl(''),
-    book_out: new FormControl(''),
+    check_in: new FormControl(''),
+    check_out: new FormControl(''),
     book_date: new FormControl(''),
    
   })
@@ -72,8 +74,8 @@ export class NotiticationsComponent implements OnInit {
 
   // update book to room
   onUpdatetoRoom() {
-    console.log(this.updateRoomResident.value)
-    this.service.editUser(this.updateRoomResident.value).subscribe(
+    console.log(this.updateBooktoRoom.value)
+    this.service.updateBooktoRoom(this.updateBooktoRoom.value).subscribe(
       (res) => {
         this.getBookTable();
         this.closeModal();
