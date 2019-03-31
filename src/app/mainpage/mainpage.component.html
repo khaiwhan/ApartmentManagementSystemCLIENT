@@ -6,22 +6,24 @@
     <a mat-button [matMenuTriggerFor]="animals" active="true">Type Room</a>
     <a mat-button routerLink="/mainpage/mainpage/contact">Contact</a>
     <mat-menu #animals="matMenu" style="background: black">
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/fanroom">Fan Room</a>
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/airroom">Air-Conditioned Room</a>
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/suiteroom">Suite Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/fanroom">Fan
+        Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;"
+        routerLink="/mainpage/mainpage/airroom">Air-Conditioned Room</a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/suiteroom">Suite
+        Room</a>
     </mat-menu>
-    
+
     <span></span>
     <span class="example-spacer"></span>
     <a mat-raised-button style="color: black;background: rgb(245, 245, 245);
                                                 border-bottom: gray 2px solid;
                                                 border-right: gray 2px solid" (click)="openDialog()"
-                                                *ngIf="user == null"
-                                                [(ngModel)] ="user">Sign-in</a>
+      *ngIf="user == null" [(ngModel)]="user">Sign-in</a>
     <!-- <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" *ngIf="user != null" [(ngModel)] ="user">{{user}}</a> -->
-    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)] ="user" active="true" *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
+    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)]="user" active="true"
+      *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
     <mat-menu #profile="matMenu" style="background: black">
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;">Profile</a>
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" (click)="onLogout()">Logout</a>
     </mat-menu>
     <a mat-button (click)="openDialogRegister()" *ngIf="user == null">Registor</a>
@@ -40,7 +42,7 @@
     <footer class="footer">
       <div class="row">
         <div class="col-md-1">
-            <mat-icon class="example-icon" style="font-size: 60px;margin-top: 20px;">location_city</mat-icon>
+          <mat-icon class="example-icon" style="font-size: 60px;margin-top: 20px;">location_city</mat-icon>
         </div>
         <div class="col-md-2 leftText">
           Contact

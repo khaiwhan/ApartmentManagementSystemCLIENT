@@ -7,16 +7,16 @@
     <div class="col-md"></div>
     <div class="col-md">
 
-      <mat-card class="example-card">
+      <mat-card class="example-card shadow">
         <mat-card-content>
           <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updateRoom">
-            <h1 mat-dialog-title>Edit Room Form</h1>
+            <h1 mat-dialog-title>Edit Room {{room_id[0]}}</h1>
 
-              <input type="hidden" formControlName="update_room_id" style="color: #63320e" [(ngModel)] = "room_id">
+              <input type="hidden" formControlName="update_room_id" style="color: #63320e" [(ngModel)] = "room_id[0]">
 
             <mat-form-field style="width: 100%;">
               <mat-select placeholder="ChooseUser" style="width: 100%;color: #63320e;font-size: 14px;"
-                formControlName="update_username">
+                formControlName="update_username" [(ngModel)] = "username[0]">
                 <mat-option *ngFor="let list of listUsername" [value]="list.username">
                   {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
                 </mat-option>
@@ -24,14 +24,14 @@
             </mat-form-field>
 
             <mat-label>TypeRoom</mat-label><br><br>
-            <mat-radio-group formControlName="update_type_id" style="color: #63320e" >
-              <mat-radio-button value="2" style="color: #63320e">Air-Room</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="1" style="color: #63320e">FanRoom</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="3" style="color: #63320e">SuiteRoom</mat-radio-button>
+            <mat-radio-group formControlName="update_type_id" style="color: #63320e" [(ngModel)] = "type_id[0]">
+              <mat-radio-button value=2 style="color: #63320e">Air-Room</mat-radio-button>&nbsp;&nbsp;
+              <mat-radio-button value=1 style="color: #63320e">FanRoom</mat-radio-button>&nbsp;&nbsp;
+              <mat-radio-button value=3 style="color: #63320e">SuiteRoom</mat-radio-button>
             </mat-radio-group><br><br>
 
             <mat-label>StatusRoom</mat-label><br><br>
-            <mat-radio-group formControlName="update_room_status" style="color: #63320e" >
+            <mat-radio-group formControlName="update_room_status" style="color: #63320e" [(ngModel)] = "room_status[0]">
               <mat-radio-button value="live" style="color: #63320e">Live</mat-radio-button>&nbsp;&nbsp;
               <mat-radio-button value="N/A" style="color: #63320e">N/A</mat-radio-button>&nbsp;&nbsp;
               <mat-radio-button value="broken" style="color: #63320e">Broken</mat-radio-button>&nbsp;&nbsp;
@@ -39,13 +39,13 @@
             </mat-radio-group><br><br>
 
             <mat-form-field>
-              <input matInput [matDatepicker]="checkin" placeholder="Check in" formControlName="update_check_in" >
+              <input matInput [matDatepicker]="checkin" placeholder="Check in" formControlName="update_check_in" [(ngModel)] = "check_in[0]">
               <mat-datepicker-toggle matSuffix [for]="checkin"></mat-datepicker-toggle>
               <mat-datepicker #checkin></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [matDatepicker]="checkout" placeholder="Check out" formControlName="update_check_out" >
+              <input matInput [matDatepicker]="checkout" placeholder="Check out" formControlName="update_check_out" [(ngModel)] = "check_out[0]">
               <mat-datepicker-toggle matSuffix [for]="checkout"></mat-datepicker-toggle>
               <mat-datepicker #checkout></mat-datepicker>
             </mat-form-field>

@@ -28,7 +28,7 @@
 
                     <ng-container matColumnDef="username">
                         <th mat-header-cell *matHeaderCellDef> Name </th>
-                        <td mat-cell *matCellDef="let row"> {{row.username}} </td>
+                        <td mat-cell *matCellDef="let row">{{row.cus_fname}} &nbsp; {{row.cus_lname}} </td>
                     </ng-container>
 
 
@@ -54,14 +54,25 @@
 
 
                     <ng-container matColumnDef="icon">
-                        <th mat-header-cell *matHeaderCellDef> icon </th>
+                        <th mat-header-cell *matHeaderCellDef> Move in </th>
                         <td mat-cell *matCellDef="let row">
-                            <i class="material-icons" style="cursor: pointer; color: #63320e;"
+                            <i class="material-icons" style="cursor: pointer; color: #63320e; text-align: center ;"
                                 (click)="openModalSearch(row,Search)">
                                 add_box
                             </i>
                         </td>
                     </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef> Delete </th>
+                        <td mat-cell *matCellDef="let row">
+                            <i class="material-icons" style="cursor: pointer; color: #63320e; text-align: center ;"
+                                (click)="openModalDeleteUser(row,deleteBook)">
+                                delete_sweep
+                            </i>
+                        </td>
+                    </ng-container>
+
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -81,38 +92,62 @@
             <h1 mat-dialog-title>Notifiy book</h1>
             <mat-form-field style="width: 100%">
                 <mat-label>Room</mat-label>
-                <input type="text" matInput formControlName="room_id" style="color: #63320e" 
-                [(ngModel)]="room_id">
+                <input type="text" matInput formControlName="room_id" style="color: #63320e" [(ngModel)]="room_id">
             </mat-form-field>
             <mat-form-field style="width: 100%">
-                <mat-label>username</mat-label>
-                <input type="text" matInput formControlName="username" style="color: #63320e" 
-                [(ngModel)]="username">
+                <mat-label>Firstname</mat-label>
+                <input type="text" matInput formControlName="cus_fname" style="color: #63320e" [(ngModel)]="cus_fname">
+            </mat-form-field>
+            <mat-form-field style="width: 100%">
+                <mat-label>Lastname</mat-label>
+                <input type="text" matInput formControlName="cus_lname" style="color: #63320e" [(ngModel)]="cus_lname">
             </mat-form-field>
             <mat-form-field style="width: 100%">
                 <mat-label>E-mail</mat-label>
-                <input type="email" matInput formControlName="email" style="color: #63320e" 
-                [(ngModel)]="email">
+                <input type="email" matInput formControlName="email" style="color: #63320e" [(ngModel)]="email">
             </mat-form-field>
             <mat-form-field style="width: 100%">
                 <mat-label>Check_in</mat-label>
-                <input type="date" matInput formControlName="check_in" style="color: #63320e"
-                    [(ngModel)]="book_in">
+                <input type="date" matInput formControlName="check_in" style="color: #63320e" [(ngModel)]="book_in">
             </mat-form-field>
             <mat-form-field style="width: 100%">
                 <mat-label>Check-out</mat-label>
-                <input type="date" matInput formControlName="check_out" style="color: #63320e"
-                    [(ngModel)]="book_out">
+                <input type="date" matInput formControlName="check_out" style="color: #63320e" [(ngModel)]="book_out">
             </mat-form-field>
             <mat-form-field style="width: 100%">
                 <mat-label>Date</mat-label>
-                <input type="date" matInput formControlName="book_date" style="color: #63320e"
-                    [(ngModel)]="book_date">
+                <input type="date" matInput formControlName="book_date" style="color: #63320e" [(ngModel)]="book_date">
             </mat-form-field>
 
-            <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%;" (click)="onUpdatetoRoom()">Add</button>
-            <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%" (click)="closeModal()">Cancle</button>
+            <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%;"
+                (click)="onUpdatetoRoom()">Add</button>
+            <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%"
+                (click)="closeModal()">Cancle</button>
 
         </form>
+    </div>
+</ng-template>
+
+<ng-template #deleteBook let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Are You Sure?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Want to Remove This Book!!</p>
+    </div>
+    <div class="modal-footer">
+      <button mat-raised-button (click)="modal.close('Close click')" >No Thanks</button>
+      <button mat-raised-button (click)="onDeleteBook()" style="background-color: #63320e;color: snow">OK</button>
+    </div>
+  </ng-template>
+
+<ng-template #success let-modal>
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+        <i class="material-icons" style="color: forestgreen">
+            offline_pin
+        </i> Successfully
     </div>
 </ng-template>

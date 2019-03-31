@@ -40,6 +40,9 @@ export class WaterComponent implements OnInit {
   })
   listDownload;
   sort;
+  dateShow;
+  month;
+  checkMonth;
   date = new Date();
   private data: any;
   private fileData;
@@ -52,6 +55,12 @@ export class WaterComponent implements OnInit {
 
   ngOnInit() {
     this.getMeterTable();
+    this.checkMonth = (this.date.getMonth() + 1);
+    this.checkMonth == 1 ? this.month = "January" : this.checkMonth == 2 ? this.month = "February" :this.checkMonth == 3 ? this.month = "March" :
+    this.checkMonth == 4 ? this.month = "April" : this.checkMonth == 5 ? this.month = "May" :this.checkMonth == 6 ? this.month = "June" :
+    this.checkMonth == 7 ? this.month = "July" : this.checkMonth == 8 ? this.month = "August" :this.checkMonth == 9 ? this.month = "September" :
+    this.checkMonth == 10 ? this.month = "Octorber" : this.checkMonth == 11 ? this.month = "November" :this.checkMonth == 12 ? this.month = "December" : "-"
+    this.dateShow = this.month + "-" + (this.date.getFullYear() + 543);
   }
 
   applyFilter(filterValue: string) {
@@ -110,7 +119,9 @@ export class WaterComponent implements OnInit {
       header: true,
       complete: (results, file) => {
         this.fileData = results;
-        console.log(this.fileData.data);
+        console.log("file date",this.fileData.data);
+        console.log(this.fileData.data.dabit_id);
+        
       },
     };
     this.papa.parse(this.data, options);
@@ -141,7 +152,7 @@ export class WaterComponent implements OnInit {
       year: (this.date.getFullYear() + 543),
       month: (this.date.getMonth())
     }]
-    console.log(data)
+    // console.log(data)
     this.service.GenerateTable(data).subscribe(
       async (res) => {
         this.modalService.open(this.success)

@@ -14,6 +14,8 @@ import { PrintoutComponent } from './print/printout/printout.component';
 import { ReplyComponent } from './reply/reply.component';
 import { InfomationComponent } from './infomation/infomation.component';
 import { FacilityComponent } from './facility/facility.component';
+import { RecieptComponent } from './reciept/reciept.component';
+
 
 const routes: Routes = [
   {
@@ -77,7 +79,13 @@ const routes: Routes = [
           }
 
         ]
-      }
+      },
+      {
+        path: 'receipt',
+        component: RecieptComponent,
+        
+      },
+      
     ]
   },
   {

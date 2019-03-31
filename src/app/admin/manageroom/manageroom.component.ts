@@ -77,10 +77,10 @@ export class ManageroomComponent implements OnInit {
     this.route.navigate[('admin/admin/manageroom/addroomresident')]
   }
   openModalEditUser(data,modal){
-    this.update_room_id = data.room_id;
-    this.update_username = data.username;
-    this.update_type_id = data.type_id;
-    this.update_room_status = data.status_room;
+    // this.update_room_id = data.room_id;
+    // this.update_username = data.username;
+    // this.update_type_id = data.type_id;
+    // this.update_room_status = data.status_room;
     this.modal.open(modal,{centered:true})
   }
   onUpdateRoom(){

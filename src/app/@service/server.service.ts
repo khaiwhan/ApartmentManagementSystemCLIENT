@@ -20,6 +20,10 @@ export class ServerService {
   getDataUser() {
     return this.http.get(urlServer.ipServer + 'selectmember')
   }
+  // manauser แก้
+  getCustomer() {
+    return this.http.get(urlServer.ipServer + 'selectcus')
+  }
   addUser(data) {
     return this.http.post(urlServer.ipServer + 'addmember', data)
   }
@@ -89,7 +93,7 @@ export class ServerService {
     return this.http.get(urlServer.ipServer + 'selectreplymember/' + data)
   }
   //getmeter 
-  getMeter(month,year) {
+  getMeter(month, year) {
     return this.http.get(urlServer.ipServer + 'selectshmeter/' + month + "/" + year)
   }
   //getBook
@@ -115,26 +119,44 @@ export class ServerService {
   }
   //meter page
   //uploadFile For Update Meter
-  uploadfile(data){
+  uploadfile(data) {
     return this.http.put(urlServer.ipServer + 'uploadmeter', data)
   }
   //Generate Table 
-  GenerateTable(data){
-    return this.http.post(urlServer.ipServer + 'generatetable',data)
+  GenerateTable(data) {
+    return this.http.post(urlServer.ipServer + 'generatetable', data)
   }
   //edit meter
-  updateMeter(data){
-    return this.http.put(urlServer.ipServer + 'updatemeter',data)
+  updateMeter(data) {
+    return this.http.put(urlServer.ipServer + 'updatemeter', data)
   }
   //end meter page
   //notifiy page
-  updateBooktoRoom(data){
-    return this.http.put(urlServer.ipServer + 'updatebooktoroom',data)
+  updateBooktoRoom(data) {
+    return this.http.put(urlServer.ipServer + 'updatebooktoroom', data)
+  }
+  //deleteNotifiy
+  deleteBook(data) {
+    return this.http.delete(urlServer.ipServer + 'deletebook/' + data)
+  }
+  //getCountBook
+  getCountBook() {
+    return this.http.get(urlServer.ipServer + 'selectcountbook')
   }
 
   //viewer room
   //addbook
-  AddtableBook(data){
-    return this.http.post(urlServer.ipServer + 'addbook',data)
+  AddtableBook(data) {
+    return this.http.post(urlServer.ipServer + 'addbook', data)
+  }
+  //end apge
+
+  //receipt page
+  getReceipt() {
+    return this.http.get(urlServer.ipServer + 'selectreceipt')
+  }
+  //update Receipt
+  updateReceipt(data) {
+    return this.http.put(urlServer.ipServer + 'updatereceipt', data)
   }
 }

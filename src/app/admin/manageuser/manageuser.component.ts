@@ -64,7 +64,7 @@ export class ManageuserComponent implements OnInit {
     this.getTable();
   }
   getTable() {
-    this.service.getDataUser().subscribe(
+    this.service.getCustomer().subscribe(
       (res) => {
         this.dataSource = new MatTableDataSource(res as any[]);
         this.dataSource.sort = this.sort;

@@ -16,6 +16,7 @@ import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { CarouselModule } from 'ngx-bootstrap';
 import { PapaParseModule } from 'ngx-papaparse';
+
 @NgModule({
   declarations: [
     AppComponent,

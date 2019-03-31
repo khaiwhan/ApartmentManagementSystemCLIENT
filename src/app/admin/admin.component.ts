@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
 
   user;
   totalQuestion;
+  totalBook;
   constructor(
     private session:SessionService,
     private route:Router,
@@ -36,6 +37,12 @@ export class AdminComponent implements OnInit {
     this.service.countQuestion().subscribe(
       (res) => {
         this.totalQuestion = res[0].total_question;
+      }
+    )
+
+    this.service.getCountBook().subscribe(
+      (res) => {
+        this.totalBook = res[0].total_book;
       }
     )
   }

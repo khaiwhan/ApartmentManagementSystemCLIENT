@@ -37,29 +37,30 @@ export class MainpageComponent implements OnInit {
     private session: SessionService,
     private route: Router
   ) {
-    
+
   }
 
   ngOnInit() {
     this.user = this.session.getActiveUser();
-    console.log(this.user)
-    
-    if(this.user == null || this.user === ""){
+    // console.log(this.user)
+
+    if (this.user == null || this.user === "") {
       this.route.navigate(['/mainpage/mainpage/home'])
     }
-    if(this.user !== null || this.user !== ""){
-      if(this.user[0].cus_role === "admin" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+    if (this.user !== null || this.user !== "") {
+      if (this.user[0].cus_role === "admin" && this.user[0].cus_role != null && this.user[0].cus_role !== "") {
         this.route.navigate(['/admin/admin/overview'])
       }
-      if(this.user[0].cus_role === "member" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+      if (this.user[0].cus_role === "member" && this.user[0].cus_role != null && this.user[0].cus_role !== "") {
         this.route.navigate(['/member/member/home'])
       }
-      if(this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
+      if (this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== "") {
         this.route.navigate(['/staff/staff'])
       }
+      
     }
-    
-    
+
+
   }
 
   openDialog(): void {
@@ -113,14 +114,14 @@ export class DialogOverviewExampleDialog {
     private service: ServerService,
     private session: SessionService,
     private route: Router,
-    private dialog:MatDialog
-    ) { }
+    private dialog: MatDialog
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
   onLogin() {
-    
+
     const data = {
       username: this.Username.value,
       password: this.Password.value
@@ -141,13 +142,14 @@ export class DialogOverviewExampleDialog {
           if (res[0].cus_role === "member") {
             window.history.go(0);
           }
-        },
-        (err) => {
-          this.dialog.open(AlertLoginError);
-          // alert("Username or Password Incorrect")
         }
+
       )
     }
+    else {
+      this.dialog.open(AlertLoginError);
+    }
+
   }
 }
 
@@ -175,7 +177,7 @@ export class RegisterDialog {
   }
 
   onRegister() {
-    this.dialog.open(AlertRegisterError)
+    // this.dialog.open(AlertRegisterError)
     const data = {
       username: this.Username.value,
       password: this.Password.value,
@@ -183,17 +185,24 @@ export class RegisterDialog {
       cus_lname: this.Lastname.value,
       email: this.Email.value
     }
+    // console.log(this.ConfirmPassword.value);
+    // console.log(this.Password.value);
+
+
     if (this.ConfirmPassword.value === this.Password.value) {
       this.service.onRegister(data).subscribe(
         (res) => {
           this.dialog.open(AlertRegisterSuccess)
         },
+
         (err) => {
           this.dialog.open(AlertRegisterError)
         }
       )
+    } else {
+      this.dialog.open(AlertRegisterError)
     }
-  
+
   }
 }
 
@@ -230,3 +239,4 @@ export class AlertLoginError {
   constructor(private dialog: MatDialog) { }
   onNoClick() { this.dialog.closeAll(); }
 }
+

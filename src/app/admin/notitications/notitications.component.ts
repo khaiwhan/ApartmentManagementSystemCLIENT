@@ -10,7 +10,7 @@ import { ServerService } from 'src/app/@service/server.service';
   styleUrls: ['./notitications.component.scss']
 })
 export class NotiticationsComponent implements OnInit {
-  displayedColumns: string[] = ['room_id','type_room', 'username', 'email', 'book_in', 'book_out', 'book_date', 'icon'];
+  displayedColumns: string[] = ['room_id', 'type_room', 'username', 'email', 'book_in', 'book_out', 'book_date', 'icon','delete'];
   dataSource: MatTableDataSource<[any]>;
 
   room_id;
@@ -21,17 +21,21 @@ export class NotiticationsComponent implements OnInit {
   book_out;
   book_date;
   sort: any;
-  
+  book_id;
+  deleteBook;
 
   public updateBooktoRoom = new FormGroup({
     room_id: new FormControl(''),
-    username: new FormControl(''),
+    cus_fname: new FormControl(''),
+    cus_lname: new FormControl(''),
     email: new FormControl(''),
     check_in: new FormControl(''),
     check_out: new FormControl(''),
     book_date: new FormControl(''),
-   
+
   })
+  cus_fname;
+  cus_lname;
 
   constructor(
     private modalService: NgbModal,
@@ -43,7 +47,8 @@ export class NotiticationsComponent implements OnInit {
   }
   openModalSearch(data, modal) {
     this.room_id = data.room_id;
-    this.username = data.username;
+    this.cus_fname = data.cus_fname;
+    this.cus_lname = data.cus_lname;
     this.email = data.email;
     this.book_in = data.book_in;
     this.book_out = data.book_out;
@@ -76,6 +81,26 @@ export class NotiticationsComponent implements OnInit {
   onUpdatetoRoom() {
     console.log(this.updateBooktoRoom.value)
     this.service.updateBooktoRoom(this.updateBooktoRoom.value).subscribe(
+      (res) => {
+        this.onDeleteBook();
+        this.getBookTable();
+        this.closeModal();
+        
+      }
+    )
+  }
+
+//delete Book
+  openModalDeleteUser(data,modal){
+    console.log(data);
+    this.deleteBook = data.book_id;
+    this.modalService.open(modal,{centered:true})
+  }
+  onDeleteBook() {
+ 
+    console.log(this.deleteBook);
+    
+    this.service.deleteBook(this.deleteBook).subscribe(
       (res) => {
         this.getBookTable();
         this.closeModal();

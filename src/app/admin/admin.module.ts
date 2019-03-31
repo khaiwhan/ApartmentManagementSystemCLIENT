@@ -22,6 +22,8 @@ import { PrintoutComponent } from './print/printout/printout.component';
 import { ReplyComponent } from './reply/reply.component';
 import { InfomationComponent } from './infomation/infomation.component';
 import { FacilityComponent } from './facility/facility.component';
+import { RecieptComponent } from './reciept/reciept.component';
+import { BillComponent } from './reciept/bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { FacilityComponent } from './facility/facility.component';
     ReplyComponent,
     InfomationComponent,
     FacilityComponent,
+    RecieptComponent,
+    BillComponent,
   ],
   entryComponents:[
     AdminComponent,

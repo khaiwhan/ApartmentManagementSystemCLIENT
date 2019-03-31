@@ -1,94 +1,65 @@
 <br><br>
 <div class="container-fluid">
-    <form [formGroup]="insertBook">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <mat-toolbar>
-                    <span>Book room</span>
-                </mat-toolbar>
-            </div>
+    <div class="row">
+        <div class="col-md"></div>
+        <div class="col-md shadow" style="border-radius: 20px;padding: 10 10 10 10">
+            <br>
+            <h4><u>Book Room</u></h4>
+            <mat-horizontal-stepper linear #stepper>
+                <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Check-IN</ng-template>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="book_in" placeholder="Check-in" formControlName="book_in"
+                                required>
+                            <mat-datepicker-toggle matSuffix [for]="book_in"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #book_in></mat-datepicker>
+                        </mat-form-field>
+                        <button mat-button matStepperNext
+                            style="margin-left: 20px; background-color: #63320e; color: snow">Next
+                        </button>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Check-OUT</ng-template>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="cDate" [matDatepicker]="book_out" placeholder="Check-out"
+                                formControlName="book_out" required>
+                            <mat-datepicker-toggle matSuffix [for]="book_out"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #book_out></mat-datepicker>
+                        </mat-form-field>
+                        <button mat-button matStepperNext
+                            style="margin-left: 20px; background-color: #63320e; color: snow">Next
+                        </button>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <form>
+                        <ng-template matStepLabel>Choose Room</ng-template>
+                        <mat-form-field>
+                            <mat-label>Room</mat-label>
+                            <mat-select matNativeControl required [formControl]="roomm">
+                                <mat-option *ngFor="let list of listRoom" [value]="list.room_id">{{list.room_id}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button matStepperNext
+                            style="margin-left: 20px; background-color: #63320e; color: snow"
+                            (click)="onInsertbook()">Done
+                        </button>
+                    </form>
+                </mat-step>
+            </mat-horizontal-stepper>
         </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; -->
-            <div class="col-md-8">
-                <br><br>
-                <mat-form-field>
-                    <input matInput [matDatepicker]="picker1"  placeholder="Check-in" formControlName="book_in">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput [matDatepicker]="picker2" placeholder="Check-out" formControlName="book_out">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <mat-form-field>
-                    <mat-label>Select on floor</mat-label>
-                    <mat-select [(value)]="selected">
-                        <mat-option>None</mat-option>
-                        <mat-option value="option1">Floor 1</mat-option>
-                        <mat-option value="option2">Floor 2</mat-option>
-                        <mat-option value="option3">Floor 3</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <div class="mat-elevation-z8">
-                    <table mat-table [dataSource]="dataSource">
-
-                        <ng-container matColumnDef="room_id" >
-                            <th mat-header-cell *matHeaderCellDef> Room </th>
-                            <td mat-cell *matCellDef="let row" > {{row.room_id}} </td>
-                        </ng-container>
-
-
-                        <ng-container matColumnDef="type_room">
-                            <th mat-header-cell *matHeaderCellDef> Type room </th>
-                            <td mat-cell *matCellDef="let row"> {{row.type_room}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="room_status">
-                            <th mat-header-cell *matHeaderCellDef> Room status </th>
-                            <td mat-cell *matCellDef="let row"> {{row.room_status}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="book">
-                            <th mat-header-cell *matHeaderCellDef> Book room </th>
-                            <td mat-cell *matCellDef="let row">
-                                <i class="material-icons" style="cursor: pointer; color: #63320e;"
-                                    (click)="openModalAirroom(row.room_id,Bookroom)">loyalty</i>
-                            </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-                </div>
-            </div>
-        </div>
-    </form>
+        <div class="col-md"></div>
+    </div>
 </div>
 
-<ng-template #Bookroom let-modal>
-    <div style="margin: 20px;">
-        <form style="padding-top: 10px;padding-left: 15px;padding-right: 15px;">
-            <h1 mat-dialog-title style="margin-left: 30%; margin-bottom: 20px;">Book a room</h1>
-
-            <button mat-raised-button
-                style="width: 20%; background-color: #63320e;color:snow; margin-left: 25%;" (click) ="onInsertbook()">Book</button>
-            <button mat-raised-button style="width: 20%; background-color: #FF9900;color:snow; margin-left: 5%"
-                (click)="closeModal()">Cancle</button>
-
-        </form>
+<ng-template #success let-modal>
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+        <i class="material-icons" style="color: forestgreen">
+            offline_pin
+        </i> Successfully
     </div>
 </ng-template>

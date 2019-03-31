@@ -1,0 +1,101 @@
+<div class="container" id="contentToConvert" style="margin-top: 20px;">
+
+  <div class="row">
+    <div class="col-md">Apartment</div>
+  </div>
+  <div class="row">
+    <div class="col-md">55 Rangsit-Pathum Rd., Khlong 6, Khlong Luang, Pathum Thani 12120</div>
+  </div>
+  <div class="row">
+    <div class="col-md">Tel.075372021</div>
+  </div>
+  <div class="row" style="margin-left: 45%; margin-top: 50px; font-size: 25px">
+    <div class="col-md"><b>ใบเสร็จรับเงิน</b></div>
+  </div>
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-md-3">วันที่แจ้งค่าเช่า : {{data[0].date}}</div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">ชื่อผู้เช่า : {{data[0].cus_fname}}&nbsp;&nbsp;{{data[0].cus_lname}}</div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">เลขที่ห้อง : {{data[0].room_id}}</div>
+    <div class="col-md-3"></div>
+  </div>
+
+  <table class="table table-bordered" style="margin-top: 40px; ">
+    <thead>
+      <tr>
+        <th scope="col" width="45%">รายการ</th>
+        <th scope="col" width="25%">อัตราค่าบริการต่อหน่วย (บาท)</th>
+        <th scope="col" width="15%">จำนวนหน่วยที่ใช้</th>
+        <th scope="col" width="15%">รวมเงิน (บาท)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">ค่าเช่า</td>
+        <td class="right">-</td>
+        <td class="right">-</td>
+        <td class="right">{{data[0].type_rent}} -</td>
+      </tr>
+      <tr>
+        <td colspan="4"><b>ค่าสารณูปโภค</b></td>
+
+      </tr>
+      <tr>
+        <td scope="row">
+          <div class="row">
+            <div class="col-md-6">ค่าไฟฟ้า</div>
+            <div class="col-md-2">{{data[0].elect_start}}&nbsp;หน่วย</div>
+            <!--เริ่ม-->
+            <div class="col-md-1">ถึง</div>
+            <div class="col-md">{{data[0].elect_end}}&nbsp;หน่วย</div>
+          </div>
+        </td>
+        <td class="right">7</td>
+        <td class="right">{{data[0].elect_using}}</td>
+        <td class="right">{{data[0].total_using_elect}} -</td>
+      </tr>
+      <tr>
+        <td scope="row">
+          <div class="row">
+            <div class="col-md-6">ค่าประปา</div>
+            <div class="col-md-2">{{data[0].water_start}}&nbsp;หน่วย</div>
+            <!--เริ่ม-->
+            <div class="col-md-1">ถึง</div>
+            <div class="col-md">{{data[0].water_end}}&nbsp;หน่วย</div>
+          </div>
+        </td>
+        <td class="right">15</td>
+        <td class="right">{{data[0].water_using}}</td>
+        <td class="right">{{data[0].total_using_water}} -</td>
+      </tr>
+      <tr>
+        <td scope="row">ค่าใช้จ่ายอื่น ๆ</td>
+        <td class="right">-</td>
+        <td class="right">-</td>
+        <td class="right">-</td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>รวมเป็นเงินทั้งสิ้น</b></td>
+        <td class="right">{{data[0].total_rent}} -</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row" style="margin-top: 150px;">
+    <div class="col-md-6"></div>
+    <div class="col-md">
+      ลายมื่อชื่อ........................................................................ผู้รับเงิน/ผู้ให้เช่า</div>
+  </div>
+ 
+
+</div>
+
+
+<!-- ปุ่ม print-->
+<button class="fa fa-print" aria-hidden="true" mat-raised-button
+  style="background:#63320e;color:snow;margin-left: 50%; margin-top: 90px;margin-block-end: 100px "
+  > Print</button>

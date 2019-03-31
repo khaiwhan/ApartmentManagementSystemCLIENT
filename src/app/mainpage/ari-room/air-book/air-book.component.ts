@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ServerService } from 'src/app/@service/server.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionService } from 'src/app/@service/session.service';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-air-book',
   templateUrl: './air-book.component.html',
-  styleUrls: ['./air-book.component.scss']
+  styleUrls: ['./air-book.component.scss'],
 })
 export class AirBookComponent implements OnInit {
   date = new FormControl(new Date());
@@ -17,32 +18,39 @@ export class AirBookComponent implements OnInit {
   dataSource: MatTableDataSource<[any]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('success') success: ElementRef;
   date1 = new Date();
-
-  public date_checkin = new FormControl;
-  public date_checkout = new FormControl;
-
-
+  listRoom;
+  // stepper
+  isLinear = false;
   user;
-  public insertBook = new FormGroup({
-    room_id: new FormControl(''),
-    username: new FormControl(''),
-    book_in: new FormControl(''),
-    book_out: new FormControl(''),
-    book_date: new FormControl(''),
-   
-  })
-  room_id;
 
+  public roomm = new FormControl('');
+  room_id;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
   constructor(
     private service: ServerService,
     private modalService: NgbModal,
-    private session : SessionService
+    private session: SessionService,
+    private _formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
-   this.user = this.session.getActiveUser();
+    this.user = this.session.getActiveUser();
     this.getAirTable()
+
+    this.service.getAirna().subscribe(
+      (res) => {
+        this.listRoom = res;
+      }
+    )
+    this.firstFormGroup = this._formBuilder.group({
+      book_in: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      book_out: ['', Validators.required]
+    });
   }
 
   //get
@@ -56,6 +64,8 @@ export class AirBookComponent implements OnInit {
     )
   }
 
+
+  // openModal
   openModalAirroom(data, modal) {
     this.room_id = data;
     // console.log(this.room_id,this.insertBook.value);
@@ -65,22 +75,28 @@ export class AirBookComponent implements OnInit {
   closeModal() {
     this.modalService.dismissAll();
   }
+
   //insert
   onInsertbook() {
     const data = [{
-      book_in:this.insertBook.value.book_in,
-      book_out:this.insertBook.value.book_out,
-      room_id:this.room_id,
-      book_date:this.date1,
-      username:this.user[0].username
+      book_in: this.firstFormGroup.value.book_in,
+      book_out: this.secondFormGroup.value.book_out,
+      room_id: this.roomm.value,
+      book_date: this.date1,
+      username: this.user[0].username
     }]
     console.log(data)
     this.service.AddtableBook(data).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.success)
         this.getAirTable();
-        this.closeModal();
+        location.reload();
+        await delay(1000);
+        this.modalService.dismissAll()
       }
     )
   }
-
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

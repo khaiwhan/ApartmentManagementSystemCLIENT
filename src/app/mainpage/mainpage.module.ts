@@ -20,6 +20,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AirBookComponent } from './ari-room/air-book/air-book.component';
 import { FanbookComponent } from './fan-room/fanbook/fanbook.component';
 import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
     RegisterDialog,
     AlertRegisterSuccess,
     AlertRegisterError,
-    AlertLoginError
+    AlertLoginError,
   ],
   imports: [
     CommonModule,
@@ -61,7 +62,9 @@ import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
     AngularFontAwesomeModule,
     CarouselModule.forRoot()
   ],
-  providers:[ServerService]
+  providers:[ServerService,{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}
+  }]
 
 })
 export class MainpageModule { }
