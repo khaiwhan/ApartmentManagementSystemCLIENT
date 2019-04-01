@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ManageroomComponent implements OnInit {
 
-  displayedColumns: string[] = ['Room', 'Residents', 'TypeRoom', 'StatusUser', 'CheckIN','CheckOut','StatusRoom','Edit'];
+  displayedColumns: string[] = ['Room', 'Residents', 'TypeRoom', 'StatusUser', 'CheckIN','CheckOut','StatusRoom','Edit', 'Moveout'];
   dataSource: MatTableDataSource<[any]>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,11 +35,22 @@ export class ManageroomComponent implements OnInit {
   update_username;
   update_type_id;
   update_room_status;
-
-  delete_room_id;
-
+  type_id;
+  type_room;
+  cus_fname;
+  cus_lname;
+  // delete_room_id;
+  room_id
   listUsername;
-  constructor(private service: ServerService, private dialog: MatDialog,private modal:NgbModal,private route:Router) { }
+  constructor(
+    private service: ServerService, 
+    private dialog: MatDialog,
+    private modal:NgbModal,
+    private route:Router,
+    private modalService: NgbModal,
+    
+    ) { }
+    
   ngOnInit() {
     this.getTable();
     this.service.getDataUser().subscribe(
@@ -56,6 +67,9 @@ export class ManageroomComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }
     )
+  }
+  closeModal() {
+    this.modalService.dismissAll();
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -91,18 +105,43 @@ export class ManageroomComponent implements OnInit {
       }
     )
   }
-  openModalDeleteUser(id,modal){
-    this.delete_room_id = id;
-    this.modal.open(modal,{centered:true});
+  // openModalDeleteUser(id,modal){
+  //   this.delete_room_id = id;
+  //   this.modal.open(modal,{centered:true});
+  // }
+  // onDeleteRoom(){
+  //   this.service.deleteRoom(this.delete_room_id).subscribe(
+  //     (res)=> {
+  //       this.getTable();
+  //       this.modal.dismissAll();
+  //     }
+  //   )
+  // }
+
+  openModalClearroom(data, modal) {
+    console.log(data);
+    this.type_room = data.type_room;    
+    this.room_id = data.room_id;
+    this.type_id = data.type_id;
+    this.cus_fname = data.cus_fname;
+    this.cus_lname = data.cus_lname;
+
+    this.modalService.open(modal, { centered: true })
   }
-  onDeleteRoom(){
-    this.service.deleteRoom(this.delete_room_id).subscribe(
-      (res)=> {
+
+  onUpdateClearRoom() {
+    const data = [{
+      room_id: (this.room_id)
+    }]
+    console.log(data)
+    this.service.updateClearRoom(data).subscribe(
+      (res) => {
         this.getTable();
-        this.modal.dismissAll();
+        this.closeModal();
       }
     )
   }
+
   gotoEditpage(){
     this.route.navigate(['../editroomresident',this.AddRoomForm.value.room_id])
   }

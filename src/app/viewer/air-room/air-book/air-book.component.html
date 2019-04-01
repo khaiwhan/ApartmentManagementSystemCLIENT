@@ -1,3 +1,65 @@
-<p>
-  air-book works!
-</p>
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md"></div>
+        <div class="col-md shadow" style="border-radius: 20px;padding: 10 10 10 10">
+            <br>
+            <h4><u>Book Room</u></h4>
+            <mat-horizontal-stepper linear #stepper>
+                <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Check-IN</ng-template>
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="book_in" placeholder="Check-in" formControlName="book_in"
+                                required>
+                            <mat-datepicker-toggle matSuffix [for]="book_in"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #book_in></mat-datepicker>
+                        </mat-form-field>
+                        <button mat-button matStepperNext
+                            style="margin-left: 20px; background-color: #63320e; color: snow">Next
+                        </button>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Check-OUT</ng-template>
+                        <mat-form-field>
+                            <input matInput [(ngModel)]="cDate" [matDatepicker]="book_out" placeholder="Check-out"
+                                formControlName="book_out" required>
+                            <mat-datepicker-toggle matSuffix [for]="book_out"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #book_out></mat-datepicker>
+                        </mat-form-field>
+                        <button mat-button matStepperNext
+                            style="margin-left: 20px; background-color: #63320e; color: snow">Next
+                        </button>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <form>
+                        <ng-template matStepLabel>Choose Room</ng-template>
+                        <mat-form-field>
+                            <mat-label>Room</mat-label>
+                            <mat-select matNativeControl required [formControl]="roomm">
+                                <mat-option *ngFor="let list of listRoom" [value]="list.room_id">{{list.room_id}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-button matStepperNext
+                            style="margin-left: 20px; background-color: #63320e; color: snow"
+                            (click)="onInsertbook()">Done
+                        </button>
+                    </form>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+        <div class="col-md"></div>
+    </div>
+</div>
+
+<ng-template #success let-modal>
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+        <i class="material-icons" style="color: forestgreen">
+            offline_pin
+        </i> Successfully
+    </div>
+</ng-template>

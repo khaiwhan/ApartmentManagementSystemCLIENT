@@ -1,0 +1,119 @@
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  mat-icon,a{
+    color: snow;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .footer {
+    font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    // position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background-color: #63320e;
+    color: white;
+    text-align: center;
+ }
+.rightText[_ngcontent-c10]{
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 15px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: center;
+    color: snow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* min-width: 500px; */
+    height: 100px;
+}
+.docs-footer-copyright[_ngcontent-c10] {
+    display: flex;
+    /* flex: 1; */
+    /* flex-grow: 1; */
+    /* flex-shrink: 1; */
+    /* flex-basis: 0%; */
+    justify-content: flex-end;
+    flex-direction: column;
+    min-width: 225px;
+    text-align: center;
+}
+.midText{
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 11px;
+    line-height: 15px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: center;
+    color: snow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.leftText{
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-align: left;
+    color: snow;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-left: 5%; */
+}
+b{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #63320e !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: #63320e !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #63320e !important;;
+}
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #63320e!important;
+  // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #63320e!important;
+}
+::placeholder{
+  color: #63320e;
+}

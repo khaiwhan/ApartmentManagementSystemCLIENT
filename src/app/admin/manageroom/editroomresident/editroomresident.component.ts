@@ -36,7 +36,7 @@ export class EditroomresidentComponent implements OnInit {
     this.room_status = this.route.snapshot.paramMap.getAll('room_status');
     this.check_in = this.route.snapshot.paramMap.getAll('check_in');
     this.check_out = this.route.snapshot.paramMap.getAll('check_out');
-    console.log(this.room_id,this.room_status[0],this.username[0],this.type_id[0],this.check_in[0],this.check_out[0])
+    console.log('-----',this.room_id,this.room_status[0],this.username[0],this.type_id[0],this.check_in[0],this.check_out[0])
     this.service.getDataUser().subscribe(
       (res) => {
         this.listUsername = res;

@@ -47,6 +47,9 @@ export class ServerService {
   deleteRoom(data) {
     return this.http.delete(urlServer.ipServer + 'deleteroom/' + data)
   }
+  updateClearRoom(data) {
+    return this.http.put(urlServer.ipServer + 'clearroom', data)
+  }
   // end ManageRoom Resident
 
   //Rent
@@ -158,5 +161,10 @@ export class ServerService {
   //update Receipt
   updateReceipt(data) {
     return this.http.put(urlServer.ipServer + 'updatereceipt', data)
+  }
+
+  //History
+  getHistory() {
+    return this.http.get(urlServer.ipServer + 'selecthistory')
   }
 }

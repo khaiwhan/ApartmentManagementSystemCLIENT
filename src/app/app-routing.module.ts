@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren:'./member/member.module#MemberModule'
   },
   {
+    path:'viewer',
+    loadChildren:'./viewer/viewer.module#ViewerModule'
+  },
+  {
     path:'',
     redirectTo:'mainpage',
     pathMatch:'full'

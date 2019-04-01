@@ -12,13 +12,14 @@ import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 })
 export class RecieptComponent implements OnInit {
 
-  displayedColumns: string[] = ['room_id','username', 'dabit_month', 'dabit_year', 'receipt_date','receipt_bill','icon'];
+  displayedColumns: string[] = ['room_id', 'username', 'dabit_month', 'dabit_year', 'receipt_date', 'receipt_bill', 'icon'];
   dataSource: MatTableDataSource<[any]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   receipt_data;
-
-
+  room_id;
+  cus_fname;
+  cus_lname;
 
   // private receipt_data = new FormControl('')
   constructor(
@@ -53,8 +54,12 @@ export class RecieptComponent implements OnInit {
   }
   openModal
   openModalReceipt(data, modal) {
-    this.receipt_data = data;
-    console.log(this.receipt_data);
+    this.receipt_data = data.dabit_id;
+    this.room_id = data.room_id;
+    this.cus_fname = data.cus_fname;
+    this.cus_lname = data.cus_lname;
+
+    // console.log(this.receipt_data);
     this.modalService.open(modal, { centered: true })
   }
   closeModal() {
@@ -62,7 +67,7 @@ export class RecieptComponent implements OnInit {
   }
 
   // onUpdateReceipt() {
-  
+
   //   this.service.updateReceipt(data).subscribe(
   //     (res) => {
   //       this.getReceiptTable();
@@ -82,6 +87,6 @@ export class RecieptComponent implements OnInit {
       }
     )
   }
-  
+
 
 }

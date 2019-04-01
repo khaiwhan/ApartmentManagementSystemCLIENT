@@ -32,6 +32,7 @@ export class NotiticationsComponent implements OnInit {
     check_in: new FormControl(''),
     check_out: new FormControl(''),
     book_date: new FormControl(''),
+    username: new FormControl(''),
 
   })
   cus_fname;
@@ -47,12 +48,15 @@ export class NotiticationsComponent implements OnInit {
   }
   openModalSearch(data, modal) {
     this.room_id = data.room_id;
+    this.username = data.username;
     this.cus_fname = data.cus_fname;
     this.cus_lname = data.cus_lname;
     this.email = data.email;
     this.book_in = data.book_in;
     this.book_out = data.book_out;
     this.book_date = data.book_date;
+    this.book_id = data.book_id;
+
     this.modalService.open(modal, { centered: true })
   }
   closeModal() {
@@ -93,14 +97,14 @@ export class NotiticationsComponent implements OnInit {
 //delete Book
   openModalDeleteUser(data,modal){
     console.log(data);
-    this.deleteBook = data.book_id;
+    this.book_id = data.book_id;
     this.modalService.open(modal,{centered:true})
   }
   onDeleteBook() {
  
-    console.log(this.deleteBook);
+    console.log(this.book_id);
     
-    this.service.deleteBook(this.deleteBook).subscribe(
+    this.service.deleteBook(this.book_id).subscribe(
       (res) => {
         this.getBookTable();
         this.closeModal();

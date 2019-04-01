@@ -42,7 +42,7 @@ export class MainpageComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.session.getActiveUser();
-    // console.log(this.user)
+   
 
     if (this.user == null || this.user === "") {
       this.route.navigate(['/mainpage/mainpage/home'])
@@ -57,6 +57,10 @@ export class MainpageComponent implements OnInit {
       if (this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== "") {
         this.route.navigate(['/staff/staff'])
       }
+      if (this.user[0].cus_role === "viewer" && this.user[0].cus_role != null && this.user[0].cus_role !== "") {
+        this.route.navigate(['/viewer/viewer/home'])
+      }
+      
       
     }
 

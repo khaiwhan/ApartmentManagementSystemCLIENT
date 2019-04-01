@@ -9,8 +9,8 @@
       <mat-form-field style="width: 80%">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
       </mat-form-field>
-      <span> &nbsp;<a mat-button style="background-color: #63320e"
-          routerLink="../addroomresident">AddRoomOrResident</a></span>
+      <span> &nbsp;<a mat-button style="background-color: #63320e" routerLink="../addroomresident">Add Room Or
+          Resident</a></span>
 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -26,40 +26,47 @@
           </ng-container>
 
           <ng-container matColumnDef="TypeRoom">
-            <th mat-header-cell *matHeaderCellDef> TypeRoom </th>
+            <th mat-header-cell *matHeaderCellDef> Type Room </th>
             <td mat-cell *matCellDef="let row"> {{row.type_room}} </td>
           </ng-container>
 
           <ng-container matColumnDef="CheckIN">
-            <th mat-header-cell *matHeaderCellDef> CheckIN </th>
+            <th mat-header-cell *matHeaderCellDef> Check-IN </th>
             <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.check_in}} </td>
           </ng-container>
 
           <ng-container matColumnDef="CheckOut">
-            <th mat-header-cell *matHeaderCellDef> CheckOut </th>
+            <th mat-header-cell *matHeaderCellDef> Check-Out </th>
             <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.check_out}} </td>
           </ng-container>
 
           <ng-container matColumnDef="StatusUser">
-            <th mat-header-cell *matHeaderCellDef> StatusUser </th>
+            <th mat-header-cell *matHeaderCellDef> Status User </th>
             <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_role}} </td>
           </ng-container>
 
           <ng-container matColumnDef="StatusRoom">
-            <th mat-header-cell *matHeaderCellDef> StatusRoom </th>
+            <th mat-header-cell *matHeaderCellDef> Status Room </th>
             <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.room_status}} </td>
           </ng-container>
 
           <ng-container matColumnDef="Edit">
-            <th mat-header-cell *matHeaderCellDef> EditRoom </th>
+            <th mat-header-cell *matHeaderCellDef> Edit Room </th>
             <td mat-cell *matCellDef="let row">
               <mat-icon style="font-size: 30px;cursor: pointer;color: #63320e"
                 [routerLink]="['../editroomresident',row.room_id,row.username,row.type_id,row.room_status,row.check_in,row.check_out]">
-                settings</mat-icon>&nbsp;
-              <mat-icon (click)="openModalDeleteUser(row.room_id,deleteRoom)"
-                style="font-size: 30px;cursor: pointer;color: rgb(177, 25, 25)">remove_circle</mat-icon>
+                settings</mat-icon>
             </td>
           </ng-container>
+
+          <ng-container matColumnDef="Moveout">
+            <th mat-header-cell *matHeaderCellDef> Move out </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-icon (click)="openModalClearroom(row,Clearroom)"
+                style="font-size: 30px;cursor: pointer;color: rgb(177, 25, 25)">exit_to_app</mat-icon>
+            </td>
+          </ng-container>
+
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;">
@@ -163,7 +170,7 @@
 
 </ng-template>
 
-<ng-template #deleteRoom let-modal>
+<!-- <ng-template #deleteRoom let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Are You Sure?</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -176,5 +183,25 @@
   <div class="modal-footer">
     <button mat-raised-button (click)="modal.close('Close click')">No Thanks</button>
     <button mat-raised-button (click)="onDeleteRoom()" style="background-color: #63320e;color: snow">OK</button>
+  </div>
+</ng-template> -->
+
+
+
+<ng-template #Clearroom let-modal>
+  <div style="margin: 20px;">
+    <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;">
+      <h1 mat-dialog-title> Move out </h1>
+      <p>The tenant wants to move out of the apartment.</p>
+      <p>Type {{type_room}} </p>
+      <p>Room &nbsp;{{room_id}} </p>
+      <p>Name &nbsp;{{cus_fname}}&nbsp;{{cus_lname}} </p>
+
+      <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%; margin-top: 30px;"
+        (click)="onUpdateClearRoom()">Submit</button>
+      <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%"
+        (click)="closeModal()">Cancle</button>
+
+    </form>
   </div>
 </ng-template>

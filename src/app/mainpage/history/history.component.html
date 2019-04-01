@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;"> Room reservation history
+      &nbsp;<i class="material-icons">
+        history
+      </i></h1>
+  </div><br>
+
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-10">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
+      </mat-form-field>
+
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+
+          <ng-container matColumnDef="room_id">
+            <th mat-header-cell *matHeaderCellDef>Room No.</th>
+            <td mat-cell *matCellDef="let row"> {{row.room_id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type_room">
+            <th mat-header-cell *matHeaderCellDef>Type room</th>
+            <td mat-cell *matCellDef="let row"> {{row.type_room}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="book_in">
+            <th mat-header-cell *matHeaderCellDef> Check-in </th>
+            <td mat-cell *matCellDef="let row"> {{row.book_in}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="book_out">
+            <th mat-header-cell *matHeaderCellDef> Check-out </th>
+            <td mat-cell *matCellDef="let row"> {{row.book_out}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="book_date">
+            <th mat-header-cell *matHeaderCellDef> Date Book </th>
+            <td mat-cell *matCellDef="let row"> {{row.book_date}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let row">
+              <i class="material-icons" style="cursor: pointer; color: #63320e; text-align: center ;"
+                (click)="openModalDeleteUser(row,deleteBook)">
+                delete_sweep
+              </i>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    </div>
+    <div class="col-md"></div>
+  </div>
+</div>
+
+<ng-template #deleteBook let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Are You Sure?</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Want to Remove This Book!!</p>
+    </div>
+    <div class="modal-footer">
+        <button mat-raised-button (click)="modal.close('Close click')">No Thanks</button>
+        <button mat-raised-button (click)="onDeleteBook()" style="background-color: #63320e;color: snow">OK</button>
+    </div>
+</ng-template>

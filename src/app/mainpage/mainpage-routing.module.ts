@@ -10,6 +10,7 @@ import { AirBookComponent } from './ari-room/air-book/air-book.component';
 import { compileComponent } from '@angular/core/src/render3/jit/directive';
 import { FanbookComponent } from './fan-room/fanbook/fanbook.component';
 import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path:'airbookroom',
         component:AirBookComponent
+      },
+      {
+        path:'history',
+        component:HistoryComponent
       }
     ]
   },

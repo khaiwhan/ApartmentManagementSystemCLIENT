@@ -103,6 +103,10 @@
                 <input type="text" matInput formControlName="cus_lname" style="color: #63320e" [(ngModel)]="cus_lname">
             </mat-form-field>
             <mat-form-field style="width: 100%">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput formControlName="username" style="color: #63320e" [(ngModel)]="username">
+            </mat-form-field>
+            <mat-form-field style="width: 100%">
                 <mat-label>E-mail</mat-label>
                 <input type="email" matInput formControlName="email" style="color: #63320e" [(ngModel)]="email">
             </mat-form-field>
@@ -130,19 +134,19 @@
 
 <ng-template #deleteBook let-modal>
     <div class="modal-header">
-      <h4 class="modal-title">Are You Sure?</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title">Are You Sure?</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-      <p>Want to Remove This Book!!</p>
+        <p>Want to Remove This Book!!</p>
     </div>
     <div class="modal-footer">
-      <button mat-raised-button (click)="modal.close('Close click')" >No Thanks</button>
-      <button mat-raised-button (click)="onDeleteBook()" style="background-color: #63320e;color: snow">OK</button>
+        <button mat-raised-button (click)="modal.close('Close click')">No Thanks</button>
+        <button mat-raised-button (click)="onDeleteBook()" style="background-color: #63320e;color: snow">OK</button>
     </div>
-  </ng-template>
+</ng-template>
 
 <ng-template #success let-modal>
     <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">

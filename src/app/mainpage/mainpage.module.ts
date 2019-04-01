@@ -21,6 +21,7 @@ import { AirBookComponent } from './ari-room/air-book/air-book.component';
 import { FanbookComponent } from './fan-room/fanbook/fanbook.component';
 import { SuitebookComponent } from './suite-room/suitebook/suitebook.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     FanbookComponent,
     
     SuitebookComponent,
+    
+    HistoryComponent,
   ],
   entryComponents: [
     MainpageComponent,
