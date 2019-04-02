@@ -30,7 +30,11 @@ export class ManageuserComponent implements OnInit {
   @ViewChild('success') success: ElementRef;
   @ViewChild('Desuccess') Desuccess: ElementRef;
   
-  constructor(private service: ServerService, private dialog: MatDialog, private modalService: NgbModal) { }
+  constructor(
+    private service: ServerService,
+    private dialog: MatDialog, 
+    private modalService: NgbModal,
+    ) { }
 
   public Username = new FormControl('');
   public Password = new FormControl('');

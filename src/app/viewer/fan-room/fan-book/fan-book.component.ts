@@ -5,6 +5,7 @@ import { ServerService } from 'src/app/@service/server.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionService } from 'src/app/@service/session.service';
 import { delay } from 'q';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fan-book',
@@ -34,6 +35,7 @@ export class FanBookComponent implements OnInit {
     private modalService: NgbModal,
     private session: SessionService,
     private _formBuilder: FormBuilder,
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -90,9 +92,10 @@ export class FanBookComponent implements OnInit {
       async (res) => {
         this.modalService.open(this.success)
         this.getFanTable();
-        window.history.go(0);
+        // window.history.go(0);
         await delay(1000);
         this.modalService.dismissAll()
+        this.router.navigate(['viewer/viewer/fanroom'])
       }
     )
   }

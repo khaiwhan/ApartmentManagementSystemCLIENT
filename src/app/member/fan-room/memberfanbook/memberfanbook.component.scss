@@ -1,8 +1,15 @@
 mat-form-field {
-    margin-left: 100px;
-  }
+  margin-left: 40px;
+}
 
-  table {
-    width: 100%;
-  }
-  
+table {
+  width: 100%;
+}
+
+.mat-form-field-infix {
+  display: block;
+  position: relative;
+  flex: auto;
+  min-width: 0;
+  width: 270px;
+}

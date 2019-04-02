@@ -56,6 +56,7 @@ export class EditroomresidentComponent implements OnInit {
     
     this.service.updateRoomResident(this.updateRoom.value).subscribe(
       async (res) => {
+        this.onUpdateVtoM();
         this.modalService.open(this.success)
         await delay(1000);
         this.modalService.dismissAll();
@@ -63,6 +64,20 @@ export class EditroomresidentComponent implements OnInit {
       }
     )
   }
+  onUpdateVtoM() {
+    const data = [{
+      username: (this.username)
+    }]
+    console.log(data[0])
+    this.service.updateViewToMember(data[0]).subscribe(
+       (res) => {
+        this.modalService.dismissAll();
+        this.router.navigate(['admin/admin/manageroom'])
+       
+      }
+    )
+  }
+
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

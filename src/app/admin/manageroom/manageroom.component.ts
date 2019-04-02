@@ -42,7 +42,8 @@ export class ManageroomComponent implements OnInit {
   cus_fname;
   cus_lname;
   // delete_room_id;
-  room_id
+  room_id;
+  username;
   listUsername;
   constructor(
     private service: ServerService, 
@@ -127,6 +128,7 @@ export class ManageroomComponent implements OnInit {
     this.type_id = data.type_id;
     this.cus_fname = data.cus_fname;
     this.cus_lname = data.cus_lname;
+    this.username = data.username;
 
     this.modalService.open(modal, { centered: true })
   }
@@ -138,9 +140,23 @@ export class ManageroomComponent implements OnInit {
     console.log(data)
     this.service.updateClearRoom(data).subscribe(
       async (res) => {
+        this.onUpdatemoveout();
         this.modalService.open(this.success)
         this.getTable();
         await delay(1000);
+        this.closeModal();
+       
+      }
+    )
+  }
+  onUpdatemoveout() {
+    const data = [{
+      username: (this.username)
+    }]
+    console.log(data)
+    this.service.updateMoveout(data).subscribe(
+       (res) => {
+        this.getTable();
         this.closeModal();
        
       }

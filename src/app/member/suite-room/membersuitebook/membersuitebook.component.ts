@@ -1,6 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { ServerService } from 'src/app/@service/server.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SessionService } from 'src/app/@service/session.service';
+import { Router } from '@angular/router';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-membersuitebook',
@@ -10,26 +15,92 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class MembersuitebookComponent implements OnInit {
   date = new FormControl(new Date());
   serializedDate = new FormControl((new Date()).toISOString());
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
+  displayedColumns: string[] = ['room_id', 'type_room', 'room_status', 'book'];
+  dataSource: MatTableDataSource<[any]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('success') success: ElementRef;
+  date1 = new Date();
+  listRoom;
+  // stepper
+  isLinear = false;
+  user;
 
-  constructor() { }
+  public roomm = new FormControl('');
+  room_id;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  constructor(
+    private service: ServerService,
+    private modalService: NgbModal,
+    private session: SessionService,
+    private _formBuilder: FormBuilder,
+    private router:Router,
+  ) { }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.user = this.session.getActiveUser();
+    this.getSuiteTable()
+
+    this.service.getSuitena().subscribe(
+      (res) => {
+        this.listRoom = res;
+      }
+    )
+    this.firstFormGroup = this._formBuilder.group({
+      book_in: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      book_out: ['', Validators.required]
+    });
+  }
+
+  //get
+  getSuiteTable() {
+    this.service.getSuitena().subscribe(
+      (res) => {
+        this.dataSource = new MatTableDataSource(res as any[]);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    )
+  }
+
+
+  // openModal
+  openModalAirroom(data, modal) {
+    this.room_id = data;
+    // console.log(this.room_id,this.insertBook.value);
+    // this.date_checkin
+    this.modalService.open(modal, { centered: true })
+  }
+  closeModal() {
+    this.modalService.dismissAll();
+  }
+
+  //insert
+  onInsertbook() {
+    const data = [{
+      book_in: this.firstFormGroup.value.book_in,
+      book_out: this.secondFormGroup.value.book_out,
+      room_id: this.roomm.value,
+      book_date: this.date1,
+      username: this.user[0].username
+    }]
+    console.log(data)
+    this.service.AddtableBook(data).subscribe(
+      async (res) => {
+        this.modalService.open(this.success)
+        this.getSuiteTable();
+        // window.history.go(0);
+        await delay(1000);
+        this.modalService.dismissAll()
+        this.router.navigate(['member/member/suiteroom'])
+      }
+    )
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  
-  
-];

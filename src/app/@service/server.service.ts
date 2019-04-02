@@ -30,6 +30,10 @@ export class ServerService {
   editUser(data) {
     return this.http.put(urlServer.ipServer + 'updatemember', data)
   }
+  //upProfile
+  editProfile(data) {
+    return this.http.put(urlServer.ipServer + 'updateprofile', data)
+  }
   deleteUser(data) {
     return this.http.delete(urlServer.ipServer + 'deletemember/' + data)
   }
@@ -49,6 +53,12 @@ export class ServerService {
   }
   updateClearRoom(data) {
     return this.http.put(urlServer.ipServer + 'clearroom', data)
+  }
+  updateMoveout(data) {
+    return this.http.put(urlServer.ipServer + 'updatemoveout', data)
+  }
+  updateViewToMember(data) {
+    return this.http.put(urlServer.ipServer + 'updatevtom', data)
   }
   // end ManageRoom Resident
 
@@ -166,5 +176,9 @@ export class ServerService {
   //History
   getHistory() {
     return this.http.get(urlServer.ipServer + 'selecthistory')
+  }
+  //getProfile
+  Profile(data) {
+    return this.http.get(urlServer.ipServer + 'selectprofile/' + data)
   }
 }
