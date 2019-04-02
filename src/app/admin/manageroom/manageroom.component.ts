@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { ServerService } from 'src/app/@service/server.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-manageroom',
@@ -17,6 +18,7 @@ export class ManageroomComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('success') success: ElementRef;
 
   public AddRoomForm = new FormGroup({
     room_id:new FormControl(''),
@@ -135,11 +137,18 @@ export class ManageroomComponent implements OnInit {
     }]
     console.log(data)
     this.service.updateClearRoom(data).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.success)
         this.getTable();
+        await delay(1000);
         this.closeModal();
+       
       }
     )
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   gotoEditpage(){

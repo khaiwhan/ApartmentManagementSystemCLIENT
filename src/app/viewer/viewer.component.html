@@ -2,15 +2,16 @@
 <mat-toolbar>
     <mat-toolbar-row class="shadow" style="background: #63320e">
       <mat-icon class="example-icon" style="margin-top: 0px;font-size:30px;padding-bottom: 35px;">home</mat-icon>
-      <a mat-button routerLink="/mainpage/mainpage/home">Apartment</a>
+      <a mat-button routerLink="/viewer/viewer/home">Apartment</a>
       <a mat-button [matMenuTriggerFor]="animals" active="true">Type Room</a>
-      <a mat-button routerLink="/mainpage/mainpage/contact">Contact</a>
+      <a mat-button routerLink="/viewer/viewer/contact">Contact</a>
+      <a mat-button routerLink="/viewer/viewer/history">History</a>
       <mat-menu #animals="matMenu" style="background: black">
-        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/fanroom">Fan
+        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/viewer/viewer/fanroom">Fan
           Room</a>
         <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;"
-          routerLink="/mainpage/mainpage/airroom">Air-Conditioned Room</a>
-        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/suiteroom">Suite
+          routerLink="/viewer/viewer/airroom">Air-Conditioned Room</a>
+        <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/viewer/viewer/suiteroom">Suite
           Room</a>
       </mat-menu>
   

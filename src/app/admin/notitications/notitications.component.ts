@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator, MatTableDataSource, TooltipPosition } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServerService } from 'src/app/@service/server.service';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-notitications',
@@ -43,6 +44,7 @@ export class NotiticationsComponent implements OnInit {
     private service: ServerService,
   ) { }
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('Desuccess') Desuccess: ElementRef;
   ngOnInit() {
     this.getBookTable()
   }
@@ -51,7 +53,7 @@ export class NotiticationsComponent implements OnInit {
     this.username = data.username;
     this.cus_fname = data.cus_fname;
     this.cus_lname = data.cus_lname;
-    this.email = data.email;
+    this.email = data.email;  
     this.book_in = data.book_in;
     this.book_out = data.book_out;
     this.book_date = data.book_date;
@@ -85,7 +87,7 @@ export class NotiticationsComponent implements OnInit {
   onUpdatetoRoom() {
     console.log(this.updateBooktoRoom.value)
     this.service.updateBooktoRoom(this.updateBooktoRoom.value).subscribe(
-      (res) => {
+      async (res) => {
         this.onDeleteBook();
         this.getBookTable();
         this.closeModal();
@@ -105,11 +107,21 @@ export class NotiticationsComponent implements OnInit {
     console.log(this.book_id);
     
     this.service.deleteBook(this.book_id).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.Desuccess)
         this.getBookTable();
+        await delay(1000);
         this.closeModal();
+        
+        
       }
     )
   }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
 }
 

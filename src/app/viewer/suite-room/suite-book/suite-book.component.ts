@@ -38,9 +38,9 @@ export class SuiteBookComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.session.getActiveUser();
-    this.getAirTable()
+    this.getSuiteTable()
 
-    this.service.getAirna().subscribe(
+    this.service.getSuitena().subscribe(
       (res) => {
         this.listRoom = res;
       }
@@ -54,8 +54,8 @@ export class SuiteBookComponent implements OnInit {
   }
 
   //get
-  getAirTable() {
-    this.service.getAirna().subscribe(
+  getSuiteTable() {
+    this.service.getSuitena().subscribe(
       (res) => {
         this.dataSource = new MatTableDataSource(res as any[]);
         this.dataSource.sort = this.sort;
@@ -89,8 +89,8 @@ export class SuiteBookComponent implements OnInit {
     this.service.AddtableBook(data).subscribe(
       async (res) => {
         this.modalService.open(this.success)
-        this.getAirTable();
-        location.reload();
+        this.getSuiteTable();
+        window.history.go(0);
         await delay(1000);
         this.modalService.dismissAll()
       }

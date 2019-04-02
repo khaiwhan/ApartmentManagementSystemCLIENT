@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ServerService } from 'src/app/@service/server.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { delay } from 'q';
 export interface AddUserData {
   Username: string;
   Password: string;
@@ -26,6 +27,9 @@ export class ManageuserComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('success') success: ElementRef;
+  @ViewChild('Desuccess') Desuccess: ElementRef;
+  
   constructor(private service: ServerService, private dialog: MatDialog, private modalService: NgbModal) { }
 
   public Username = new FormControl('');
@@ -131,21 +135,32 @@ export class ManageuserComponent implements OnInit {
   onUpdateUser() {
     console.log(this.updateUser.value)
     this.service.editUser(this.updateUser.value).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.success)
         this.getTable();
+        await delay(1000);
         this.closeModal();
+        
       }
     )
   }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
   openModalDeleteUser(deleteUSer,modal){
     this.deleteUSer = deleteUSer;
     this.modalService.open(modal,{centered:true})
   }
   onDeleteUser(){
     this.service.deleteUser(this.deleteUSer).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.Desuccess)
         this.getTable();
+        await delay(1000);
         this.closeModal();
+                
       }
     )
   }

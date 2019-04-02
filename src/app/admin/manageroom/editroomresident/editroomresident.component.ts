@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServerService } from 'src/app/@service/server.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-editroomresident',
@@ -9,6 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./editroomresident.component.scss']
 })
 export class EditroomresidentComponent implements OnInit {
+  @ViewChild('success') success: ElementRef;
 
   room_id;
   username;
@@ -26,7 +29,11 @@ export class EditroomresidentComponent implements OnInit {
     update_check_out:new FormControl('')
   })
 
-  constructor(private service:ServerService,private router:Router,private route: ActivatedRoute) { 
+  constructor(
+    private service:ServerService,
+    private router:Router,
+    private route: ActivatedRoute,
+    private modalService: NgbModal,) { 
   }
 
   ngOnInit() {
@@ -48,10 +55,16 @@ export class EditroomresidentComponent implements OnInit {
     console.log(this.updateRoom.value);
     
     this.service.updateRoomResident(this.updateRoom.value).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.success)
+        await delay(1000);
+        this.modalService.dismissAll();
         this.router.navigate(['admin/admin/manageroom'])
       }
     )
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

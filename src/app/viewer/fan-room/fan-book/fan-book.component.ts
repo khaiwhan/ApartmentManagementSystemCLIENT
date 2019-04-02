@@ -38,9 +38,9 @@ export class FanBookComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.session.getActiveUser();
-    this.getAirTable()
+    this.getFanTable()
 
-    this.service.getAirna().subscribe(
+    this.service.getFanna().subscribe(
       (res) => {
         this.listRoom = res;
       }
@@ -54,8 +54,8 @@ export class FanBookComponent implements OnInit {
   }
 
   //get
-  getAirTable() {
-    this.service.getAirna().subscribe(
+  getFanTable() {
+    this.service.getFanna().subscribe(
       (res) => {
         this.dataSource = new MatTableDataSource(res as any[]);
         this.dataSource.sort = this.sort;
@@ -89,8 +89,8 @@ export class FanBookComponent implements OnInit {
     this.service.AddtableBook(data).subscribe(
       async (res) => {
         this.modalService.open(this.success)
-        this.getAirTable();
-        location.reload();
+        this.getFanTable();
+        window.history.go(0);
         await delay(1000);
         this.modalService.dismissAll()
       }

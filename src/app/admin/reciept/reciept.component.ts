@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServerService } from 'src/app/@service/server.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-reciept',
@@ -11,7 +12,8 @@ import { isInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
   styleUrls: ['./reciept.component.scss']
 })
 export class RecieptComponent implements OnInit {
-
+  @ViewChild('success') success: ElementRef;
+  
   displayedColumns: string[] = ['room_id', 'username', 'dabit_month', 'dabit_year', 'receipt_date', 'receipt_bill', 'icon'];
   dataSource: MatTableDataSource<[any]>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -81,12 +83,16 @@ export class RecieptComponent implements OnInit {
     }]
     console.log(data)
     this.service.updateReceipt(data).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.success)
         this.getReceiptTable();
+        await delay(1000);
         this.closeModal();
       }
     )
   }
 
-
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

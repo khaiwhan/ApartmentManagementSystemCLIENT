@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServerService } from 'src/app/@service/server.service';
 import { FormControl } from '@angular/forms';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-reply',
@@ -13,6 +14,7 @@ export class ReplyComponent implements OnInit {
   displayedColumns: string[] = ['room', 'question', 'reply'];
   dataSource : MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('success') success: ElementRef;
   contact_id;
   question;
   public answer = new FormControl('')
@@ -46,11 +48,16 @@ export class ReplyComponent implements OnInit {
     console.log(data);
     
     this.service.Answer(data).subscribe(
-      (res) => {
+      async (res) => {
+        this.modalService.open(this.success)
+        await delay(1000);
         this.modalService.dismissAll();
         window.history.go(0);
       }
     )
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
 

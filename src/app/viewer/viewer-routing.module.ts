@@ -9,6 +9,7 @@ import { FanBookComponent } from './fan-room/fan-book/fan-book.component';
 import { SuiteRoomComponent } from './suite-room/suite-room.component';
 import { SuiteBookComponent } from './suite-room/suite-book/suite-book.component';
 import { ContactComponent } from './contact/contact.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
 
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'airbookroom',
         component: AirBookComponent
+      },
+      {
+        path: 'history',
+        component: HistoryComponent
       }
     ]
   },

@@ -90,7 +90,7 @@ export class AirBookComponent implements OnInit {
       async (res) => {
         this.modalService.open(this.success)
         this.getAirTable();
-        location.reload();
+        window.history.go(0);
         await delay(1000);
         this.modalService.dismissAll()
       }
