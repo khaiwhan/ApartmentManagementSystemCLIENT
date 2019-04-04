@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100px;background-color: #63320e">
+    <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;">Reply</h1>
+  </div>
+  <div class="row">
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+
+        <ng-container matColumnDef="room">
+          <th mat-header-cell *matHeaderCellDef> Room </th>
+          <td mat-cell *matCellDef="let row"> {{row.room_id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Detail </th>
+          <td mat-cell *matCellDef="let row"> {{row.cus_fname}} &nbsp; {{row.cus_lname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="question">
+          <th mat-header-cell *matHeaderCellDef> Question </th>
+          <td mat-cell *matCellDef="let row"> {{row.question}} </td>
+        </ng-container>
+
+
+        <!-- <ng-container matColumnDef="awnser">
+            <th mat-header-cell *matHeaderCellDef> Detail </th>
+            <td mat-cell *matCellDef="let row"> {{row.awnser}} </td>
+          </ng-container> -->
+
+
+        <ng-container matColumnDef="reply">
+          <th mat-header-cell *matHeaderCellDef style="right: 2%;"> Reply</th>
+          <td mat-cell *matCellDef="let row">
+            <i class="material-icons" (click)="openModalReply(row,Reply)"
+              style="font-size: 30px;cursor: pointer;color: #63320e">
+              reply
+            </i></td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+<ng-template #Reply let-modal>
+  <div style="margin: 20px;">
+    <form>
+      <h6>Room :</h6>
+      {{room}} <br><br>
+      <h6>Question :</h6>
+      {{question}} <br><br>
+      <h6>Reply :</h6>
+      <textarea name="" id="" cols="30" rows="4" style="width: 100%" [formControl]="answer"></textarea><br>
+      <button mat-raised-button style="background-color: #63320e;color:snow;margin-left: 40%"
+        (click)="onReply()">Reply</button>
+    </form>
+  </div>
+</ng-template>
+
+<!-- Alert -->
+<ng-template #success let-modal>
+  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+    <i class="material-icons" style="color: forestgreen">
+      offline_pin
+    </i> Successfully
+  </div>
+</ng-template>
+
+<ng-template #error let-modal>
+  <div class="alert alert-warning" role="alert" style="margin-bottom: 0px;">
+    <i class="material-icons" style="color: LightCoral;">
+      highlight_off
+    </i> &nbsp;Please enter the message to be sent.
+  </div>
+</ng-template>

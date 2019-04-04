@@ -1,0 +1,201 @@
+<div class="container-fluid">
+    <div class="row" style="height: 100px;background-color: #63320e">
+      <h1 style="color: snow;font-size: 20px;margin-top: 35px;margin-left: 25px;"> Room Resident</h1>
+    </div>
+    <br><br>
+    <div class="row">
+  
+      <div class="col-md">
+        <mat-form-field style="width: 100%">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
+        </mat-form-field>
+        <!-- <span> &nbsp;<a mat-button style="background-color: #63320e" routerLink="../addroomresident">Add users to the room</a></span> -->
+  
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+  
+            <ng-container matColumnDef="Room">
+              <th mat-header-cell *matHeaderCellDef> Room </th>
+              <td mat-cell *matCellDef="let row"> {{row.room_id}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Residents">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let row"> {{row.cus_fname}} &nbsp; {{row.cus_lname}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="TypeRoom">
+              <th mat-header-cell *matHeaderCellDef> Type Room </th>
+              <td mat-cell *matCellDef="let row"> {{row.type_room}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="CheckIN">
+              <th mat-header-cell *matHeaderCellDef> Check-IN </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.check_in}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="CheckOut">
+              <th mat-header-cell *matHeaderCellDef> Check-Out </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.check_out}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="StatusUser">
+              <th mat-header-cell *matHeaderCellDef> Status User </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.cus_role}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="StatusRoom">
+              <th mat-header-cell *matHeaderCellDef> Status Room </th>
+              <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.room_status}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Edit">
+              <th mat-header-cell *matHeaderCellDef> Edit Room </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-icon style="font-size: 30px;cursor: pointer;color: #63320e"
+                  (click)="openModalEditUser(row,EditData)">
+                  settings</mat-icon>
+              </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Moveout">
+              <th mat-header-cell *matHeaderCellDef> Move out </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-icon (click)="openModalClearroom(row,Clearroom)"
+                  style="font-size: 30px;cursor: pointer;color: rgb(177, 25, 25)">exit_to_app</mat-icon>
+              </td>
+            </ng-container>
+  
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+  
+          <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  
+  
+  
+  
+  <ng-template #AddRoom let-modal>
+    <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="AddRoomForm">
+      <h1 mat-dialog-title>Add Room Form</h1>
+  
+      <mat-form-field style="width: 100%">
+        <mat-label>Room</mat-label>
+        <input matInput formControlName="room_id" style="color: #63320e">
+      </mat-form-field>
+  
+   
+      <select class="custom-select mb-3" formControlName="username" placeholder="ChooseUser"
+        style="width: 100%;color: #63320e;font-size: 14px;">
+        <option *ngFor="let list of listUsername" [value]="list.username">
+          {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
+        </option>
+      </select>
+  
+  
+      <mat-label>TypeRoom</mat-label><br><br>
+      <mat-radio-group formControlName="type_id" style="color: #63320e">
+        <mat-radio-button value="2" style="color: #63320e">Air-Room</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="1" style="color: #63320e">FanRoom</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="3" style="color: #63320e">SuiteRoom</mat-radio-button>
+      </mat-radio-group><br><br>
+  
+      <mat-label>StatusRoom</mat-label><br><br>
+      <mat-radio-group formControlName="room_status" style="color: #63320e">
+        <mat-radio-button value="live" style="color: #63320e">Live</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="N/A" style="color: #63320e">N/A</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="broken" style="color: #63320e">Broken</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="book" style="color: #63320e">Book</mat-radio-button>
+      </mat-radio-group><br><br>
+  
+      <div mat-dialog-actions>
+        <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow"
+          (click)="onAddRoom()">AddDataAboutRoom</button>
+      </div>
+    </form>
+  
+  </ng-template>
+  
+  <ng-template #EditData let-modal>
+  
+    <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updateRoom">
+      <h1 mat-dialog-title>Edit Room {{room_id}}</h1>
+  
+      <input type="hidden" formControlName="update_room_id" style="color: #63320e" [(ngModel)]="room_id">
+  
+      <!-- USER -->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Name</label>
+        </div>
+        <select class="custom-select" formControlName="update_username" [(ngModel)]="username">
+          <option selected *ngFor="let list of listcustomer" [value]="list.username">
+            {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
+          </option>
+  
+        </select>
+      </div>
+  
+      <mat-label>StatusRoom</mat-label><br><br>
+      <mat-radio-group formControlName="update_room_status" style="color: #63320e" [(ngModel)]="room_status">
+        <mat-radio-button value="live" style="color: #63320e">Live</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="N/A" style="color: #63320e">N/A</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="broken" style="color: #63320e">Broken</mat-radio-button>&nbsp;&nbsp;
+        <mat-radio-button value="book" style="color: #63320e">Book</mat-radio-button>
+      </mat-radio-group><br><br>
+  
+      <div class="row">
+        <div class="col-md">
+          <label>Check-IN</label>
+          <input type="date" id="inputMDEx" formControlName="update_check_in" [(ngModel)]="check_in">
+        </div>
+        <div class="col-md">
+          <label>Check-Out</label>
+          <input type="date" id="inputMDEx" formControlName="update_check_out" [(ngModel)]="check_out">
+        </div>
+      </div>
+  
+      <div mat-dialog-actions>
+        <button mat-raised-button
+          style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow;margin-top: 30px;"
+          (click)="onEditRoom()">EditDataAboutRoom</button>
+      </div>
+    </form>
+  </ng-template>
+
+  
+  <ng-template #Clearroom let-modal>
+    <div style="margin: 20px;">
+      <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;">
+        <h1 mat-dialog-title> Move out </h1>
+        <p>The tenant wants to move out of the apartment.</p>
+        <p>Type {{type_room}} </p>
+        <p>Room &nbsp;{{room_id}} </p>
+        <p>Name &nbsp;{{cus_fname}}&nbsp;{{cus_lname}} </p>
+  
+        <button mat-raised-button style="background-color: #63320e;color:snow; margin-left: 30%; margin-top: 30px;"
+          (click)="onUpdateClearRoom()">Submit</button>
+        <button mat-raised-button style="background-color: #FF9900;color:snow; margin-left: 5%"
+          (click)="closeModal()">Cancle</button>
+  
+      </form>
+    </div>
+  </ng-template>
+  
+  
+  <!-- Alert -->
+  <ng-template #success let-modal>
+    <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+      <i class="material-icons" style="color: forestgreen">
+        offline_pin
+      </i> Remove Successfully
+    </div>
+  </ng-template>

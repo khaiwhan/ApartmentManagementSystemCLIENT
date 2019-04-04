@@ -4,7 +4,7 @@
   </div>
   <br><br>
   <div class="row">
-  
+
     <div class="col-md">
       <mat-form-field style="width: 100%">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
@@ -78,7 +78,7 @@
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
       </div>
     </div>
-   
+
   </div>
 </div>
 <router-outlet></router-outlet>
@@ -141,16 +141,16 @@
 
     <!-- USER -->
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="inputGroupSelect01">Name</label>
-        </div>
-        <select class="custom-select"  formControlName="update_username" [(ngModel)]="username">
-          <option selected *ngFor="let list of listUsername" [value]="list.username">
-              {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
-          </option>
-          
-        </select>
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Name</label>
       </div>
+      <select class="custom-select" formControlName="update_username" [(ngModel)]="username">
+        <option selected *ngFor="let list of listcustomer" [value]="list.username">
+          {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
+        </option>
+
+      </select>
+    </div>
 
     <mat-label>StatusRoom</mat-label><br><br>
     <mat-radio-group formControlName="update_room_status" style="color: #63320e" [(ngModel)]="room_status">
@@ -163,14 +163,17 @@
     <div class="row">
       <div class="col-md">
         <label>Check-IN</label>
-        <input type="date" id="inputMDEx" formControlName="update_check_in">
+        <input type="date" id="inputMDEx" formControlName="update_check_in" [(ngModel)]="check_in">
       </div>
-      <div class="col-md"> <label>Check-Out</label>
-        <input type="date" id="inputMDEx" formControlName="update_check_out"></div>
+      <div class="col-md">
+        <label>Check-Out</label>
+        <input type="date" id="inputMDEx" formControlName="update_check_out" [(ngModel)]="check_out">
+      </div>
     </div>
 
     <div mat-dialog-actions>
-      <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow;margin-top: 30px;"
+      <button mat-raised-button
+        style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow;margin-top: 30px;"
         (click)="onEditRoom()">EditDataAboutRoom</button>
     </div>
   </form>

@@ -58,7 +58,7 @@ export class MainpageComponent implements OnInit {
         this.route.navigate(['/staff/staff'])
       }
       if (this.user[0].cus_role === "viewer" && this.user[0].cus_role != null && this.user[0].cus_role !== "") {
-        this.route.navigate(['/viewer/viewer/home'])
+        this.route.navigate(['/viewer/viewer/overview'])
       }
       
       

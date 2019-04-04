@@ -12,16 +12,12 @@
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/member/member/suiteroom">Suite
         Room</a>
     </mat-menu>
-    <a mat-button routerLink="/member/member/print">Print <i class="fa fa-print" aria-hidden="true"></i></a>
+    <a mat-button routerLink="/member/member/print"><i class="material-icons">print</i> Print </a>
     <!-- <a mat-button routerLink="/member/member/info">Info</a> -->
-    <a mat-button routerLink="/member/member/contact">Contact</a>
-
+    <a mat-button routerLink="/member/member/contact"><i class="material-icons">contact_support</i> Contact</a>
     <a mat-button routerLink="/member/member/reply"><span matBadge="{{total_reply}}">Reply</span></a>
 
-
-
-    <span></span>
-    <span class="example-spacer"></span>
+   
     <a mat-raised-button style="color: black;background: rgb(245, 245, 245);
                                                   border-bottom: gray 2px solid;
                                                   border-right: gray 2px solid" (click)="openDialog()"

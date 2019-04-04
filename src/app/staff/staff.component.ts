@@ -23,7 +23,7 @@ export class StaffComponent implements OnInit {
         this.route.navigate(['/admin/admin/overview'])
       }
       if(this.user[0].cus_role === "staff" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
-        this.route.navigate(['/staff/staff/home'])
+        this.route.navigate(['/staff/staff/overview'])
       }
       if(this.user[0].cus_role === "member" && this.user[0].cus_role != null && this.user[0].cus_role !== ""){
         this.route.navigate(['/member/member/home'])

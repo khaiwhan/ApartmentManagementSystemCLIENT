@@ -4,10 +4,8 @@
     <mat-icon class="example-icon" style="margin-top: 0px;font-size:30px;padding-bottom: 35px;">home</mat-icon>
     <a mat-button routerLink="/viewer/viewer/home">Apartment</a>
     <a mat-button [matMenuTriggerFor]="animals" active="true">Type Room</a>
-    <a mat-button routerLink="/viewer/viewer/history"><i class="material-icons">
-        history
-      </i> History</a>
-    <a mat-button routerLink="/viewer/viewer/contact">Contact</a>
+    <a mat-button routerLink="/viewer/viewer/history"><i class="material-icons">history</i> History</a>
+    <a mat-button routerLink="/viewer/viewer/contact"><i class="material-icons">contact_support</i>Contact</a>
     <mat-menu #animals="matMenu" style="background: black">
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/viewer/viewer/fanroom">Fan
         Room</a>

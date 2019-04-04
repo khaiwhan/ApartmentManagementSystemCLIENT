@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ServerService } from 'src/app/@service/server.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { delay } from 'q';
 
@@ -11,7 +11,6 @@ import { delay } from 'q';
   templateUrl: './manageroom.component.html',
   styleUrls: ['./manageroom.component.scss']
 })
-
 export class ManageroomComponent implements OnInit {
 
   displayedColumns: string[] = ['Room', 'Residents', 'TypeRoom', 'StatusUser', 'CheckIN', 'CheckOut', 'StatusRoom', 'Edit', 'Moveout'];
@@ -47,18 +46,18 @@ export class ManageroomComponent implements OnInit {
   room_status;
   check_in;
   check_out;
-  listcustomer;
   // delete_room_id;
   room_id;
   username;
   listUsername;
+  listcustomer;
   constructor(
     private service: ServerService,
     private dialog: MatDialog,
     private modal: NgbModal,
     private modalService: NgbModal,
-    private router: Router,
-
+    private router:Router,
+    
     private route: ActivatedRoute,
 
   ) { }
@@ -100,18 +99,10 @@ export class ManageroomComponent implements OnInit {
   }
 
 
-  onAddRoom() {
-    // this.service.addRoomResident(this.AddRoomForm.value).subscribe(
-    //   (res) => {
-    //     this.getTable();
-    //     this.modal.dismissAll();
-    //   }
-    // )
-    this.route.navigate[('admin/admin/manageroom/addroomresident')]
-  }
+ 
   openModalEditUser(data, modal) {
     console.log(data);
-
+    
     this.room_id = data.room_id;
     this.username = data.username;
     this.room_status = data.room_status;
@@ -125,11 +116,11 @@ export class ManageroomComponent implements OnInit {
     this.service.updateRoomResident(this.updateRoom.value).subscribe(
       async (res) => {
         this.onUpdateVtoM();
-        this.modalService.open(this.success);
+        this.modalService.open(this.success);    
         this.getTable();
         await delay(1000);
         this.closeModal();
-
+        
       }
     )
   }
@@ -140,8 +131,8 @@ export class ManageroomComponent implements OnInit {
     console.log(data[0])
     this.service.updateViewToMember(data[0]).subscribe(
       (res) => {
-
-
+      
+       
       }
     )
   }
@@ -200,12 +191,12 @@ export class ManageroomComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  gotoEditpage() {
-    this.route.navigate(['../editroomresident', this.AddRoomForm.value.room_id])
+  gotoEditpage(){
+    this.route.navigate(['../editroomresident',this.AddRoomForm.value.room_id])
   }
 
   data: Date;
-
+ 
   onValueChange(value: Date): void {
     this.data = value;
   }
