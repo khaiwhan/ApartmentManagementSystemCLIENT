@@ -60,6 +60,9 @@ export class ServerService {
   updateViewToMember(data) {
     return this.http.put(urlServer.ipServer + 'updatevtom', data)
   }
+  getManageroom(data) {
+    return this.http.get(urlServer.ipServer + 'selectmanageroom' , data)
+  }
   // end ManageRoom Resident
 
   //Rent

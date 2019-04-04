@@ -4,13 +4,12 @@
   </div>
   <br><br>
   <div class="row">
-    <div class="col-md-1"></div>
+  
     <div class="col-md">
-      <mat-form-field style="width: 80%">
+      <mat-form-field style="width: 100%">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter Data Source">
       </mat-form-field>
-      <span> &nbsp;<a mat-button style="background-color: #63320e" routerLink="../addroomresident">Add Room Or
-          Resident</a></span>
+      <!-- <span> &nbsp;<a mat-button style="background-color: #63320e" routerLink="../addroomresident">Add users to the room</a></span> -->
 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -21,8 +20,8 @@
           </ng-container>
 
           <ng-container matColumnDef="Residents">
-            <th mat-header-cell *matHeaderCellDef> Residents </th>
-            <td mat-cell *matCellDef="let row"> {{row.cus_fname}} </td>
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let row"> {{row.cus_fname}} &nbsp; {{row.cus_lname}} </td>
           </ng-container>
 
           <ng-container matColumnDef="TypeRoom">
@@ -54,9 +53,12 @@
             <th mat-header-cell *matHeaderCellDef> Edit Room </th>
             <td mat-cell *matCellDef="let row">
               <mat-icon style="font-size: 30px;cursor: pointer;color: #63320e"
-                [routerLink]="['../editroomresident',row.room_id,row.username,row.type_id,row.room_status,row.check_in,row.check_out]">
+                (click)="openModalEditUser(row,EditData)">
                 settings</mat-icon>
             </td>
+            <!-- (click)="openModalEditUser(row,EditData)"
+            [routerLink]="['../editroomresident',row.room_id]" 
+          routerLink="/admin/admin/manageroom/editroomresident"-->
           </ng-container>
 
           <ng-container matColumnDef="Moveout">
@@ -76,9 +78,13 @@
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
       </div>
     </div>
-    <div class="col-md-1"></div>
+   
   </div>
 </div>
+<router-outlet></router-outlet>
+
+
+
 
 <ng-template #AddRoom let-modal>
   <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="AddRoomForm">
@@ -127,47 +133,47 @@
 </ng-template>
 
 <ng-template #EditData let-modal>
+
   <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="updateRoom">
-    <h1 mat-dialog-title>Edit Room And Residents Form</h1>
+    <h1 mat-dialog-title>Edit Room {{room_id}}</h1>
 
-    <input formControlName="update_room_id" style="color: #63320e" type="hidden" [(ngModel)]="update_room_id">
+    <input type="hidden" formControlName="update_room_id" style="color: #63320e" [(ngModel)]="room_id">
 
+    <!-- USER -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Name</label>
+        </div>
+        <select class="custom-select"  formControlName="update_username" [(ngModel)]="username">
+          <option selected *ngFor="let list of listUsername" [value]="list.username">
+              {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
+          </option>
+          
+        </select>
+      </div>
 
-    <select class="custom-select mb-3" formControlName="update_username" [(ngModel)]="update_username"
-      placeholder="ChooseUser" style="width: 100%;color: #63320e;font-size: 14px;">
-      <option *ngFor="let list of listUsername" [value]="list.username">
-        {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
-      </option>
-    </select>
-    <!-- <mat-form-field style="width: 100%">
-      <mat-label>Residents</mat-label>
-      <input matInput formControlName="update_username" style="color: #63320e" [(ngModel)]="update_username">
-    </mat-form-field> -->
-    <br>
-    <mat-label style="font-size: 14px">TypeRoom</mat-label><br><br>
-    <mat-radio-group formControlName="update_type_id" style="color: #63320e;font-size: 14px;"
-      [(ngModel)]="update_type_id">
-      <mat-radio-button value="2" style="color: #63320e">Air-Room</mat-radio-button>&nbsp;&nbsp;
-      <mat-radio-button value="1" style="color: #63320e">FanRoom</mat-radio-button>&nbsp;&nbsp;
-      <mat-radio-button value="3" style="color: #63320e">SuiteRoom</mat-radio-button>
-    </mat-radio-group><br><br>
-
-    <mat-label style="font-size:14px;">StatusRoom</mat-label><br><br>
-    <mat-radio-group formControlName="update_room_status" style="color: #63320e;font-size: 14px;"
-      [(ngModel)]="update_status_room">
+    <mat-label>StatusRoom</mat-label><br><br>
+    <mat-radio-group formControlName="update_room_status" style="color: #63320e" [(ngModel)]="room_status">
       <mat-radio-button value="live" style="color: #63320e">Live</mat-radio-button>&nbsp;&nbsp;
       <mat-radio-button value="N/A" style="color: #63320e">N/A</mat-radio-button>&nbsp;&nbsp;
       <mat-radio-button value="broken" style="color: #63320e">Broken</mat-radio-button>&nbsp;&nbsp;
       <mat-radio-button value="book" style="color: #63320e">Book</mat-radio-button>
     </mat-radio-group><br><br>
 
+    <div class="row">
+      <div class="col-md">
+        <label>Check-IN</label>
+        <input type="date" id="inputMDEx" formControlName="update_check_in">
+      </div>
+      <div class="col-md"> <label>Check-Out</label>
+        <input type="date" id="inputMDEx" formControlName="update_check_out"></div>
+    </div>
 
     <div mat-dialog-actions>
-      <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow"
-        (click)="onUpdateRoom()">EditData</button>
+      <button mat-raised-button style="width: 100%;margin-bottom: 20px;background-color: #63320e;color: snow;margin-top: 30px;"
+        (click)="onEditRoom()">EditDataAboutRoom</button>
     </div>
   </form>
-
 </ng-template>
 
 <!-- <ng-template #deleteRoom let-modal>
@@ -210,8 +216,8 @@
 <!-- Alert -->
 <ng-template #success let-modal>
   <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
-      <i class="material-icons" style="color: forestgreen">
-          offline_pin
-      </i> Remove Successfully
+    <i class="material-icons" style="color: forestgreen">
+      offline_pin
+    </i> Remove Successfully
   </div>
 </ng-template>

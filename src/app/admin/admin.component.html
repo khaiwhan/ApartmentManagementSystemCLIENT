@@ -7,8 +7,8 @@
     <a mat-button routerLink="/admin/admin/manageuser">ManageUser</a>
     <!-- <a mat-button routerLink="/admin/admin/facility">Facility</a> -->
 
-    <a mat-button routerLink="/admin/admin/notitications"> Notifications <mat-icon matBadge="{{totalBook}}" matBadgeColor="warn"><i
-          class="fa fa-bell" aria-hidden="true"></i></mat-icon></a>
+    <a mat-button routerLink="/admin/admin/notitications"> Notifications <mat-icon matBadge="{{totalBook}}"
+        matBadgeColor="warn"><i class="fa fa-bell" aria-hidden="true"></i></mat-icon></a>
     <a mat-button routerLink="/admin/admin/water">Meter <i class="fa fa-tint" aria-hidden="true"></i></a>
     <a mat-button routerLink="/admin/admin/print">Print <i class="fa fa-print" aria-hidden="true"></i></a>
     <a mat-button routerLink="/admin/admin/receipt">Bill <i class="fa fa-money" aria-hidden="true"></i></a>
@@ -25,18 +25,20 @@
     <span></span>
     <span class="example-spacer"></span>
 
-    <a mat-menu-item  routerLink="/admin/admin/reply">Reply <mat-icon matBadge="{{totalQuestion}}" matBadgeColor="warn"><i
-      class="fa fa-commenting" style="color: snow" aria-hidden="true"></i></mat-icon></a>
+    <a mat-menu-item routerLink="/admin/admin/reply">Reply <mat-icon matBadge="{{totalQuestion}}" matBadgeColor="warn">
+        <i class="fa fa-commenting" style="color: snow" aria-hidden="true"></i></mat-icon></a>
     <!-- <a mat-button [matMenuTriggerFor]="contact"> Contact <mat-icon matBadge="2" matBadgeColor="warn"><i
           class="fa fa-commenting" aria-hidden="true"></i></mat-icon></a>
     <mat-menu #contact="matMenu" style="background: black">
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/contact">Contact</a>
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/admin/admin/reply">Reply</a>
     </mat-menu> -->
-    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)]="user" active="true"
-      *ngIf="user != null">{{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
+    <a mat-button [matMenuTriggerFor]="profile" [(ngModel)]="user" active="true" *ngIf="user != null">
+      <i class="material-icons">account_circle</i>&nbsp;
+      {{user[0].cus_fname}}&nbsp;{{user[0].cus_lname}}</a>
     <mat-menu #profile="matMenu" style="background: black">
-      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" (click)="onLogout()">Logout &nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+      <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" (click)="onLogout()">Logout &nbsp;<i
+          class="fa fa-sign-out" aria-hidden="true"></i></a>
     </mat-menu>
     <a mat-button (click)="openDialogRegister()" *ngIf="user == null">Registor</a>
   </mat-toolbar-row>

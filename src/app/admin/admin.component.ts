@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
 
     this.user = this.session.getActiveUser();
-    console.log(this.user[0].cus_role);
+    // console.log(this.user[0].cus_role);
     
     if(this.user == null || this.user === "" || this.user[0].cus_role !== "admin"){
       this.route.navigate(['/mainpage/mainpage/home'])

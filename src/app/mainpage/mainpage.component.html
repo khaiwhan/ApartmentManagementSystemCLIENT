@@ -6,7 +6,7 @@
     <a mat-button [matMenuTriggerFor]="animals" active="true">Type Room</a>
     <!-- <a mat-button routerLink="/mainpage/mainpage/history">History</a> -->
     <a mat-button routerLink="/mainpage/mainpage/contact">Contact</a>
-    
+
     <mat-menu #animals="matMenu" style="background: black">
       <a mat-menu-item style="color: rgb(24, 24, 24);font-size: 15px;" routerLink="/mainpage/mainpage/fanroom">Fan
         Room</a>
@@ -71,3 +71,13 @@
     </footer>
   </mat-toolbar-row>
 </mat-toolbar>
+
+
+<!-- Alert -->
+<ng-template #success let-modal>
+  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+    <i class="material-icons" style="color: forestgreen">
+      offline_pin
+    </i> Remove Successfully
+  </div>
+</ng-template>

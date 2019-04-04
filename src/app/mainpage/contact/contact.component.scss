@@ -3,7 +3,35 @@ table {
   }
 
 .mat-elevation-z8{
-    width: 100%;
-    // margin-left: 1%;
-    margin: 1%;
+    width: 94%;
+    margin-left: 3%;
+    // margin: 1%;
 }
+
+.map-container-6{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+  }
+  .map-container-6 iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+  }
+
+  .map-container-5{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+    }
+    .map-container-5 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    }

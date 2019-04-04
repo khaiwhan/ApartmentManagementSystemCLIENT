@@ -5,23 +5,47 @@
         contact_mail
       </i></h1>
   </div>
-  <div class="container" style="margin-top: 20px;">
-    <form>
-      <div class="row">
-        <div class="col-md"></div>
-        <div class="col-md-6 shadow" style="border-radius: 20px;padding-top: 20px;padding-left: 30px;padding-right: 30px;padding-bottom: 20px;">
-          <div class="form-group">
-            <label><b>Question</b></label>
-            <textarea class="form-control" rows="5" [formControl] = "question"></textarea>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-md-6 mb-4">
+      <div class="card card-cascade narrower">
+        <div class="card-body card-body-cascade text-center">
+          <div id="map-container-google-8" class="z-depth-1-half map-container-5" style="height: 300px">
+            <iframe src="https://www.google.com/maps/d/embed?mid=1ofAZSfguUqLTX31Z8zXGyFoE3jiNCVYF" width="640"
+              height="480"></iframe>
           </div>
-
-          <button mat-raised-button (click)="onSend()" style="background:#63320e;color: snow; margin-top: 20px ; margin-left: 40%; ">Send
-            <i class="material-icons">
-              send
-            </i></button>
         </div>
-        <div class="col-md"></div>
       </div>
-    </form>
+    </div>
+    <div class="col-md-5 mb-4 shadow"
+      style="border-radius: 20px;padding-top: 20px;padding-left: 30px;padding-right: 30px;padding-bottom: 20px;height: 50%;">
+      <div class="form-group">
+        <label><b>Question</b></label>
+        <textarea class="form-control" rows="5" [formControl]="question"></textarea>
+      </div>
+
+      <button mat-raised-button (click)="onSend()"
+        style="background:#63320e;color: snow; margin-top: 20px ; margin-left: 40%; ">Send
+        <i class="material-icons">
+          send
+        </i></button>
+    </div>
   </div>
 </div>
+
+
+<!-- alert -->
+<ng-template #success let-modal>
+  <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+    <i class="material-icons" style="color: forestgreen">
+      offline_pin
+    </i> Successfully
+  </div>
+</ng-template>
+
+<ng-template #error let-modal>
+  <div class="alert alert-warning" role="alert" style="margin-bottom: 0px;">
+    <i class="material-icons" style="color: LightCoral;">
+      highlight_off
+    </i> &nbsp;Please enter the message to be sent.
+  </div>
+</ng-template>

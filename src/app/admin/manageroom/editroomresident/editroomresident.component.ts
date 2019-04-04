@@ -20,6 +20,7 @@ export class EditroomresidentComponent implements OnInit {
   check_in;
   check_out;
   listUsername;
+  room;
   public updateRoom = new FormGroup({
     update_room_id:new FormControl(''),
     update_username:new FormControl(''),
@@ -44,12 +45,26 @@ export class EditroomresidentComponent implements OnInit {
     this.check_in = this.route.snapshot.paramMap.getAll('check_in');
     this.check_out = this.route.snapshot.paramMap.getAll('check_out');
     console.log('-----',this.room_id,this.room_status[0],this.username[0],this.type_id[0],this.check_in[0],this.check_out[0])
-    this.service.getDataUser().subscribe(
+    this.service.getCustomer().subscribe(
       (res) => {
         this.listUsername = res;
       }
     )
-    
+    this.room = this.route.snapshot.paramMap.getAll('room_id');
+    this.service.getManageroom(this.room[0].room_id).subscribe(
+      (res) => {
+        console.log(res);
+        this.room_id = res[0].room_id;
+        this.username = res[0].username;
+        this.type_id = res[0].type_id;
+        this.room_status = res[0].room_status;
+        this.check_in = res[0].check_in;
+        this.check_out = res[0].check_out;
+        
+      }
+    )
+    // console.log(this.user);
+
   }
   onEditRoom(){
     console.log(this.updateRoom.value);
@@ -57,7 +72,7 @@ export class EditroomresidentComponent implements OnInit {
     this.service.updateRoomResident(this.updateRoom.value).subscribe(
       async (res) => {
         this.onUpdateVtoM();
-        this.modalService.open(this.success)
+        this.modalService.open(this.success)        
         await delay(1000);
         this.modalService.dismissAll();
         this.router.navigate(['admin/admin/manageroom'])
@@ -71,7 +86,7 @@ export class EditroomresidentComponent implements OnInit {
     console.log(data[0])
     this.service.updateViewToMember(data[0]).subscribe(
        (res) => {
-        this.modalService.dismissAll();
+       
         this.router.navigate(['admin/admin/manageroom'])
        
       }

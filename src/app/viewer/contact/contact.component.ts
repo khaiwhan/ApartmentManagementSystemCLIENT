@@ -13,14 +13,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ContactComponent implements OnInit {
   displayedColumns: string[] = ['question', 'answer'];
-  dataSource : MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('success') success: ElementRef;
+  @ViewChild('error') error: ElementRef;
+
   public question = new FormControl('');
   user;
   constructor(
-    private service:ServerService,
-    private session:SessionService,
+    private service: ServerService,
+    private session: SessionService,
     private modalService: NgbModal,
   ) { }
 
@@ -33,17 +35,24 @@ export class ContactComponent implements OnInit {
       }
     )
   }
-  onSend(){
+  onSend() {
     const data = [{
-      question:this.question.value
+      question: this.question.value
     }]
-    this.service.Ask(data).subscribe(
-      async (res) => {
-        this.modalService.open(this.success)
-        await delay(1000);
-        window.history.go(0)
-      }
-    )
+    if (this.question.value != '') {
+      this.service.Ask(data).subscribe(
+        async (res) => {
+          this.modalService.open(this.success)
+          await delay(1000);
+          window.history.go(0)
+        }
+      )
+    }
+    // alert
+    else{
+      this.modalService.open(this.error)
+
+    }
   }
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));

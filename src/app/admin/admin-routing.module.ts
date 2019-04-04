@@ -47,7 +47,7 @@ const routes: Routes = [
         component: AddroomresidentComponent
       },
       {
-        path: 'editroomresident/:room_id/:username/:type_id/:room_status/:check_in/:check_out',
+        path: 'editroomresident/:room_id',
         component: EditroomresidentComponent
       },
       {

@@ -73,7 +73,6 @@ export class ProfileComponent implements OnInit {
     this.service.editProfile(this.updateUser.value).subscribe(
       async (res) => {
         this.modalService.open(this.success)
-
         await delay(1000);
         this.modalService.dismissAll()
         this.router.navigate(['member/member/home'])

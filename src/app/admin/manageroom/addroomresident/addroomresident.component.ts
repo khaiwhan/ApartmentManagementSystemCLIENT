@@ -13,9 +13,11 @@ export class AddroomresidentComponent implements OnInit {
   public AddRoomForm = new FormGroup({
     room_id: new FormControl(''),
     username: new FormControl(''),
-    type_id: new FormControl(''),
-    room_status: new FormControl(''),
-    check_in: new FormControl(),
+    password: new FormControl(''),
+    cus_fname: new FormControl(''),
+    cus_lname: new FormControl(''),
+    email: new FormControl(''),
+    check_in: new FormControl(''),
     check_out: new FormControl('')
   })
   listUsername;

@@ -10,47 +10,50 @@
       <mat-card class="example-card">
         <mat-card-content>
           <form style="padding-top: 10px;padding-left: 20px;padding-right: 20px;" [formGroup]="AddRoomForm">
-            <h1 mat-dialog-title>Add Room Form</h1>
+            <h1 mat-dialog-title>Add users to the room </h1>
+
 
             <mat-form-field style="width: 100%">
               <mat-label>Room</mat-label>
               <input matInput formControlName="room_id" style="color: #63320e">
             </mat-form-field>
 
-            <mat-form-field style="width: 100%;">
-              <mat-select placeholder="ChooseUser" style="width: 100%;color: #63320e;font-size: 14px;"
-                formControlName="username">
-                <mat-option *ngFor="let list of listUsername" [value]="list.username">
-                  {{list.cus_fname}}&nbsp;&nbsp;{{list.cus_lname}}
-                </mat-option>
-              </mat-select>
+            <mat-form-field style="width: 100%">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username" style="color: #63320e">
             </mat-form-field>
 
-            <mat-label>TypeRoom</mat-label><br><br>
-            <mat-radio-group formControlName="type_id" style="color: #63320e">
-              <mat-radio-button value="2" style="color: #63320e">Air-Room</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="1" style="color: #63320e">FanRoom</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="3" style="color: #63320e">SuiteRoom</mat-radio-button>
-            </mat-radio-group><br><br>
+            <mat-form-field style="width: 100%">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" style="color: #63320e">
+            </mat-form-field>
 
-            <mat-label>StatusRoom</mat-label><br><br>
-            <mat-radio-group formControlName="room_status" style="color: #63320e">
-              <mat-radio-button value="live" style="color: #63320e">Live</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="N/A" style="color: #63320e">N/A</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="broken" style="color: #63320e">Broken</mat-radio-button>&nbsp;&nbsp;
-              <mat-radio-button value="book" style="color: #63320e">Book</mat-radio-button>
-            </mat-radio-group><br><br>
+            <mat-form-field style="width: 100%">
+              <mat-label>First name</mat-label>
+              <input matInput formControlName="cus_fname" style="color: #63320e">
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%">
+              <mat-label>Last name</mat-label>
+              <input matInput formControlName="cus_lname" style="color: #63320e">
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email" style="color: #63320e">
+            </mat-form-field>
+            
 
             <mat-form-field>
               <input matInput [matDatepicker]="checkin" placeholder="Check in" formControlName="check_in">
               <mat-datepicker-toggle matSuffix [for]="checkin"></mat-datepicker-toggle>
-              <mat-datepicker #checkin></mat-datepicker>
+              <mat-datepicker touchUi #checkin></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [matDatepicker]="checkout" placeholder="Check out" formControlName="check_out">
               <mat-datepicker-toggle matSuffix [for]="checkout"></mat-datepicker-toggle>
-              <mat-datepicker #checkout></mat-datepicker>
+              <mat-datepicker touchUi #checkout></mat-datepicker>
             </mat-form-field>
 
             <div mat-dialog-actions>
@@ -61,6 +64,8 @@
         </mat-card-content>
       </mat-card>
 
+
+      
     </div>
     <div class="col-md"></div>
   </div>
